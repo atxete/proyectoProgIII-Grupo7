@@ -10,6 +10,7 @@ public class Producto {
 	protected enum tipo{VerduraFruta, CarnePescado, ProductosSecos, Bebidas, Desayuno};
 	protected float precio;
 	protected String foto;
+	protected TipoIva TipoIva;
 	
 	
 	

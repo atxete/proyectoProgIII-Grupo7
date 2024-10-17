@@ -1,5 +1,7 @@
 package gui;
 
-public class VentanaCestaUsuario {
+import javax.swing.JFrame;
+
+public class VentanaCestaUsuario extends JFrame{
 
 }
