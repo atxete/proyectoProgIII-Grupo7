@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,6 +26,7 @@ public class VentanaCestaUsuario extends JFrame{
 	private JScrollPane scrolltabla;
 	private JPanel panelBotones;
 	private JButton botonAniadirFavoritos, botonPagar, botonSeguirComprando;
+	private JLabel pieDePagina;
 		
 	public VentanaCestaUsuario() {
 		super();
@@ -48,6 +51,11 @@ public class VentanaCestaUsuario extends JFrame{
 		panelBotones.add(botonSeguirComprando);
 		
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
+		//Hay que revisar la foto!!!!!!
+		ImageIcon logo = new ImageIcon("C:\\Users\\usuario\\trabajoProg3\\proyectoProgIII-Grupo7\\imagenes\\Logo.jpg");
+		pieDePagina = new JLabel(logo);
+		
+		getContentPane().add(pieDePagina, BorderLayout.NORTH);
 		
 		tabla.setDefaultRenderer(Object.class, new TableCellRenderer() {
 			
