@@ -27,7 +27,6 @@ public class VentanaInicioSesion extends JFrame{
 	private JPanel panelSur;
 	
 	public VentanaInicioSesion() {
-		super();
 		setTitle("Registro/Inicio Sesión");
 	    setSize(400, 200);
 	    setLocationRelativeTo(null);
@@ -53,7 +52,6 @@ public class VentanaInicioSesion extends JFrame{
 		btnIniciarSesion = new JButton("Iniciar sesión");
 		btnRegistrarse = new JButton("Registrarse");
 		lblInformacion = new JLabel("Si no se ha registrado anteriormente, pulse registrarse.");
-		lblInformacion.setAlignmentX(CENTER_ALIGNMENT);
 		
 		panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
 		panelBotones.add(btnRegistrarse);
