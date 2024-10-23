@@ -42,6 +42,7 @@ public class VentanaProductoUsuario extends JFrame{
 		nombreProducto = new JLabel("Nombre: " );
 		precioProducto = new JLabel("Precio: ");
 		cantidadProducto = new JLabel("Cantidad: ");
+		spinnerCantidad = new JSpinner();
 		//imagenProducto = new ImageIcon(p.getFoto());
 		//lblFoto = new JLabel(imagenProducto);
 		pnlIzq = new JPanel();
@@ -57,6 +58,7 @@ public class VentanaProductoUsuario extends JFrame{
 		pnlDerecha.add(nombreProducto);
 		pnlDerecha.add(precioProducto);
 		pnlDerecha.add(cantidadProducto);
+		pnlDerecha.add(spinnerCantidad);
 		pnlBotones.add(btnAnyadirCesta);
 		pnlBotones.add(btnAnyadirWish);
 		pnlBotones.add(btnVolver);
