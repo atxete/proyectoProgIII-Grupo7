@@ -81,7 +81,7 @@ public class VentanaProductoUsuario extends JFrame{
 		
 		
 		pnlIzq.add(lblFoto, BorderLayout.CENTER);
-		pnlDerecha.setLayout(new GridLayout(0, 1));
+		pnlDerecha.setLayout(new GridLayout(0, 1)); //BOX LAYOUT
 		pnlDerecha.add(nombreProducto);
 		pnlDerecha.add(precioProducto);
 		pnlSpinner.add(cantidadProducto);
