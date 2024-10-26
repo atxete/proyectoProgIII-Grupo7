@@ -7,7 +7,7 @@ public class Producto {
 	protected String nombre;
 	//NO SE SI SE QUIERE INT O STRING, si eso cambiarlo
 	protected String id;
-	protected enum tipo{VerduraFruta, CarnePescado, ProductosSecos, Bebidas, Desayuno};
+	public enum tipo{VerduraFruta, CarnePescado, ProductosSecos, Bebidas, Desayuno};
 	protected float precio;
 	protected String foto;
 	protected TipoIva TipoIva;

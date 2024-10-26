@@ -85,7 +85,7 @@ public class VentanaRegistrarse extends JFrame{
 	    panelBotones.add(btnRegistrarse);
 	    panelBotones.add(btnInicioSesion);
 	    
-	    lblInformacion = new JLabel("Si ya se ha registrado anteriormente, pulse iniciar sesión");
+	    lblInformacion = new JLabel("Si ya se ha registrado anteriormente, pulse iniciar sesión.");
 	    panelInformacion = new JPanel();
 	    panelInformacion.add(lblInformacion);
 	    

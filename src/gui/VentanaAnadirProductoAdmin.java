@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -16,8 +17,8 @@ import domain.Producto;
 
 public class VentanaAnadirProductoAdmin  extends JFrame{
 
-
-	private JComboBox<Producto> tipoProductos;
+	private JLabel lblTipoProductos;
+	private JComboBox<Producto.tipo> tipoProductos;
 	private JPanel pnlProductos;
 	private JLabel lblNombre;
 	private JLabel lblPrecio;
@@ -33,28 +34,31 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 	
 	public VentanaAnadirProductoAdmin() {
 		
-		setTitle("Administración de productos");
+		setTitle("Añadir producto administrador");
 		setSize(600,300);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		tipoProductos = new JComboBox<Producto>();
+		lblTipoProductos = new JLabel("Selecciona el tipo de producto a añadir:");
+		tipoProductos = new JComboBox<>(Producto.tipo.values());
 		tipoProductos.setPreferredSize(new Dimension(200,25));
+		tipoProductos.setBackground(Color.WHITE);
 		pnlProductos = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		pnlProductos.add(lblTipoProductos);
 		pnlProductos.add(tipoProductos);
 		
-		lblNombre = new JLabel("Nombre: ");
+		lblNombre = new JLabel("Nombre:");
 		tfNombre = new JTextField();
 		tfNombre.setPreferredSize(new Dimension(150,25));
-		lblPrecio = new JLabel("Precio: ");
+		lblPrecio = new JLabel("Precio:");
 		tfPrecio = new JTextField();
 		tfPrecio.setPreferredSize(new Dimension(150,25));
-		lblNombre_foto = new JLabel("Nombre foto: ");
+		lblNombre_foto = new JLabel("Nombre foto:");
 		tfNombre_foto = new JTextField();
 		tfNombre_foto.setPreferredSize(new Dimension(150,25));
 		
-		pnlTexto = new JPanel(new GridLayout(3,3,10,10));
+		pnlTexto = new JPanel(new GridLayout(3,2,10,20));
 		pnlTexto.add(lblNombre);
 		pnlTexto.add(tfNombre);
 		pnlTexto.add(lblPrecio);
