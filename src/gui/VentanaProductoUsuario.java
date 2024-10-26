@@ -2,10 +2,13 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import domain.Producto;
 import javax.swing.*;
@@ -56,7 +59,6 @@ public class VentanaProductoUsuario extends JFrame{
 		
         SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1); //valor que aparece, min, max, +1
         spinnerCantidad = new JSpinner(model);
-
 		
 		
 		imagenProducto = new ImageIcon("imagenes/Logo.jpg");
@@ -69,7 +71,13 @@ public class VentanaProductoUsuario extends JFrame{
 		pnlIzq = new JPanel();
 		pnlDerecha = new JPanel();
 		pnlBotones = new JPanel(new GridLayout(1, 3));
-		pnlSpinner = new JPanel(new GridLayout(1, 2));
+		pnlSpinner = new JPanel();
+		
+		//pnlSpinner.setLayout(new BoxLayout(pnlSpinner, BoxLayout.X_AXIS));
+		pnlSpinner.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		cantidadProducto.setAlignmentX(Component.LEFT_ALIGNMENT);
+		spinnerCantidad.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		btnAnyadirCesta = new JButton("AÑADIR A LA CESTA");
 		Font defaultFont = btnAnyadirCesta.getFont(); // fuente por defecto de btn
@@ -81,11 +89,13 @@ public class VentanaProductoUsuario extends JFrame{
 		
 		
 		pnlIzq.add(lblFoto, BorderLayout.CENTER);
-		pnlDerecha.setLayout(new GridLayout(0, 1)); //BOX LAYOUT
+		pnlDerecha.setLayout(new GridLayout(0, 1)); 
 		pnlDerecha.add(nombreProducto);
 		pnlDerecha.add(precioProducto);
 		pnlSpinner.add(cantidadProducto);
 		pnlSpinner.add(spinnerCantidad);
+		//pnlSpinner.add(Box.createHorizontalStrut(5)); //con esto se añade un espacio entre el label y el spinner
+		
 		pnlDerecha.add(pnlSpinner);
 		pnlBotones.add(btnAnyadirCesta);
 		pnlBotones.add(btnAnyadirWish);
@@ -107,6 +117,29 @@ public class VentanaProductoUsuario extends JFrame{
         pnlBotones.setBackground(Color.WHITE);
         pnlDerecha.setBackground(Color.WHITE);
         pnlIzq.setBackground(Color.WHITE);
+        
+        
+        
+        btnVolver.addActionListener((e)->{
+        	new VentanaPrincipalUsuario();
+        	dispose();
+        });
+        
+        btnAnyadirCesta.addActionListener((e)->{
+        	//Para programar esto necesitariamos tener la base de datos 
+        	//hecha para poder añadirle al usuario que ha iniciado sesión
+        	//el producto que recibe la ventana como parametro a la lista 
+        	//de los productos que él tenga en la cesta, para así poder visualizarlo en la tabla
+        });
+        
+        btnAnyadirWish.addActionListener((e)->{
+        	//Para programar esto necesitariamos tener la base de datos 
+        	//hecha para poder añadirle al usuario que ha iniciado sesión
+        	//el producto que recibe la ventana como parametro a la lista 
+        	//de los productos que él tenga en favoritos, para así poder visualizarlo en la tabla
+        });
+        
+        
 		setVisible(true);
 	}
 	
