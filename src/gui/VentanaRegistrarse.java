@@ -96,6 +96,12 @@ public class VentanaRegistrarse extends JFrame{
 	    getContentPane().add(panelTextoTamanyo, BorderLayout.CENTER);
 	    getContentPane().add(panelSur, BorderLayout.SOUTH);
 	    
+	    btnInicioSesion.addActionListener((e)->{
+			VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
+			ventanaInicioSesion.setVisible(true);
+			dispose();
+		});
+	    
 	    setVisible(true);
 	}
 	
