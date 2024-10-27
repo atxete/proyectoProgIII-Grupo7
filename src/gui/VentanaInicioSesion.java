@@ -4,13 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import domain.GestorUsuarios;
 
 public class VentanaInicioSesion extends JFrame{
 	private JLabel lblUsuario;
@@ -26,7 +31,10 @@ public class VentanaInicioSesion extends JFrame{
 	private JPanel panelInformacion;
 	private JPanel panelSur;
 	
-	public VentanaInicioSesion() {
+	private GestorUsuarios gestorUsuarios;
+	public VentanaInicioSesion(GestorUsuarios gestor){
+		this.gestorUsuarios = gestor;
+		
 		setTitle("Registro/Inicio Sesión");
 	    setSize(400, 200);
 	    setLocationRelativeTo(null);
@@ -68,15 +76,37 @@ public class VentanaInicioSesion extends JFrame{
 		getContentPane().add(panelSur, BorderLayout.SOUTH);
 		
 		btnRegistrarse.addActionListener((e)->{
-			VentanaRegistrarse ventanaRegistrarse = new VentanaRegistrarse();
+			GestorUsuarios gestorUsuarios = new GestorUsuarios();
+			VentanaRegistrarse ventanaRegistrarse = new VentanaRegistrarse(gestorUsuarios);
 			ventanaRegistrarse.setVisible(true);
 			dispose();
+		});
+		
+		btnIniciarSesion.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				iniciarSesion();
+			}
 		});
 		
 		setVisible(true);
 	}
 
+	private void iniciarSesion() {
+		String usuario = tfUsuario.getText();
+		String contrasenya = String.valueOf(psContrasenya.getPassword());
+		
+		boolean loginExitoso = gestorUsuarios.iniciarSesion(usuario, contrasenya);
+		
+		if(loginExitoso) {
+			JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+		}else {
+			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	public static void main(String[] args) {
-		new VentanaInicioSesion();
+		GestorUsuarios gestorUsuarios = new GestorUsuarios();
+		new VentanaInicioSesion(gestorUsuarios);
 	}
 }

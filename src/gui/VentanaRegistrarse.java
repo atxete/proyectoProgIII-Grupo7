@@ -4,13 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import domain.GestorUsuarios;
+import domain.Usuario;
 
 public class VentanaRegistrarse extends JFrame{
 	private JLabel lblNombre;
@@ -34,8 +40,10 @@ public class VentanaRegistrarse extends JFrame{
 	private JPanel panelInformacion;
 	private JPanel panelSur;
 	
-	public VentanaRegistrarse() {
-		super();
+	private GestorUsuarios gestorUsuarios;
+	public VentanaRegistrarse(GestorUsuarios gestor) {
+		this.gestorUsuarios = gestor;
+		
 		setTitle("Registro/Inicio Sesión");
 	    setSize(625, 325);
 	    setLocationRelativeTo(null);
@@ -97,17 +105,52 @@ public class VentanaRegistrarse extends JFrame{
 	    getContentPane().add(panelSur, BorderLayout.SOUTH);
 	    
 	    btnInicioSesion.addActionListener((e)->{
-			VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
+	    	GestorUsuarios gestorUsuarios = new GestorUsuarios();
+			VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion(gestorUsuarios);
 			ventanaInicioSesion.setVisible(true);
 			dispose();
 		});
 	    
+	    btnRegistrarse.addActionListener(new ActionListener() {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		registrarUsuario();
+	    	}
+	    });
+	    
 	    setVisible(true);
 	}
 	
+	private void registrarUsuario() {
+		String nombre = tfNombre.getText();
+		String apellidos = tfApellidos.getText();
+		String usuario = tfUsuario.getText();
+		String contrasenya = String.valueOf(psContrasenya.getPassword());
+		String repetirContrasenya = String.valueOf(psRepetirContrasenya.getPassword());
+		String email = tfEmail.getText();
+		
+		if(!contrasenya.equals(repetirContrasenya)) {
+			JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		Usuario nuevoUsuario = new Usuario(nombre, apellidos, usuario, contrasenya, repetirContrasenya, email);
+		boolean registroExitoso = gestorUsuarios.registrarUsuario(nuevoUsuario);
+		
+		
+		if(registroExitoso) {
+			JOptionPane.showMessageDialog(this, "Registro exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+		}else {
+			JOptionPane.showMessageDialog(this, "El usuario ya existe. Inténtalo con otro nombre de usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new VentanaRegistrarse();
+		GestorUsuarios gestorUsuarios = new GestorUsuarios();
+		new VentanaRegistrarse(gestorUsuarios);
+		System.out.println(gestorUsuarios.verUsuariosRegistrados());
 	}
 
 }
