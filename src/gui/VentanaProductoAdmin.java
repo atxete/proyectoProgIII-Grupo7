@@ -28,6 +28,7 @@ public class VentanaProductoAdmin extends JFrame{
 		setBounds(300, 100, 700, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		/**SE PUEDE AÑADIR EN EL PANEL NORTE DE LA VENTANA EL LOGO DEL SUPERMERCADO**/
 		
 		pnlBotones = new JPanel(new GridLayout(1, 4));
 		pnlInfoProd = new JPanel(new GridLayout(1,2));
