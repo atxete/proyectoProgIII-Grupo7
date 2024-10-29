@@ -41,7 +41,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		List<Producto> productos = new ArrayList();
 		productos.add(new Producto("P1", "id1", 1, "foto1"));
 		
-		pnlProductos = new JPanel(new GridLayout());
+		pnlProductos = new JPanel(new GridLayout(2, productos.size()));
 		
 		for(Producto p: productos) {
 			JLabel nombreProducto = new JLabel("Nombre: " + p.getNombre());
