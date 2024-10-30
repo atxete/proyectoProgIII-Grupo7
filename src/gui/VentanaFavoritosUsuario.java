@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 
 	public VentanaFavoritosUsuario() {
 		super();
-		setBounds(300, 200, 600, 400);
+		setBounds(300, 100, 700, 500);
 		
 		List<Producto> productos = new ArrayList<>(); 
 		modeloFavoritosUsuarios = new ModeloFavoritosUsuario(productos);
@@ -43,6 +45,27 @@ public class VentanaFavoritosUsuario extends JFrame{
 		foto = new JLabel(logo);
 		
 		getContentPane().add(foto, BorderLayout.NORTH);
+		
+		cesta.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				VentanaCestaUsuario ventanaCesta = new VentanaCestaUsuario();
+				ventanaCesta.setVisible(true);
+				dispose();
+				
+			}
+		});
+		
+		seguirComprando.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
+				ventanausuario.setVisible(true);
+				dispose();
+				
+			}
+		});
+		
 		
 		
 		setVisible(true);

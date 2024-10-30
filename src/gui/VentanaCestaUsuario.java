@@ -3,7 +3,10 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.GridLayout;import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,7 +34,7 @@ public class VentanaCestaUsuario extends JFrame{
 		
 	public VentanaCestaUsuario() {
 		super();
-		setBounds(300, 200, 600, 400);
+		setBounds(300, 100, 700, 500);
 		
 		List<Producto> productos = new ArrayList<>();
 		modeloCestaUsuario = new ModeloCestaUsuario(productos);
@@ -62,6 +66,25 @@ public class VentanaCestaUsuario extends JFrame{
 		//Añadimos el panel a la ventana
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
 		
+		botonPagar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(VentanaCestaUsuario.this, "Compra pagada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+		});
+		
+		botonSeguirComprando.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
+				ventanausuario.setVisible(true);
+				dispose();
+				
+			}
+		});
 		
 		
 		
