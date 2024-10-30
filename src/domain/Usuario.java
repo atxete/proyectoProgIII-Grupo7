@@ -1,31 +1,31 @@
 package domain;
 
-public class Usuario {
-
-	private String nombre;
-	private String apellidos;
-	private String usuario;
-	private String contrasenya;
-	private String repetirContrasenya;
-	private String email;
+public /*abstract*/ class Usuario {
+	String nombreUsuario;
+	String apellidosUsuario;
+	String usuarioUsuario;
+	String contrasenya;
+	String repetirContrasenya;
+	String email;
+	//int admin; //si es administrador (1) o si es comprador (0)
 	
 	public String getNombre() {
-		return nombre;
+		return nombreUsuario;
 	}
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombreUsuario = nombre;
 	}
 	public String getApellidos() {
-		return apellidos;
+		return apellidosUsuario;
 	}
 	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+		this.apellidosUsuario = apellidos;
 	}
 	public String getUsuario() {
-		return usuario;
+		return usuarioUsuario;
 	}
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		this.usuarioUsuario = usuario;
 	}
 	public String getContrasenya() {
 		return contrasenya;
@@ -49,9 +49,9 @@ public class Usuario {
 	public Usuario(String nombre, String apellidos, String usuario, String contrasenya, String repetirContrasenya,
 			String email) {
 		super();
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.usuario = usuario;
+		this.nombreUsuario = nombre;
+		this.apellidosUsuario = apellidos;
+		this.usuarioUsuario = usuario;
 		this.contrasenya = contrasenya;
 		this.repetirContrasenya = repetirContrasenya;
 		this.email = email;
@@ -60,7 +60,7 @@ public class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", apellidos=" + apellidos + ", usuario=" + usuario + ", contrasenya="
+		return "Usuario [nombre=" + nombreUsuario + ", apellidos=" + apellidosUsuario + ", usuario=" + usuarioUsuario + ", contrasenya="
 				+ contrasenya + ", repetirContrasenya=" + repetirContrasenya + ", email=" + email + "]";
 	}
 	

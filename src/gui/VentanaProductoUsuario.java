@@ -73,6 +73,8 @@ public class VentanaProductoUsuario extends JFrame{
 		pnlBotones = new JPanel(new GridLayout(1, 3));
 		pnlSpinner = new JPanel();
 		
+		pnlDerecha.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
 		//pnlSpinner.setLayout(new BoxLayout(pnlSpinner, BoxLayout.X_AXIS));
 		pnlSpinner.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
@@ -106,7 +108,8 @@ public class VentanaProductoUsuario extends JFrame{
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, pnlIzq, pnlDerecha);
         splitPane.setDividerLocation(getWidth()/3); 
         splitPane.setResizeWeight(0.5); // Para que ambos paneles mantengan el 50% del espacio
-
+        
+        splitPane.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         getContentPane().add(splitPane);
 
