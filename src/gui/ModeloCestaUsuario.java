@@ -69,10 +69,10 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 		// TODO Auto-generated method stub
 		Producto p = listaProductos.get(row);
 		switch (column){
-			case 0: p.getId();
-			case 1: p.getNombre();
-			case 2: p.getPrecio();
-			case 3: p.getFoto();
+			case 0: return p.getId();
+			case 1: return p.getNombre();
+			case 2: return p.getPrecio();
+			case 3: return p.getFoto();
 			default: return null;
 		}
 	}
