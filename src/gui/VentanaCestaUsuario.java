@@ -24,9 +24,9 @@ public class VentanaCestaUsuario extends JFrame{
 	private ModeloCestaUsuario modeloCestaUsuario;
 	private JTable tabla;
 	private JScrollPane scrolltabla;
-	private JPanel panelBotones;
+	private JPanel panelBotones, panelTotal;
 	private JButton botonAniadirFavoritos, botonPagar, botonSeguirComprando;
-	private JLabel pieDePagina;
+	private JLabel pieDePagina, textoTotal, valorTotal;
 		
 	public VentanaCestaUsuario() {
 		super();
@@ -39,18 +39,32 @@ public class VentanaCestaUsuario extends JFrame{
 		
 		getContentPane().add(scrolltabla, BorderLayout.CENTER);
 		
+		panelTotal = new JPanel();
+		textoTotal = new JLabel("Total a pagar: ");
+		valorTotal = new JLabel("0.00€");
+		
+		panelTotal.add(textoTotal);
+		panelTotal.add(valorTotal);
+		
+		
+		getContentPane().add(panelTotal, BorderLayout.SOUTH);
+		
 		panelBotones = new JPanel();
 		
-		
+		//Creamos los 3 botones
 		botonAniadirFavoritos = new JButton("Añadir a favoritos");
 		botonPagar = new JButton("Pagar");
 		botonSeguirComprando = new JButton("Seguir comprando");
-		
+		//Los añadimos al panel
 		panelBotones.add(botonAniadirFavoritos);
 		panelBotones.add(botonPagar);
 		panelBotones.add(botonSeguirComprando);
-		
+		//Añadimos el panel a la ventana
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
+		
+		
+		
+		
 		//Hay que revisar la foto!!!!!!
 		ImageIcon logo = new ImageIcon("C:\\Users\\usuario\\trabajoProg3\\proyectoProgIII-Grupo7\\imagenes\\Logo.jpg");
 		pieDePagina = new JLabel(logo);
