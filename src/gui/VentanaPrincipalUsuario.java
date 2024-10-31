@@ -24,6 +24,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 	protected JPanel pnlBotones;
 	protected JPanel pnlFiltro;
 	protected JComboBox<String> filtroTipos;
+	//muri
 	
 	public VentanaPrincipalUsuario() {
 		
