@@ -14,6 +14,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 	protected JPanel pnlProductos;
 	protected JButton btnAnyadirProd;
 	protected JPanel pnlBotones;
+	protected List<Producto> productos;
 	
 	public VentanaPrincipalAdmin() {
 		
@@ -28,7 +29,8 @@ public class VentanaPrincipalAdmin extends JFrame{
 		/* 
 		 * productos = supermercado.crearProductos()
 		 */
-		List<Producto> productos = new ArrayList();
+		productos = new ArrayList<>();
+		
 		productos.add(new Producto("P1", "id1", 1, "foto1"));
 		
 		pnlProductos = new JPanel(new GridLayout(2, productos.size()));
@@ -62,6 +64,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 		
 		setVisible(true);
+	}
+	public List<Producto> getProductos() {
+		return productos;
+	}
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
 	}
 	public static void main(String[] args) {
 		new VentanaPrincipalAdmin();

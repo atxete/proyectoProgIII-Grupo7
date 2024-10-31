@@ -5,11 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -31,8 +34,10 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 	private JButton btnCancelar;
 	private JButton btnGuardar;
 	private JPanel pnlBotones;
+	private VentanaPrincipalAdmin ventanaPrincipalAdmin;
 	
-	public VentanaAnadirProductoAdmin() {
+	public VentanaAnadirProductoAdmin(VentanaPrincipalAdmin ventanaPrincipalAdmin) {
+		this.ventanaPrincipalAdmin = ventanaPrincipalAdmin;
 		
 		setTitle("Añadir producto administrador");
 		setSize(600,300);
@@ -78,10 +83,39 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 		getContentPane().add(pnlProductos, BorderLayout.NORTH);
 		getContentPane().add(pnlTextoTamanyo, BorderLayout.CENTER);
 		getContentPane().add(pnlBotones, BorderLayout.SOUTH);
+		
+		
+		btnGuardar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Producto producto = new Producto(tfNombre.getText(), "", Float.valueOf(tfPrecio.getText()), tfNombre_foto.getText()); 
+				ventanaPrincipalAdmin.getProductos().add(producto);
+				JOptionPane.showMessageDialog(null, "El producto se ha añadido correctamente al supermercado.", "Producto añadido correctamente", JOptionPane.INFORMATION_MESSAGE);
+				dispose();
+				ventanaPrincipalAdmin.setVisible(true);
+			}
+			
+		});
+		
+		btnCancelar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+				ventanaPrincipalAdmin.setVisible(true);
+			}
+			
+		});
+		
 		setVisible(true);
 	}
-	
+
 	public static void main(String[] args) {
-		new VentanaAnadirProductoAdmin();
+		VentanaPrincipalAdmin ventanaPrincipalAdmin = new VentanaPrincipalAdmin();
+		ventanaPrincipalAdmin.setVisible(false);
+		new VentanaAnadirProductoAdmin(ventanaPrincipalAdmin);
 	}
 }
