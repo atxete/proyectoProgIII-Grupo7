@@ -34,7 +34,7 @@ public class VentanaCestaUsuario extends JFrame{
 		
 	public VentanaCestaUsuario() {
 		super();
-		setBounds(300, 100, 700, 500);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		List<Producto> productos = new ArrayList<>();
 		modeloCestaUsuario = new ModeloCestaUsuario(productos);

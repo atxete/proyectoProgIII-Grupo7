@@ -25,7 +25,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 
 	public VentanaFavoritosUsuario() {
 		super();
-		setBounds(300, 100, 700, 500);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		List<Producto> productos = new ArrayList<>(); 
 		modeloFavoritosUsuarios = new ModeloFavoritosUsuario(productos);
