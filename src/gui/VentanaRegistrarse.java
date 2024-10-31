@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import domain.Comprador;
 import domain.GestorUsuarios;
@@ -49,7 +50,7 @@ public class VentanaRegistrarse extends JFrame{
 	    setSize(625, 325);
 	    setLocationRelativeTo(null);
 	    setResizable(false);
-	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    //setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);   descomentar más tarde
 		
 	    lblNombre = new JLabel("Nombre: ");
 	    lblApellidos = new JLabel("Apellidos: ");
