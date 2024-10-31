@@ -1,5 +1,5 @@
 package domain;
 
-public class Comprador {
-
+public class Comprador extends Usuario{
+	
 }

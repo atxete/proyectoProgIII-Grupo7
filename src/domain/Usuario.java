@@ -1,13 +1,13 @@
 package domain;
 
-public /*abstract*/ class Usuario {
+public abstract class Usuario {
 	String nombreUsuario;
 	String apellidosUsuario;
 	String usuarioUsuario;
 	String contrasenya;
 	String repetirContrasenya;
 	String email;
-	//int admin; //si es administrador (1) o si es comprador (0)
+	int admin; //si es administrador (1) o si es comprador (0)
 	
 	public String getNombre() {
 		return nombreUsuario;
