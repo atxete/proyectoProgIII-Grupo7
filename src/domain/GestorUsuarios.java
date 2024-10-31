@@ -68,7 +68,7 @@ public class GestorUsuarios {
 		return listadoUsuarios.toString(); 
 	}
 	
-	private Usuario buscarUsuarioPorNombreDeUsuario(String usuario) {
+	public Usuario buscarUsuarioPorNombreDeUsuario(String usuario) {
 		for(Usuario u: usuariosRegistrados) {
 			if(u.getUsuario().equals(usuario)) {
 				return u;
