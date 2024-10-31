@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import domain.GestorUsuarios;
+import domain.Usuario;
 
 public class VentanaInicioSesion extends JFrame{
 	private JLabel lblUsuario;
@@ -96,10 +97,21 @@ public class VentanaInicioSesion extends JFrame{
 		String usuario = tfUsuario.getText();
 		String contrasenya = String.valueOf(psContrasenya.getPassword());
 		
-		boolean loginExitoso = gestorUsuarios.iniciarSesion(usuario, contrasenya);
+		if(usuario.isEmpty() || contrasenya.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "El campo de usuario y contraseña son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 		
-		if(loginExitoso) {
-			JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+		Usuario loginExitoso = gestorUsuarios.iniciarSesion(usuario, contrasenya);
+		
+		if(loginExitoso != null) {
+			if(loginExitoso.getAdmin() == 1) {
+				JOptionPane.showMessageDialog(this, "Bienvenido administrador", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
+				new VentanaPrincipalAdmin();
+			}else {
+				JOptionPane.showMessageDialog(this, "Bienvenido comprador", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
+				new VentanaPrincipalUsuario();
+			}
+			dispose();
 		}else {
 			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
 		}
