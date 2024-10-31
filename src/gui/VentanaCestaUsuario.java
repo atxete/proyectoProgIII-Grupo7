@@ -35,12 +35,10 @@ public class VentanaCestaUsuario extends JFrame{
 	public VentanaCestaUsuario() {
 		super();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
 		List<Producto> productos = new ArrayList<>();
 		modeloCestaUsuario = new ModeloCestaUsuario(productos);
 		tabla = new JTable(modeloCestaUsuario);
 		scrolltabla = new JScrollPane(tabla);
-		
 		getContentPane().add(scrolltabla, BorderLayout.CENTER);
 		
 		panelTotal = new JPanel();

@@ -10,10 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import domain.Comprador;
 import domain.Producto;
 
 public class VentanaPrincipalUsuario extends JFrame{
@@ -34,6 +36,10 @@ public class VentanaPrincipalUsuario extends JFrame{
 		
 		setLayout(new BorderLayout());
 		
+		VentanaCestaUsuario vcu = new VentanaCestaUsuario(); 
+		//inicializamos esta ventana para mas adelante poder añadir los productos que queramos 
+		// a la lista de productos que compone la cesta
+		
 		
 		//cargamos los productos (funcion que generara una lista de productos)
 		/* 
@@ -50,23 +56,23 @@ public class VentanaPrincipalUsuario extends JFrame{
 			
 			SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
 	        JSpinner spinnerCantidad = new JSpinner(model);
-			JLabel cantidadProducto = new JLabel("Canridad: "+ spinnerCantidad);
+			JLabel cantidadProducto = new JLabel("Cantidad: "+ spinnerCantidad);
 			
 			//ImageIcon imagenProducto = new ImageIcon(p.getFoto());
 			//JLabel lblFoto = new JLabel(imagenProducto);
-			
 			JPanel pnlPrincipal = new JPanel();
 			JPanel pnlCentral = new JPanel();
 			JPanel pnlBtnProd = new JPanel(new GridLayout(1,2));
 			
 			JButton btnAnyadirCesta = new JButton("AÑADIR");
 			btnAnyadirCesta.addActionListener((e)->{
-	        	//Para programar esto necesitariamos tener la base de datos 
-	        	//hecha para poder añadirle al usuario que ha iniciado sesión
-	        	//el producto que recibe la ventana como parametro a la lista 
-	        	//de los productos que él tenga en la cesta, para así poder visualizarlo en la tabla
+				int cantidad = (int) spinnerCantidad.getValue();
+				if(cantidad>0) {
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "No puedes añadir 0 productos", "Error", JOptionPane.ERROR_MESSAGE);;
+				}
 	        });
-	        
 	        
 	        pnlBtnProd.add(btnAnyadirCesta);
 	        pnlBtnProd.add(spinnerCantidad);

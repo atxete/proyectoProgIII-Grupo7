@@ -53,6 +53,9 @@ public class VentanaPrincipalAdmin extends JFrame{
 		}
 		
 		btnAnyadirProd = new JButton("Añadir Producto");
+		btnAnyadirProd.addActionListener((e) ->{
+			new VentanaAnadirProductoAdmin();
+		});
 		
 		pnlBotones = new JPanel();
 		
