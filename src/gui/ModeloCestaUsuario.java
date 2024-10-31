@@ -84,8 +84,5 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 		// TODO Auto-generated method stub
 		super.setValueAt(aValue, row, column);
 	}
-	
-	
-	
-	
+		
 }
