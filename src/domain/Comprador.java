@@ -1,5 +1,6 @@
 package domain;
 
+
 import java.util.ArrayList;
 
 public class Comprador extends Usuario{
@@ -37,6 +38,5 @@ public class Comprador extends Usuario{
 		return "Comprador [cesta=" + cesta + ", listaFavoritos=" + listaFavoritos + "]";
 	}
 	
-	
-	
+
 }
