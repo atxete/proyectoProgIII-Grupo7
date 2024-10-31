@@ -1,8 +1,6 @@
 package domain;
 
-<<<<<<< HEAD
-public class Comprador extends Usuario{
-=======
+
 import java.util.ArrayList;
 
 public class Comprador extends Usuario{
@@ -40,7 +38,5 @@ public class Comprador extends Usuario{
 		return "Comprador [cesta=" + cesta + ", listaFavoritos=" + listaFavoritos + "]";
 	}
 	
-	
->>>>>>> branch 'master' of git@github.com:atxete/proyectoProgIII-Grupo7.git
-	
+
 }
