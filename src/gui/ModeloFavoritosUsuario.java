@@ -12,6 +12,7 @@ public class ModeloFavoritosUsuario extends DefaultTableModel{
 	private List<String> listaTitulos = Arrays.asList("ID", "Tipo", "Precio", "Tipo de IVA");
 
 
+	
 
 
 	public ModeloFavoritosUsuario(List<Producto> lp) {

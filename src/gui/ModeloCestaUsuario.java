@@ -64,7 +64,7 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 
 
 
-	@Override
+	@Override  
 	public Object getValueAt(int row, int column) {
 		// TODO Auto-generated method stub
 		Producto p = listaProductos.get(row);

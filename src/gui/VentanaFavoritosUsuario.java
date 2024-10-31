@@ -52,6 +52,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 				VentanaCestaUsuario ventanaCesta = new VentanaCestaUsuario();
 				ventanaCesta.setVisible(true);
 				dispose();
+				 
 				
 			}
 		});

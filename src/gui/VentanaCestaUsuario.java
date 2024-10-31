@@ -65,7 +65,7 @@ public class VentanaCestaUsuario extends JFrame{
 		panelBotones.add(botonSeguirComprando);
 		//Añadimos el panel a la ventana
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
-		
+		 
 		botonPagar.addActionListener(new ActionListener() {
 			
 			@Override
