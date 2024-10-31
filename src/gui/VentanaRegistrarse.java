@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import domain.Comprador;
 import domain.GestorUsuarios;
 import domain.Usuario;
 
@@ -129,17 +130,22 @@ public class VentanaRegistrarse extends JFrame{
 		String repetirContrasenya = String.valueOf(psRepetirContrasenya.getPassword());
 		String email = tfEmail.getText();
 		
+		if(nombre.isEmpty() || apellidos.isEmpty() || usuario.isEmpty() || contrasenya.isEmpty() || repetirContrasenya.isEmpty() || email.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Por favor, rellénalos", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
 		if(!contrasenya.equals(repetirContrasenya)) {
 			JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
-		Usuario nuevoUsuario = new Usuario(nombre, apellidos, usuario, contrasenya, repetirContrasenya, email);
-		boolean registroExitoso = gestorUsuarios.registrarUsuario(nuevoUsuario);
+		boolean registroExitoso = gestorUsuarios.registrarUsuario(nombre, apellidos, usuario, contrasenya, repetirContrasenya, email, 0);
 		
 		
 		if(registroExitoso) {
 			JOptionPane.showMessageDialog(this, "Registro exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			new VentanaPrincipalUsuario();
+			dispose();
 		}else {
 			JOptionPane.showMessageDialog(this, "El usuario ya existe. Inténtalo con otro nombre de usuario.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
