@@ -39,6 +39,7 @@ public class VentanaInicioSesion extends JFrame{
 		
 		setTitle("Registro/Inicio Sesión");
 	    setSize(400, 200);
+	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 	    setLocationRelativeTo(null);
 	    setResizable(false);
 	    //setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);   descomentar más tarde
