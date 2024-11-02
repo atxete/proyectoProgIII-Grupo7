@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import domain.Comprador;
 import domain.GestorUsuarios;
@@ -49,7 +50,7 @@ public class VentanaRegistrarse extends JFrame{
 	    setSize(625, 325);
 	    setLocationRelativeTo(null);
 	    setResizable(false);
-	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    //setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);   descomentar más tarde
 		
 	    lblNombre = new JLabel("Nombre: ");
 	    lblApellidos = new JLabel("Apellidos: ");
@@ -132,6 +133,12 @@ public class VentanaRegistrarse extends JFrame{
 		
 		if(nombre.isEmpty() || apellidos.isEmpty() || usuario.isEmpty() || contrasenya.isEmpty() || repetirContrasenya.isEmpty() || email.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Por favor, rellénalos", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		if(gestorUsuarios.buscarUsuarioPorNombreDeUsuario(usuario) != null) {
+			JOptionPane.showMessageDialog(this, "El usuario ya existe. Inténtalo con otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		
 		if(!contrasenya.equals(repetirContrasenya)) {
@@ -140,14 +147,13 @@ public class VentanaRegistrarse extends JFrame{
 		}
 		
 		boolean registroExitoso = gestorUsuarios.registrarUsuario(nombre, apellidos, usuario, contrasenya, repetirContrasenya, email, 0);
-		
-		
 		if(registroExitoso) {
-			JOptionPane.showMessageDialog(this, "Registro exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Bienvenido comprardor", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE
+					);
 			new VentanaPrincipalUsuario();
 			dispose();
 		}else {
-			JOptionPane.showMessageDialog(this, "El usuario ya existe. Inténtalo con otro nombre de usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Error al registrar usuario. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

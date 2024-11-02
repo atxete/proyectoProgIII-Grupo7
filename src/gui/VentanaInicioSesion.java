@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import domain.GestorUsuarios;
 import domain.Usuario;
@@ -36,11 +37,13 @@ public class VentanaInicioSesion extends JFrame{
 	public VentanaInicioSesion(GestorUsuarios gestor){
 		this.gestorUsuarios = gestor;
 		
+		
 		setTitle("Registro/Inicio Sesión");
 	    setSize(400, 200);
 	    setLocationRelativeTo(null);
 	    setResizable(false);
-	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    //setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);   descomentar más tarde
+	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		lblUsuario = new JLabel("Usuario: ");
 		lblContrasenya = new JLabel("Contraseña: ");
@@ -94,6 +97,10 @@ public class VentanaInicioSesion extends JFrame{
 	}
 
 	private void iniciarSesion() {
+		
+		JFrame v = new JFrame();
+		v = this;
+		
 		String usuario = tfUsuario.getText();
 		String contrasenya = String.valueOf(psContrasenya.getPassword());
 		
@@ -109,7 +116,10 @@ public class VentanaInicioSesion extends JFrame{
 				new VentanaPrincipalAdmin();
 			}else {
 				JOptionPane.showMessageDialog(this, "Bienvenido comprador", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
-				new VentanaPrincipalUsuario();
+				VentanaLoading vl = new VentanaLoading(v);
+				dispose();
+				vl.setVisible(true);
+				//new VentanaPrincipalUsuario();
 			}
 			dispose();
 		}else {
