@@ -8,6 +8,7 @@ public class Producto {
 	//NO SE SI SE QUIERE INT O STRING, si eso cambiarlo
 	protected String id;
 	public enum tipo{VerduraFruta, CarnePescado, ProductosSecos, Bebidas, Desayuno};
+	protected tipo tipo;
 	protected float precio;
 	protected String foto;
 	protected TipoIva TipoIva;
@@ -38,9 +39,12 @@ public class Producto {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
-	
-	
+	public tipo getTipo() {
+		return tipo;
+	}
+	public void setTipo(tipo tipo) {
+		this.tipo = tipo;
+	}
 	public Producto(String nombre, String id, float precio, String foto) {
 		super();
 		this.nombre = nombre;
