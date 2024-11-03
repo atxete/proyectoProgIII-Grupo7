@@ -1,9 +1,13 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -30,6 +35,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 	protected JPanel pnlFiltro;
 	protected JComboBox<String> filtroTipos;
 	protected List<Producto> productos;
+	protected static VentanaCestaUsuario vcu;
 	
 	
 	public VentanaPrincipalUsuario() {
@@ -38,79 +44,76 @@ public class VentanaPrincipalUsuario extends JFrame{
 		setTitle("Ventana Principal Usuario");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		setLayout(new BorderLayout());
-		
-		VentanaCestaUsuario vcu = new VentanaCestaUsuario(); 
+		setLayout(new BorderLayout()); 
 		//inicializamos esta ventana para mas adelante poder añadir los productos que queramos 
 		// a la lista de productos que compone la cesta
 		
 		
 		//cargamos los productos (funcion que generara una lista de productos)
 		/* 
-		 * productos = supermercado.crearProductos()
+		 * productos = crearProductos()
 		 */
 		List<Producto> productos = new ArrayList();
-		Producto p1 = new Producto("P1", "id1", 1, "foto1");
+		Producto p1 = new Producto("P1", "id1", 1, "imagenes/Logo.jpg");
 		p1.setTipo(Producto.tipo.Bebidas);
-		Producto p2 = new Producto("P2", "id2", 2, "foto1");
+		Producto p2 = new Producto("P2", "id2", 2, "imagenes/Logo.jpg");
 		p2.setTipo(Producto.tipo.Desayuno);
-		Producto p3 = new Producto("P3", "id3", 3, "foto1");
+		Producto p3 = new Producto("P3", "id3", 3, "imagenes/Logo.jpg");
 		p3.setTipo(Producto.tipo.Bebidas);
-		Producto p4 = new Producto("P4", "id4", 4, "foto1");
+		Producto p4 = new Producto("P4", "id4", 4, "imagenes/Logo.jpg");
 		p4.setTipo(Producto.tipo.Desayuno);
+		Producto p5 = new Producto("P5", "id4", 4, "imagenes/Logo.jpg");
+		p5.setTipo(Producto.tipo.CarnePescado);
+		Producto p6 = new Producto("P6", "id4", 4, "imagenes/Logo.jpg");
+		p6.setTipo(Producto.tipo.CarnePescado);
+		Producto p7 = new Producto("P7", "id4", 4, "imagenes/Logo.jpg");
+		p7.setTipo(Producto.tipo.CarnePescado);
 		productos.add(p1);
 		productos.add(p2);
 		productos.add(p3);
 		productos.add(p4);
+		productos.add(p5);
+		productos.add(p6);
+		productos.add(p7);
 		
-		pnlProductos = new JPanel(new GridLayout(2, productos.size()));
-		for(Producto p: productos) {
-			JLabel nombreProducto = new JLabel("Nombre: " + p.getNombre());
-			JLabel precioProducto = new JLabel("Precio: "+p.getPrecio());
-			
-			SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
-	        JSpinner spinnerCantidad = new JSpinner(model);
-			JLabel cantidadProducto = new JLabel("Cantidad: "+ spinnerCantidad);
-			
-			//ImageIcon imagenProducto = new ImageIcon(p.getFoto());
-			//JLabel lblFoto = new JLabel(imagenProducto);
-			JPanel pnlPrincipal = new JPanel(new BorderLayout());
-			JPanel pnlCentral = new JPanel();
-			JPanel pnlBtnProd = new JPanel(new GridLayout(1,2));
-			
-			JButton btnAnyadirCesta = new JButton("AÑADIR");
-			btnAnyadirCesta.addActionListener((e)->{
-				int cantidad = (int) spinnerCantidad.getValue();
-				if(cantidad>0) {
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "No puedes añadir 0 productos", "Error", JOptionPane.ERROR_MESSAGE);;
-				}
-	        });
-	        
-	        pnlBtnProd.add(btnAnyadirCesta);
-	        pnlBtnProd.add(spinnerCantidad);
-	        
-	        pnlCentral.add(nombreProducto);
-	        pnlCentral.add(precioProducto);
-	        
-	        //pnlPrincipal.add(lblFoto, BorderLayout.NORTH);
-	        pnlPrincipal.add(pnlBtnProd, BorderLayout.SOUTH);
-	        pnlPrincipal.add(pnlCentral, BorderLayout.CENTER);
-	        
-	        pnlProductos.add(pnlPrincipal);
-		}
+		
+		
+		pnlProductos = new JPanel(new GridLayout(0, 2, 10, 10));
+		JScrollPane scrollProductos = new JScrollPane(pnlProductos);
+		scrollProductos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		actualizarPanel(productos);
+		
 		
 		filtroTipos = new JComboBox<>();
 		filtroTipos.addItem("Todos"); //de inicio no habra filtro
 		
-		  for(Producto.tipo tipo : Producto.tipo.values()){
+		 for(Producto.tipo tipo : Producto.tipo.values()){
 		  	filtroTipos.addItem(tipo.name());
-		  }
-		  
+		 }
+		 
+		 filtroTipos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String seleccionado = (String) filtroTipos.getSelectedItem();
+				List<Producto> productosFiltrados = new ArrayList<Producto>();
+				
+				if(seleccionado.equals("Todos")) {
+					productosFiltrados = productos;
+				} else {
+					for(Producto p : productos) {
+						if(p.getTipo().name().equals(seleccionado)) {
+							productosFiltrados.add(p);
+						}
+					}
+				}
+				actualizarPanel(productosFiltrados);
+			}
+		});
 		 
 		  
-		pnlFiltro = new JPanel();
+		pnlFiltro = new JPanel(new BorderLayout());
 		pnlFiltro.add(filtroTipos, BorderLayout.WEST);
 		
 		btnCesta = new JButton("Cesta");
@@ -124,18 +127,70 @@ public class VentanaPrincipalUsuario extends JFrame{
 			new VentanaFavoritosUsuario();
 		});
 		
-		pnlBotones = new JPanel(new GridLayout(1,2));
+		pnlBotones = new JPanel();
 		
 		pnlBotones.add(btnCesta);
 		pnlBotones.add(btnFavoritos);
 		
 		this.add(pnlFiltro, BorderLayout.NORTH);
-		this.add(pnlProductos, BorderLayout.CENTER);
+		this.add(scrollProductos, BorderLayout.CENTER);
 		this.add(pnlBotones, BorderLayout.SOUTH);
 		
 		
 		setVisible(true);
 	}
+	
+	private void actualizarPanel(List<Producto> listaProductos) {
+		pnlProductos.removeAll();
+		
+		for(Producto p: listaProductos) {
+			JLabel nombreProducto = new JLabel("Nombre: " + p.getNombre());
+			JLabel precioProducto = new JLabel("Precio: "+p.getPrecio());
+			
+			SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
+	        JSpinner spinnerCantidad = new JSpinner(model);
+			JLabel cantidadProducto = new JLabel("Cantidad: "+ spinnerCantidad);
+			
+			ImageIcon imagenProducto = new ImageIcon(p.getFoto());
+			Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+			ImageIcon imagen = new ImageIcon(imagenRedimensionada);
+			JLabel lblFoto = new JLabel(imagen);
+			lblFoto.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					new VentanaProductoUsuario(/*p*/);
+				}
+			});
+			JPanel pnlPrincipal = new JPanel(new BorderLayout());
+			pnlPrincipal.setPreferredSize(new Dimension(200,100));
+			JPanel pnlCentral = new JPanel();
+			JPanel pnlBtnProd = new JPanel(new GridLayout(1,2));
+			
+			JButton btnAnyadirCesta = new JButton("Añadir a Cesta");
+			btnAnyadirCesta.addActionListener((e)->{
+				int cantidad = (int) spinnerCantidad.getValue();
+				if(cantidad>0) {
+					vcu.anyadirProducto(p);
+					JOptionPane.showMessageDialog(null, "PRODUCTO AÑADIDO", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "No puedes añadir 0 productos", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+	        });
+	        
+	        pnlBtnProd.add(btnAnyadirCesta);
+	        pnlBtnProd.add(spinnerCantidad);
+	        
+	        pnlCentral.add(nombreProducto);
+	        pnlCentral.add(precioProducto);
+	        
+	        pnlPrincipal.add(lblFoto, BorderLayout.NORTH);
+	        pnlPrincipal.add(pnlBtnProd, BorderLayout.SOUTH);
+	        pnlPrincipal.add(pnlCentral, BorderLayout.CENTER);
+	        
+	        pnlProductos.add(pnlPrincipal);
+		}
+		
+	}
+	
 		
 	public static void main(String[] args) {
 		new VentanaPrincipalUsuario();

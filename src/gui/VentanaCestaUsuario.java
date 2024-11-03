@@ -31,11 +31,12 @@ public class VentanaCestaUsuario extends JFrame{
 	private JPanel panelBotones, panelTotal;
 	private JButton botonAniadirFavoritos, botonPagar, botonSeguirComprando;
 	private JLabel pieDePagina, textoTotal, valorTotal;
+	private List<Producto> productos;
 		
 	public VentanaCestaUsuario() {
 		super();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		List<Producto> productos = new ArrayList<>();
+		productos = new ArrayList<>();
 		modeloCestaUsuario = new ModeloCestaUsuario(productos);
 		tabla = new JTable(modeloCestaUsuario);
 		scrolltabla = new JScrollPane(tabla);
@@ -106,6 +107,9 @@ public class VentanaCestaUsuario extends JFrame{
 		setVisible(true);
 	}
 	
+	public void anyadirProducto(Producto p) {
+		productos.add(p);
+	}
 	
 	public static void main(String[] args) {
 		new VentanaCestaUsuario();
