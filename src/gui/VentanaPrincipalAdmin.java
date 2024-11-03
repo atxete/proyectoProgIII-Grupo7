@@ -15,8 +15,10 @@ public class VentanaPrincipalAdmin extends JFrame{
 	protected JButton btnAnyadirProd;
 	protected JPanel pnlBotones;
 	protected List<Producto> productos;
+	protected VentanaPrincipalAdmin ventanaPrincipalAdmin;
 	
 	public VentanaPrincipalAdmin() {
+		ventanaPrincipalAdmin = this;
 		
 		setBounds(300, 100, 700, 500);
 		setTitle("Ventana Principal Admin");
@@ -56,7 +58,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 		btnAnyadirProd = new JButton("Añadir Producto");
 		btnAnyadirProd.addActionListener((e) ->{
-			new VentanaAnadirProductoAdmin();
+			new VentanaAnadirProductoAdmin(ventanaPrincipalAdmin);
 		});
 		
 		pnlBotones = new JPanel();
