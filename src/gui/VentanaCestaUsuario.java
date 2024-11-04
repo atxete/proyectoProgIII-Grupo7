@@ -78,8 +78,8 @@ public class VentanaCestaUsuario extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
-				ventanausuario.setVisible(true);
+				//VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
+				//ventanausuario.setVisible(true);
 				dispose();
 				
 			}

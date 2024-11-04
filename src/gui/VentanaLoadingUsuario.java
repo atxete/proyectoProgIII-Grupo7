@@ -5,14 +5,13 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-public class VentanaLoading extends JFrame{
+public class VentanaLoadingUsuario extends JFrame{
 	
 	private JPanel pnlTitulo, pnlCentro;
 	private JLabel lblTitulo;
 	private JProgressBar progressBar;
 	
-	
-	public VentanaLoading(JFrame va) {
+	public VentanaLoadingUsuario(JFrame va) {
 		super();
 		setBounds(va.getX()+10, va.getY()+10, 200, 100);
 		setResizable(false);

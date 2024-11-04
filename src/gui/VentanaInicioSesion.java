@@ -114,14 +114,14 @@ public class VentanaInicioSesion extends JFrame{
 			if(loginExitoso.getAdmin() == 1) {
 				JOptionPane.showMessageDialog(this, "Bienvenido administrador", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
 				//new VentanaPrincipalAdmin();
-				VentanaLoading vl = new VentanaLoading(v);
+				VentanaLoadingAdmin vla = new VentanaLoadingAdmin(v);
 				dispose();
-				vl.setVisible(true);
+				vla.setVisible(true);
 			}else {
 				JOptionPane.showMessageDialog(this, "Bienvenido comprador", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
-				VentanaLoading vl = new VentanaLoading(v);
+				VentanaLoadingUsuario vlu = new VentanaLoadingUsuario(v);
 				dispose();
-				vl.setVisible(true);
+				vlu.setVisible(true);
 				//new VentanaPrincipalUsuario();
 			}
 			dispose();

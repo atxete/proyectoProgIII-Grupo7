@@ -60,8 +60,8 @@ public class VentanaFavoritosUsuario extends JFrame{
 		seguirComprando.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
-				ventanausuario.setVisible(true);
+				//VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
+				//ventanausuario.setVisible(true);
 				dispose();
 				
 			}
