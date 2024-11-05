@@ -65,7 +65,7 @@ public class VentanaProductoAdmin extends JFrame{
 		
 		
 		btnVolver.addActionListener((e)->{
-			new VentanaPrincipalAdmin();
+			//new VentanaPrincipalAdmin();
 			dispose();
 		});
 		

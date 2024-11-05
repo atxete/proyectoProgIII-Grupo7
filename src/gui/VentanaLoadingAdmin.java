@@ -25,7 +25,7 @@ public class VentanaLoadingAdmin extends JFrame{
 		getContentPane().add(pnlTitulo, BorderLayout.NORTH);
 		getContentPane().add(pnlCentro, BorderLayout.CENTER);
 		
-		lblTitulo = new JLabel("LOADING...");
+		lblTitulo = new JLabel("CARGANDO...");
 		lblTitulo.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		pnlTitulo.add(lblTitulo);
 		
@@ -43,7 +43,7 @@ public class VentanaLoadingAdmin extends JFrame{
 				for(int i=0;i<100;i++) {
 					progressBar.setValue(progressBar.getValue()+1);
 					try {
-						Thread.sleep((int) (Math.random()*50)+50);
+						Thread.sleep((int) (Math.random()*50)+25);
 					}catch (Exception e) {
 						e.printStackTrace();
 					}

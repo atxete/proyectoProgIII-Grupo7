@@ -124,7 +124,7 @@ public class VentanaProductoUsuario extends JFrame{
         
         
         btnVolver.addActionListener((e)->{
-        	new VentanaPrincipalUsuario();
+        	//new VentanaPrincipalUsuario();
         	dispose();
         });
         

@@ -124,6 +124,9 @@ public class VentanaRegistrarse extends JFrame{
 	}
 	
 	private void registrarUsuario() {
+		JFrame v = new JFrame();
+		v = this;
+		
 		String nombre = tfNombre.getText();
 		String apellidos = tfApellidos.getText();
 		String usuario = tfUsuario.getText();
@@ -148,10 +151,11 @@ public class VentanaRegistrarse extends JFrame{
 		
 		boolean registroExitoso = gestorUsuarios.registrarUsuario(nombre, apellidos, usuario, contrasenya, repetirContrasenya, email, 0);
 		if(registroExitoso) {
-			JOptionPane.showMessageDialog(this, "Bienvenido comprardor", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE
-					);
-			new VentanaPrincipalUsuario();
+			JOptionPane.showMessageDialog(this, "Bienvenido comprador", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+			VentanaLoadingUsuario vlu = new VentanaLoadingUsuario(v);
 			dispose();
+			vlu.setVisible(true);			
+			//new VentanaPrincipalUsuario();
 		}else {
 			JOptionPane.showMessageDialog(this, "Error al registrar usuario. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
