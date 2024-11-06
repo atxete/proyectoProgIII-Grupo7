@@ -63,6 +63,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 		JScrollPane scrollProductos = new JScrollPane(pnlProductos);
 		scrollProductos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
+		
+		
+		VentanaPrincipalAdmin ventPrinAdmin = this;
+		
+		
+		
 		for(Producto p: productos) {
 			JLabel nombreProducto = new JLabel("Nombre: " + p.getNombre());
 			JLabel precioProducto = new JLabel("Precio: "+p.getPrecio());
@@ -73,7 +79,8 @@ public class VentanaPrincipalAdmin extends JFrame{
 			JLabel lblFoto = new JLabel(imagen);
 			lblFoto.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					new VentanaProductoAdmin(/*p*/);
+					dispose();
+					new VentanaProductoAdmin(/*p*/ ventPrinAdmin);
 				}
 			});
 			

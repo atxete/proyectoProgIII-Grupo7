@@ -155,9 +155,15 @@ public class VentanaPrincipalUsuario extends JFrame{
 			Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 			ImageIcon imagen = new ImageIcon(imagenRedimensionada);
 			JLabel lblFoto = new JLabel(imagen);
+			
+			
+			VentanaPrincipalUsuario ventPrinUsu = this;
+			
+			
 			lblFoto.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					new VentanaProductoUsuario(/*p*/);
+					dispose();
+					new VentanaProductoUsuario(/*p*/ ventPrinUsu);
 				}
 			});
 			JPanel pnlPrincipal = new JPanel(new BorderLayout());

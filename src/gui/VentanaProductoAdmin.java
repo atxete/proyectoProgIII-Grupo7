@@ -21,7 +21,8 @@ public class VentanaProductoAdmin extends JFrame{
 	JLabel lblFoto;
 	
 	
-	public VentanaProductoAdmin(/*Producto p*/) {
+	public VentanaProductoAdmin(/*Producto p*/ VentanaPrincipalAdmin ventAnt) {
+		JFrame ventanaAnterior = ventAnt;
 		setTitle("Ventana Producto Administrador");
 		setBounds(300, 100, 700, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -78,7 +79,7 @@ public class VentanaProductoAdmin extends JFrame{
 		
 		
 		btnVolver.addActionListener((e)->{
-			//new VentanaPrincipalAdmin();
+			ventanaAnterior.setVisible(true);
 			dispose();
 		});
 		
@@ -166,7 +167,7 @@ public class VentanaProductoAdmin extends JFrame{
 		setVisible(true);
 		
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		new VentanaProductoAdmin();
-	}
+	}*/
 }

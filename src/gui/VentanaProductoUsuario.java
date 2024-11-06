@@ -35,7 +35,9 @@ public class VentanaProductoUsuario extends JFrame{
 	private ImageIcon iconoBlancoRedimensionado;
 	private ImageIcon iconoNegroRedimensionado;
 	
-	public VentanaProductoUsuario(/**Producto p**/) {
+	public VentanaProductoUsuario(/**Producto p**/ VentanaPrincipalUsuario ventAnt) {
+		
+		JFrame ventanaAnterior = ventAnt;
 		
 		setBounds(300, 100, 700, 500);
 		setTitle("Ventana Producto Usuario");
@@ -172,7 +174,7 @@ public class VentanaProductoUsuario extends JFrame{
         
         
         btnVolver.addActionListener((e)->{
-        	//new VentanaPrincipalUsuario();
+        	ventanaAnterior.setVisible(true);
         	dispose();
         });
         
@@ -206,12 +208,12 @@ public class VentanaProductoUsuario extends JFrame{
 		setVisible(true);
 	}
 	
-	
+	/*
 	public static void main(String[] args) {
 		//aqui habria que ponerle la ventana de que podructo se abre
 		//falta indicar el parametro de entrada
-		/**new VentanaProductoUsuario(new Producto("Producto1", "id1",9.99f, "/imagenes/IMG-20231017-WA0003.jpg"));**/
+		//new VentanaProductoUsuario(new Producto("Producto1", "id1",9.99f, "/imagenes/IMG-20231017-WA0003.jpg"));
 		new VentanaProductoUsuario();
 		
-	}
+	}*/
 }
