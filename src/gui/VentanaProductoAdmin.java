@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.io.File;
 
 import javax.swing.*;
 
@@ -31,7 +32,19 @@ public class VentanaProductoAdmin extends JFrame{
 		pnlInfoProd = new JPanel(new GridLayout(1,2));
 		pnlFoto = new JPanel();
 		pnlCentro = new JPanel(new GridLayout(2,1));
-		btnVolver = new JButton("VOLVER");
+		//btnVolver = new JButton("VOLVER");
+		
+		 
+        ImageIcon iconoOriginalFlecha = new ImageIcon("imagenes/flechaVolver.png");
+        if (iconoOriginalFlecha.getIconWidth() != -1) {
+            Image imagenRedimensionadaFlecha = iconoOriginalFlecha.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            ImageIcon iconoRedimensionadoFlecha = new ImageIcon(imagenRedimensionadaFlecha);
+
+            btnVolver = new JButton(iconoRedimensionadoFlecha);  // Usar la imagen redimensionada en el botón
+        } else {
+            btnVolver = new JButton("VOLVER");  // En caso de error en la carga de la imagen
+        }
+		
 		btnModNombre = new JButton("Cambiar Nombre");
 		btnModPrecio = new JButton("Cambiar Precio");
 		btnModFoto = new JButton("Cambiar Foto");
@@ -107,27 +120,41 @@ public class VentanaProductoAdmin extends JFrame{
 		    }
 		});
 		
+		
+		// Parte del código generada con la ayuda de la inteligencia artificial (ChatGPT)
+		// El siguiente bloque de código permite seleccionar una imagen a través de un JFileChooser
+		// y actualizar la imagen de un producto en el sistema.
 		btnModFoto.addActionListener((e)->{
-			String nuevaFoto = JOptionPane.showInputDialog("Introduce el source de la nueva imagen para este producto");
 			
-			
-			if (nuevaFoto != null && !nuevaFoto.trim().isEmpty()) { 
+		    JFileChooser fileChooser = new JFileChooser();
+
+		    File directorioProyecto = new File(System.getProperty("user.dir"));
+		    fileChooser.setCurrentDirectory(directorioProyecto);
+
+		    fileChooser.setDialogTitle("Selecciona una imagen");
+
+		    fileChooser.setAcceptAllFileFilterUsed(false);
+		    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos de imagen", "jpg", "png", "jpeg", "gif"));
+
+		    int resultado = fileChooser.showOpenDialog(null);
+
+		    if (resultado == JFileChooser.APPROVE_OPTION) {
+		        
+		        String nuevaFoto = fileChooser.getSelectedFile().getAbsolutePath();
+
 		        ImageIcon nuevaImagenIcon = new ImageIcon(nuevaFoto);
 
-		        
+		       
 		        if (nuevaImagenIcon.getIconWidth() > 0) {
-		            
+		           
 		            // p.setFoto(nuevaFoto);
-		            
-		            
+
 		            JOptionPane.showMessageDialog(null, "La imagen del producto se ha actualizado.");
 		        } else {
-		            
-		            JOptionPane.showMessageDialog(null, "La ruta proporcionada no es válida o no corresponde a una imagen.", 
+		            JOptionPane.showMessageDialog(null, "El archivo seleccionado no es una imagen válida.", 
 		                                          "Error en la imagen", JOptionPane.ERROR_MESSAGE);
 		        }
 		    } else {
-		        
 		        JOptionPane.showMessageDialog(null, "No se realizó ningún cambio en la imagen del producto.", 
 		                                      "Cambio Cancelado", JOptionPane.WARNING_MESSAGE);
 		    }
