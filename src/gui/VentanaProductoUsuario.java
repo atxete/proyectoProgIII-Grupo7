@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 
 import domain.Producto;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class VentanaProductoUsuario extends JFrame{
 	
@@ -22,12 +24,16 @@ public class VentanaProductoUsuario extends JFrame{
 	protected JLabel lblFoto;
 	protected JButton btnVolver;
 	protected JButton btnAnyadirWish;
-	protected JButton btnAnyadirCesta;
+	//protected JButton btnAnyadirCesta;
 	protected JPanel pnlIzq;
 	protected JPanel pnlDerecha;
 	protected JPanel pnlBotones;
 	protected JSpinner spinnerCantidad;
 	protected JPanel pnlSpinner;
+	
+	private boolean esFavorito = false;
+	private ImageIcon iconoBlancoRedimensionado;
+	private ImageIcon iconoNegroRedimensionado;
 	
 	public VentanaProductoUsuario(/**Producto p**/) {
 		
@@ -70,8 +76,8 @@ public class VentanaProductoUsuario extends JFrame{
 		lblFoto = new JLabel(imagenRedimensionadaIcono);
 		pnlIzq = new JPanel();
 		pnlDerecha = new JPanel();
-		pnlBotones = new JPanel(new GridLayout(1, 3));
-		pnlSpinner = new JPanel();
+		pnlBotones = new JPanel(/*new GridLayout(1, 3)*/);
+		pnlSpinner = new JPanel(new BorderLayout());
 		
 		pnlDerecha.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
@@ -81,27 +87,66 @@ public class VentanaProductoUsuario extends JFrame{
 		cantidadProducto.setAlignmentX(Component.LEFT_ALIGNMENT);
 		spinnerCantidad.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
-		btnAnyadirCesta = new JButton("AÑADIR A LA CESTA");
-		Font defaultFont = btnAnyadirCesta.getFont(); // fuente por defecto de btn
-        btnAnyadirCesta.setFont(defaultFont.deriveFont(11f));
-        btnAnyadirWish = new JButton("AÑADIR A FAVORITOS");
-        btnAnyadirWish = new JButton(new ImageIcon("imagenes/corazonBlanco.png"));
+		//btnAnyadirCesta = new JButton("AÑADIR A LA CESTA");
+
+        //btnAnyadirCesta.setFont(defaultFont.deriveFont(11f));
         
-        btnAnyadirWish.setFont(defaultFont.deriveFont(10f));
-		btnVolver = new JButton("VOLVER");
-		btnVolver.setFont(defaultFont.deriveFont(11f));
+        
+        ImageIcon iconoBlanco = new ImageIcon("imagenes/corazonBlanco.png");
+        ImageIcon iconoNegro = new ImageIcon("imagenes/corazonNegro.png");
+        
+        //Para verificar si las imagenes se han cargado correctamente
+        if (iconoBlanco.getIconWidth() == -1) {
+            System.out.println("Error: No se pudo cargar corazonBlanco.png");
+        }
+        if (iconoNegro.getIconWidth() == -1) {
+            System.out.println("Error: No se pudo cargar corazonNegro.png");
+        }
+        
+        
+        //Se redimensionan las imagenes, pero solo una vez que se hayan cargado correctamente
+        if (iconoBlanco.getIconWidth() != -1) {
+            Image imagenBlanca = iconoBlanco.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            iconoBlancoRedimensionado = new ImageIcon(imagenBlanca);
+        }
+
+        if (iconoNegro.getIconWidth() != -1) {
+            Image imagenNegra = iconoNegro.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            iconoNegroRedimensionado = new ImageIcon(imagenNegra);
+        }
+
+        
+        btnAnyadirWish = new JButton(iconoBlancoRedimensionado);
+        btnAnyadirWish.setBackground(Color.WHITE);
+        
+        
+        
+        ImageIcon iconoOriginalFlecha = new ImageIcon("imagenes/flechaVolver.png");
+        if (iconoOriginalFlecha.getIconWidth() != -1) {
+            Image imagenRedimensionadaFlecha = iconoOriginalFlecha.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            ImageIcon iconoRedimensionadoFlecha = new ImageIcon(imagenRedimensionadaFlecha);
+
+            btnVolver = new JButton(iconoRedimensionadoFlecha);  // Usar la imagen redimensionada en el botón
+        } else {
+            btnVolver = new JButton("VOLVER");  // En caso de error en la carga de la imagen
+        }
+        
+        btnVolver.setBackground(Color.RED);
+	
 		
 		
 		pnlIzq.add(lblFoto, BorderLayout.CENTER);
-		pnlDerecha.setLayout(new GridLayout(0, 1)); 
+		pnlDerecha.setLayout(new GridLayout(0, 1));
 		pnlDerecha.add(nombreProducto);
 		pnlDerecha.add(precioProducto);
-		pnlSpinner.add(cantidadProducto);
-		pnlSpinner.add(spinnerCantidad);
+		JPanel pnlCantidad = new JPanel();
+		pnlCantidad.add(cantidadProducto);
+		pnlCantidad.add(spinnerCantidad);
+		pnlSpinner.add(pnlCantidad, BorderLayout.WEST);
 		//pnlSpinner.add(Box.createHorizontalStrut(5)); //con esto se añade un espacio entre el label y el spinner
 		
 		pnlDerecha.add(pnlSpinner);
-		pnlBotones.add(btnAnyadirCesta);
+		//pnlBotones.add(btnAnyadirCesta);
 		pnlBotones.add(btnAnyadirWish);
 		pnlBotones.add(btnVolver);
 		pnlDerecha.add(pnlBotones);
@@ -122,6 +167,7 @@ public class VentanaProductoUsuario extends JFrame{
         pnlBotones.setBackground(Color.WHITE);
         pnlDerecha.setBackground(Color.WHITE);
         pnlIzq.setBackground(Color.WHITE);
+        pnlCantidad.setBackground(Color.WHITE);
         
         
         
@@ -130,18 +176,30 @@ public class VentanaProductoUsuario extends JFrame{
         	dispose();
         });
         
-        btnAnyadirCesta.addActionListener((e)->{
-        	//Para programar esto necesitariamos tener la base de datos 
-        	//hecha para poder añadirle al usuario que ha iniciado sesión
-        	//el producto que recibe la ventana como parametro a la lista 
-        	//de los productos que él tenga en la cesta, para así poder visualizarlo en la tabla
-        });
+        
         
         btnAnyadirWish.addActionListener((e)->{
         	//Para programar esto necesitariamos tener la base de datos 
         	//hecha para poder añadirle al usuario que ha iniciado sesión
         	//el producto que recibe la ventana como parametro a la lista 
         	//de los productos que él tenga en favoritos, para así poder visualizarlo en la tabla
+        	 esFavorito = !esFavorito;
+        	
+        	if (esFavorito && iconoNegroRedimensionado != null) {
+                btnAnyadirWish.setIcon(iconoNegroRedimensionado);
+            } else if (!esFavorito && iconoBlancoRedimensionado != null) {
+                btnAnyadirWish.setIcon(iconoBlancoRedimensionado);
+            }
+        
+        });
+        
+        
+        spinnerCantidad.addChangeListener((e)->{
+        	//Para programar esto necesitariamos tener la base de datos 
+        	//hecha para poder añadirle al usuario que ha iniciado sesión
+        	//el producto que recibe la ventana como parametro a la lista 
+        	//de los productos que él tenga en compra por la cantidad que pone, (excepto si es 0, se elimina de la compra)
+        	// para así poder visualizarlo en la tabla
         });
         
         
