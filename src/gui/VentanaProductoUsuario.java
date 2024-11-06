@@ -85,6 +85,8 @@ public class VentanaProductoUsuario extends JFrame{
 		Font defaultFont = btnAnyadirCesta.getFont(); // fuente por defecto de btn
         btnAnyadirCesta.setFont(defaultFont.deriveFont(11f));
         btnAnyadirWish = new JButton("AÑADIR A FAVORITOS");
+        btnAnyadirWish = new JButton(new ImageIcon("imagenes/corazonBlanco.png"));
+        
         btnAnyadirWish.setFont(defaultFont.deriveFont(10f));
 		btnVolver = new JButton("VOLVER");
 		btnVolver.setFont(defaultFont.deriveFont(11f));
