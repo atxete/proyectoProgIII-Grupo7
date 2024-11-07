@@ -7,11 +7,14 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
+import domain.GestorUsuarios;
 import domain.Producto;
 
 public class VentanaPrincipalAdmin extends JFrame{
@@ -27,7 +30,28 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 		setBounds(300, 100, 700, 500);
 		setTitle("Ventana Principal Admin");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		ventanaPrincipalAdmin.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		ventanaPrincipalAdmin.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				Object[] opciones = {"Aceptar", "Cancelar"};
+		        int opcion = JOptionPane.showOptionDialog(
+		        	ventanaPrincipalAdmin,
+		            "¿Está seguro de que desea salir?",
+		            "Confirmación de salida",
+		            JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE,
+		            null,
+		            opciones,
+		            opciones[1] // Opciones[1] es "Cancelar", el botón seleccionado por defecto
+		        );
+		        
+		        if(opcion == JOptionPane.YES_OPTION) {
+		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());
+		        	vis.setVisible(true);
+		        	ventanaPrincipalAdmin.dispose();
+		        }
+			}
+		});
 		
 		setLayout(new BorderLayout());
 		

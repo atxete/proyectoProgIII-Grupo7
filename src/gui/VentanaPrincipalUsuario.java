@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import domain.Comprador;
+import domain.GestorUsuarios;
 import domain.Producto;
 
 public class VentanaPrincipalUsuario extends JFrame{
@@ -40,9 +43,34 @@ public class VentanaPrincipalUsuario extends JFrame{
 	
 	public VentanaPrincipalUsuario() {
 		
+		JFrame vActual = this;
+		
 		setBounds(300, 100, 700, 500);
 		setTitle("Ventana Principal Usuario");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		vActual.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				Object[] opciones = {"Aceptar", "Cancelar"};
+		        int opcion = JOptionPane.showOptionDialog(
+		            vActual,
+		            "¿Está seguro de que desea salir?",
+		            "Confirmación de salida",
+		            JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE,
+		            null,
+		            opciones,
+		            opciones[1] // Opciones[1] es "Cancelar", el botón seleccionado por defecto
+		        );
+		        
+		        if(opcion == JOptionPane.YES_OPTION) {
+		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());
+		        	vis.setVisible(true);
+		        	vActual.dispose();
+		        }
+			}
+		});
+		
+		vcu = new VentanaCestaUsuario();
 		
 		setLayout(new BorderLayout()); 
 		//inicializamos esta ventana para mas adelante poder añadir los productos que queramos 
@@ -78,7 +106,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		
 		
 		
-		pnlProductos = new JPanel(new GridLayout(0, 2, 10, 10));
+		pnlProductos = new JPanel(new GridLayout(0, 3, 10, 10));
 		JScrollPane scrollProductos = new JScrollPane(pnlProductos);
 		scrollProductos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		actualizarPanel(productos);
@@ -109,6 +137,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 					}
 				}
 				actualizarPanel(productosFiltrados);
+				repaint();
 			}
 		});
 		 
@@ -149,7 +178,10 @@ public class VentanaPrincipalUsuario extends JFrame{
 			
 			SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
 	        JSpinner spinnerCantidad = new JSpinner(model);
-			JLabel cantidadProducto = new JLabel("Cantidad: "+ spinnerCantidad);
+	        spinnerCantidad.addChangeListener(e->{
+	        	int cantidad = (Integer) ((JSpinner)e.getSource()).getValue();
+	        	vcu.anyadirProducto(p, cantidad);
+	        });
 			
 			ImageIcon imagenProducto = new ImageIcon(p.getFoto());
 			Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -171,20 +203,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 			JPanel pnlCentral = new JPanel();
 			JPanel pnlBtnProd = new JPanel(new GridLayout(1,2));
 			
-			JButton btnAnyadirCesta = new JButton("Añadir a Cesta");
-			btnAnyadirCesta.addActionListener((e)->{
-				int cantidad = (int) spinnerCantidad.getValue();
-				if(cantidad>0) {
-					vcu.anyadirProducto(p);
-					JOptionPane.showMessageDialog(null, "PRODUCTO AÑADIDO", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "No puedes añadir 0 productos", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-	        });
-	        
-	        pnlBtnProd.add(btnAnyadirCesta);
 	        pnlBtnProd.add(spinnerCantidad);
-	        
 	        pnlCentral.add(nombreProducto);
 	        pnlCentral.add(precioProducto);
 	        

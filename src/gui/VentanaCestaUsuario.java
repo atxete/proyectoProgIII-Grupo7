@@ -107,7 +107,7 @@ public class VentanaCestaUsuario extends JFrame{
 		setVisible(true);
 	}
 	
-	public void anyadirProducto(Producto p) {
+	public void anyadirProducto(Producto p, Integer cantidad) {
 		productos.add(p);
 	}
 	
