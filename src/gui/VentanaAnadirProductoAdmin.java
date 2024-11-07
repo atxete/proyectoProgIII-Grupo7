@@ -7,9 +7,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,15 +28,18 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 	private JPanel pnlProductos;
 	private JLabel lblNombre;
 	private JLabel lblPrecio;
-	private JLabel lblNombre_foto;
+	private JLabel lblFoto;
 	private JTextField tfNombre;
 	private JTextField tfPrecio;
-	private JTextField tfNombre_foto;
+	private JButton btnFoto;
 	private JPanel pnlTexto;
 	private JPanel pnlTextoTamanyo;
 	private JButton btnCancelar;
 	private JButton btnGuardar;
 	private JPanel pnlBotones;
+	private JFileChooser fileChooser;
+	private String nuevaFoto;
+	private ImageIcon nuevaImagenIcon;
 	private VentanaPrincipalAdmin ventanaPrincipalAdmin;
 	
 	public VentanaAnadirProductoAdmin(VentanaPrincipalAdmin ventanaPrincipalAdmin) {
@@ -59,17 +65,17 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 		lblPrecio = new JLabel("Precio:");
 		tfPrecio = new JTextField();
 		tfPrecio.setPreferredSize(new Dimension(150,25));
-		lblNombre_foto = new JLabel("Nombre foto:");
-		tfNombre_foto = new JTextField();
-		tfNombre_foto.setPreferredSize(new Dimension(150,25));
+		lblFoto = new JLabel("Foto:");
+		btnFoto = new JButton("Seleccionar foto");
+		btnFoto.setPreferredSize(new Dimension(150,25));
 		
 		pnlTexto = new JPanel(new GridLayout(3,2,10,20));
 		pnlTexto.add(lblNombre);
 		pnlTexto.add(tfNombre);
 		pnlTexto.add(lblPrecio);
 		pnlTexto.add(tfPrecio);
-		pnlTexto.add(lblNombre_foto);
-		pnlTexto.add(tfNombre_foto);
+		pnlTexto.add(lblFoto);
+		pnlTexto.add(btnFoto);
 		
 		pnlTextoTamanyo = new JPanel(new FlowLayout(FlowLayout.CENTER,30,30));
 		pnlTextoTamanyo.add(pnlTexto);
@@ -85,12 +91,50 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 		getContentPane().add(pnlBotones, BorderLayout.SOUTH);
 		
 		
+		btnFoto.addActionListener((e)->{
+			
+		    fileChooser = new JFileChooser();
+
+		    File directorioProyecto = new File(System.getProperty("user.dir"));
+		    fileChooser.setCurrentDirectory(directorioProyecto);
+
+		    fileChooser.setDialogTitle("Selecciona una imagen");
+
+		    fileChooser.setAcceptAllFileFilterUsed(false);
+		    fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos de imagen", "jpg", "png", "jpeg", "gif"));
+
+		    int resultado = fileChooser.showOpenDialog(null);
+
+		    if (resultado == JFileChooser.APPROVE_OPTION) {
+		        
+		        nuevaFoto = fileChooser.getSelectedFile().getAbsolutePath();
+
+		        nuevaImagenIcon = new ImageIcon(nuevaFoto);
+
+		       
+		        if (nuevaImagenIcon.getIconWidth() > 0) {
+		           
+		            // p.setFoto(nuevaFoto);
+
+		            JOptionPane.showMessageDialog(null, "La imagen del producto se ha actualizado.");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "El archivo seleccionado no es una imagen válida.", 
+		                                          "Error en la imagen", JOptionPane.ERROR_MESSAGE);
+		        }
+		    } else {
+		        JOptionPane.showMessageDialog(null, "No se realizó ningún cambio en la imagen del producto.", 
+		                                      "Cambio Cancelado", JOptionPane.WARNING_MESSAGE);
+		    }
+			
+		});
+		;
+		
 		btnGuardar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Producto producto = new Producto(tfNombre.getText(), "", Float.valueOf(tfPrecio.getText()), tfNombre_foto.getText()); 
+				Producto producto = new Producto(tfNombre.getText(), "", Float.valueOf(tfPrecio.getText()), btnFoto.getText()); 
 				ventanaPrincipalAdmin.getProductos().add(producto);
 				JOptionPane.showMessageDialog(null, "El producto se ha añadido correctamente al supermercado.", "Producto añadido correctamente", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
