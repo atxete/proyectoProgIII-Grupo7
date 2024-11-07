@@ -70,7 +70,6 @@ public class VentanaPrincipalUsuario extends JFrame{
 			}
 		});
 		
-		vcu = new VentanaCestaUsuario();
 		
 		setLayout(new BorderLayout()); 
 		//inicializamos esta ventana para mas adelante poder añadir los productos que queramos 
