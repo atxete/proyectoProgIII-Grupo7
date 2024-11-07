@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -117,6 +119,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		 for(Producto.tipo tipo : Producto.tipo.values()){
 		  	filtroTipos.addItem(tipo.name());
 		 }
+		
 		 
 		 filtroTipos.addActionListener(new ActionListener() {
 			
@@ -136,7 +139,8 @@ public class VentanaPrincipalUsuario extends JFrame{
 					}
 				}
 				actualizarPanel(productosFiltrados);
-				repaint();
+				pnlProductos.repaint();
+				pnlProductos.revalidate();
 			}
 		});
 		 
