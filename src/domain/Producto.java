@@ -12,12 +12,39 @@ public class Producto {
 	protected float precio;
 	protected String foto;
 	protected TipoIva TipoIva;
+	protected int cantidad;
+	protected int precioTotal;
 	
 	
 	
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public TipoIva getTipoIva() {
+		return TipoIva;
+	}
+
+	public void setTipoIva(TipoIva tipoIva) {
+		TipoIva = tipoIva;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public int getPrecioTotal() {
+		return precioTotal;
+	}
+
+	public void setPrecioTotal(int precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

@@ -2,14 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -20,11 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-
 import domain.Producto;
-import domain.Producto.tipo;
 import domain.TipoIva;
 
 public class VentanaCestaUsuario extends JFrame{
@@ -68,31 +59,19 @@ public class VentanaCestaUsuario extends JFrame{
 		//Añadimos el panel a la ventana
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
 		 
-		botonPagar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(VentanaCestaUsuario.this, "Compra pagada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-				
-			}
+		botonPagar.addActionListener((e)->{
+			JOptionPane.showMessageDialog(VentanaCestaUsuario.this, "Compra pagada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 		});
-		
-		botonSeguirComprando.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
-				ventanausuario.setVisible(true);
-				dispose();
-				
-			}
+		botonSeguirComprando.addActionListener((e)->{
+			VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
+			ventanausuario.setVisible(true);
+			dispose();
 		});
 		
 		
-		
-		//Hay que revisar la foto!!!!!!
 		ImageIcon logo = new ImageIcon("C:\\Users\\usuario\\trabajoProg3\\proyectoProgIII-Grupo7\\imagenes\\Logo.jpg");
 		pieDePagina = new JLabel(logo);
+		pieDePagina.setSize(100, 50);
 		
 		getContentPane().add(pieDePagina, BorderLayout.NORTH);
 		
