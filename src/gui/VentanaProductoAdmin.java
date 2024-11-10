@@ -127,12 +127,9 @@ public class VentanaProductoAdmin extends JFrame{
 		btnModFoto.addActionListener((e)->{
 			
 			//IAG: (herramienta: chatGPT)
-		    //ADAPTADO (crear el keyListener lo sabíamos hacer, y saber cuál teníamos que usar también.
-		    //Sin embargo, no sabíamos como acceder exactamente a la tecla enter para todos los keyListener creados.)
-			//ADAPTADO (hemos pedido como se hace un JFileChooser (estructura y procedimiento)
-			//			también como podiamos añadir que el directorio que se abría fuera el de este proyecto)
-			
-			
+			//ADAPTADO (sabíamos como crear el file chooser y añadirlo al boton. 
+			//Sin embargo, no sabíamos como configurarlo para que el usuario pueda elegir la imagen que desee de su archivo.
+			//Tampoco sabíamos como hacer para que solo se puedan elegir los tipos de archivo especificados en la línea 142).
 			
 		    JFileChooser fileChooser = new JFileChooser();
 
