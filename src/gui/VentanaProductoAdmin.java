@@ -133,6 +133,7 @@ public class VentanaProductoAdmin extends JFrame{
 			//			también como podiamos añadir que el directorio que se abría fuera el de este proyecto)
 			
 			
+			
 		    JFileChooser fileChooser = new JFileChooser();
 
 		    File directorioProyecto = new File(System.getProperty("user.dir"));
