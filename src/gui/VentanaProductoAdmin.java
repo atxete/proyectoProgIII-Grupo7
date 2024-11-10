@@ -122,10 +122,16 @@ public class VentanaProductoAdmin extends JFrame{
 		});
 		
 		
-		// Parte del código generada con la ayuda de la inteligencia artificial (ChatGPT)
-		// El siguiente bloque de código permite seleccionar una imagen a través de un JFileChooser
-		// y actualizar la imagen de un producto en el sistema.
+		
+		
 		btnModFoto.addActionListener((e)->{
+			
+			//IAG: (herramienta: chatGPT)
+		    //ADAPTADO (crear el keyListener lo sabíamos hacer, y saber cuál teníamos que usar también.
+		    //Sin embargo, no sabíamos como acceder exactamente a la tecla enter para todos los keyListener creados.)
+			//ADAPTADO (hemos pedido como se hace un JFileChooser (estructura y procedimiento)
+			//			también como podiamos añadir que el directorio que se abría fuera el de este proyecto)
+			
 			
 		    JFileChooser fileChooser = new JFileChooser();
 
