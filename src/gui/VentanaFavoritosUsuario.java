@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import domain.Producto;
+import domain.TipoIva;
 
 public class VentanaFavoritosUsuario extends JFrame{
 	private ModeloFavoritosUsuario modeloFavoritosUsuarios;
@@ -60,13 +62,48 @@ public class VentanaFavoritosUsuario extends JFrame{
 		seguirComprando.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				//VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
-				//ventanausuario.setVisible(true);
+				VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
+				ventanausuario.setVisible(true);
 				dispose();
 				
 			}
 		});
 		
+        tablaFavoritos.setDefaultRenderer(Object.class, (table, value, isSelected, hasFocus, row, column) -> {
+            JLabel labelCestaUsuario = new JLabel(value.toString());
+         	if(column==2) {
+         	   int precio = (int) value;
+         	   if(precio <10) {
+         		   labelCestaUsuario.setBackground(Color.GREEN);
+         	   }
+         	   else if(precio <50) {
+         		   labelCestaUsuario.setBackground(Color.yellow);
+         	   }else if(precio <100) {
+         		   labelCestaUsuario.setBackground(Color.orange);
+         	   }else {
+         		   labelCestaUsuario.setBackground(Color.red);
+         	   }
+         	}
+         	if(column ==3) {
+         		TipoIva tipoIva = (TipoIva) value;
+         		if(tipoIva == tipoIva.General) {
+         			labelCestaUsuario.setForeground(Color.black);
+         		}else if(tipoIva == tipoIva.Reducido) {
+         			labelCestaUsuario.setForeground(Color.ORANGE);
+         		}else if(tipoIva == tipoIva.Superreducido) {
+         			labelCestaUsuario.setForeground(Color.yellow);
+         		}else {
+         			labelCestaUsuario.setForeground(Color.green);
+         		}
+         	}
+         	
+         	else {
+         		labelCestaUsuario.setBackground(Color.white);
+         		labelCestaUsuario.setForeground(Color.black);
+         	}
+         	
+         	return labelCestaUsuario;
+         });
 		
 		
 		setVisible(true);
