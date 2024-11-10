@@ -40,6 +40,9 @@ public class GestorUsuarios {
 		return null;
 	}
 	
+	
+	//IAG (herramienta:chatGPT)
+	//ADAPTADO (para crear los StringBuilder se ha necesitado ayuda de chatGPT, ya que no sabíamos como hacer para imprimir los usuarios por pantalla.) 
 	public String verUsuariosRegistrados() {
 		if(usuariosRegistrados.isEmpty()) {
 			return "No hay usuarios registrados";

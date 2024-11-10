@@ -96,6 +96,10 @@ public class VentanaInicioSesion extends JFrame{
 			}
 		});
 		
+		
+	    //IAG: (herramienta: chatGPT)
+	    //ADAPTADO (crear el keyListener lo sabíamos hacer, y saber cuál teníamos que usar también.
+	    //Sin embargo, no sabíamos como acceder exactamente a la tecla enter para todos los keyListener creados.)
 		tfUsuario.addKeyListener(new KeyListener() {
 
 			@Override

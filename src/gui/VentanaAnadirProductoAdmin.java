@@ -90,7 +90,10 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 		getContentPane().add(pnlTextoTamanyo, BorderLayout.CENTER);
 		getContentPane().add(pnlBotones, BorderLayout.SOUTH);
 		
-		
+		//IAG (herramienta: chatGPT)
+		//ADAPTADO (sabíamos como crear el file chooser y añadirlo al boton. 
+		//Sin embargo, no sabíamos como configurarlo para que el usuario pueda elegir la imagen que desee de su archivo.
+		//Tampoco sabíamos como hacer para que solo se puedan elegir los tipos de archivo especificados en la línea 107).
 		btnFoto.addActionListener((e)->{
 			
 		    fileChooser = new JFileChooser();
