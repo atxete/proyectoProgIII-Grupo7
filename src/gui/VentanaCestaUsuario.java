@@ -60,7 +60,7 @@ public class VentanaCestaUsuario extends JFrame{
 		});
 		botonSeguirComprando.addActionListener((e)->{
 			VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
-			ventanausuario.setVisible(true);
+			ventanausuario.setVisible(false);
 			dispose();
 		});
 		

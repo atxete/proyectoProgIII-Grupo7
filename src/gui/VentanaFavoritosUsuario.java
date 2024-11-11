@@ -63,7 +63,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 			
 			public void actionPerformed(ActionEvent e) {
 				VentanaPrincipalUsuario ventanausuario = new VentanaPrincipalUsuario();
-				ventanausuario.setVisible(true);
+				ventanausuario.setVisible(false);
 				dispose();
 				
 			}

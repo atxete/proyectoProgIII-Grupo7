@@ -185,7 +185,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 	        JSpinner spinnerCantidad = new JSpinner(model);
 	        spinnerCantidad.addChangeListener(e->{
 	        	int cantidad = (Integer) ((JSpinner)e.getSource()).getValue();
-	        	vcu.anyadirProducto(p, cantidad);
+	        	//vcu.anyadirProducto(p, cantidad);
 	        });
 			
 			ImageIcon imagenProducto = new ImageIcon(p.getFoto());
