@@ -118,6 +118,7 @@ public class VentanaCestaUsuario extends JFrame{
 		productos.add(p);
 	}
 	
+	
 	public static void main(String[] args) {
 		new VentanaCestaUsuario();
 		
