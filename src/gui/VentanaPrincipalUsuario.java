@@ -120,7 +120,9 @@ public class VentanaPrincipalUsuario extends JFrame{
 		  	filtroTipos.addItem(tipo.name());
 		 }
 		
-		 
+		 //IAG (herramienta: ChatGPT)
+		 //Adaptado: sabiamos por donde empezar pero no acababa de funcionar bien del todo. 
+		 //Tuvimos que buscar lo del revalidate ya que sino se hacia muy lento.
 		 filtroTipos.addActionListener(new ActionListener() {
 			
 			@Override
