@@ -47,11 +47,9 @@ public class VentanaCestaUsuario extends JFrame{
 		panelBotones = new JPanel();
 		
 		//Creamos los 3 botones
-		botonAniadirFavoritos = new JButton("Añadir a favoritos");
 		botonPagar = new JButton("Pagar");
 		botonSeguirComprando = new JButton("Seguir comprando");
 		//Los añadimos al panel
-		panelBotones.add(botonAniadirFavoritos);
 		panelBotones.add(botonPagar);
 		panelBotones.add(botonSeguirComprando);
 		//Añadimos el panel a la ventana

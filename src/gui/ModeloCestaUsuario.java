@@ -13,7 +13,7 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 	//
 	
 	private List<Producto> listaProductos;
-	private List<String> listaTitulos = Arrays.asList("ID", "Nombre", "Precio", "Tipo de IVA", "Cantidad", "Precio final");
+	private List<String> listaTitulos = Arrays.asList("ID", "Nombre", "Precio", "Tipo de IVA", "Cantidad", "Precio sin IVA","Precio final");
 	
 	
 	
@@ -76,7 +76,7 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 			case 2: return p.getPrecio();
 			case 3: return p.getTipoIva();
 			case 4: return p.getCantidad();
-			case 5: return p.getCantidad()*p.getPrecio();
+			case 6: return p.getCantidad()*p.getPrecio();
 			default: return null;
 		}
 	}
