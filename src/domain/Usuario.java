@@ -1,6 +1,7 @@
 package domain;
 
 public abstract class Usuario {
+	int codigoUsuario = 0;
 	String nombreUsuario;
 	String apellidosUsuario;
 	String usuarioUsuario;
@@ -8,6 +9,13 @@ public abstract class Usuario {
 	String email;
 	int admin; //si es administrador (1) o si es comprador (0)
 	
+	
+	public int getCodigoUsuario() {
+		return codigoUsuario;
+	}
+	public void setCodigoUsuario(int codigoUsuario) {
+		this.codigoUsuario = codigoUsuario;
+	}
 	public String getNombre() {
 		return nombreUsuario;
 	}
@@ -58,7 +66,7 @@ public abstract class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombreUsuario + ", apellidos=" + apellidosUsuario + ", usuario=" + usuarioUsuario + ", contrasenya="
+		return "Usuario [codigoUsuario=" + codigoUsuario + ", nombre=" + nombreUsuario + ", apellidos=" + apellidosUsuario + ", usuario=" + usuarioUsuario + ", contrasenya="
 				+ contrasenya + ", email=" + email + ", admin=" + "]";
 	}
 	
