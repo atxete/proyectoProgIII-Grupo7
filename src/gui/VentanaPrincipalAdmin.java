@@ -16,6 +16,7 @@ import javax.swing.*;
 
 import domain.GestorUsuarios;
 import domain.Producto;
+import domain.Producto.tipo;
 
 public class VentanaPrincipalAdmin extends JFrame{
 	
@@ -61,20 +62,20 @@ public class VentanaPrincipalAdmin extends JFrame{
 		 * productos = crearProductos()
 		 */
 		List<Producto> productos = new ArrayList();
-		Producto p1 = new Producto("P1", "id1", 1, "imagenes/Logo.jpg");
-		p1.setTipo(Producto.tipo.Bebidas);
-		Producto p2 = new Producto("P2", "id2", 2, "imagenes/Logo.jpg");
-		p2.setTipo(Producto.tipo.Desayuno);
-		Producto p3 = new Producto("P3", "id3", 3, "imagenes/Logo.jpg");
-		p3.setTipo(Producto.tipo.Bebidas);
-		Producto p4 = new Producto("P4", "id4", 4, "imagenes/Logo.jpg");
-		p4.setTipo(Producto.tipo.Desayuno);
-		Producto p5 = new Producto("P5", "id4", 4, "imagenes/Logo.jpg");
-		p5.setTipo(Producto.tipo.CarnePescado);
-		Producto p6 = new Producto("P6", "id4", 4, "imagenes/Logo.jpg");
-		p6.setTipo(Producto.tipo.CarnePescado);
-		Producto p7 = new Producto("P7", "id4", 4, "imagenes/Logo.jpg");
-		p7.setTipo(Producto.tipo.CarnePescado);
+		Producto p1 = new Producto(tipo.Bebidas, "P1", "id1", 1, "imagenes/agua.jpg");
+		//p1.setTipo(Producto.tipo.Bebidas);
+		Producto p2 = new Producto(tipo.Desayuno, "P2", "id2", 2, "imagenes/cerealesFibra.jpg");
+		//p2.setTipo(Producto.tipo.Desayuno);
+		Producto p3 = new Producto(tipo.Bebidas, "P3", "id3", 3, "imagenes/cerveza.jpg");
+		//p3.setTipo(Producto.tipo.Bebidas);
+		Producto p4 = new Producto(tipo.Desayuno, "P4", "id4", 4, "imagenes/donuts.jpg");
+		//p4.setTipo(Producto.tipo.Desayuno);
+		Producto p5 = new Producto(tipo.CarnePescado, "P5", "id4", 4, "imagenes/fileteDeCarne.jpg");
+		//p5.setTipo(Producto.tipo.CarnePescado);
+		Producto p6 = new Producto(tipo.CarnePescado, "P6", "id4", 4, "imagenes/merluza.jpg");
+		//p6.setTipo(Producto.tipo.CarnePescado);
+		Producto p7 = new Producto(tipo.CarnePescado, "P7", "id4", 4, "imagenes/entrecot.jpg");
+		//p7.setTipo(Producto.tipo.CarnePescado);
 		productos.add(p1);
 		productos.add(p2);
 		productos.add(p3);

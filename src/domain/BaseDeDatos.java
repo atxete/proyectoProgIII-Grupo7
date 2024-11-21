@@ -23,6 +23,8 @@ public class BaseDeDatos {
 			if(reiniciaBD) {
 				Statement stmt = conexion.createStatement();
 				
+				
+				//creación de tablas
 				String sent = "CREATE TABLE IF NOT EXISTS usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), apellidos varchar(25), usuario varchar(15), contrasenya varchar(25), email varchar(25), admin int);";
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
@@ -45,6 +47,22 @@ public class BaseDeDatos {
 				
 				sent = "CREATE TABLE IF NOT EXISTS producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), id int, precio float, foto varchar(50));";
 				logger.log(Level.INFO, "Statement: " + sent);
+				stmt.executeUpdate(sent);
+				
+				//creación de productos
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('Bebidas', 'Agua', '1', '1.95', 'imagenes/agua.jpg');";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('CarnePescado', 'Entrecot', '2', '8.5', 'imagenes/entrecot.jpg');";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('ProductosSecos', 'Almendras', '3', '2.45', 'imagenes/almendras.jpg');";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('Desayuno', 'Cereales de fibra', '4', '3.69', 'imagenes/cerealesFibra.jpg');";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('VerduraFruta', 'Kiwi', '5', '0.97', 'imagenes/kiwi.jpg');";
 				stmt.executeUpdate(sent);
 			}
 			

@@ -72,7 +72,7 @@ public class Producto {
 	public void setTipo(tipo tipo) {
 		this.tipo = tipo;
 	}
-	public Producto(String nombre, String id, float precio, String foto) {
+	public Producto(tipo tipo, String nombre, String id, float precio, String foto) {
 		super();
 		this.nombre = nombre;
 		this.id = id;

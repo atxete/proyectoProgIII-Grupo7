@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import domain.Producto;
+import domain.Producto.tipo;
 
 public class VentanaAnadirProductoAdmin  extends JFrame{
 
@@ -137,7 +138,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Producto producto = new Producto(tfNombre.getText(), "", Float.valueOf(tfPrecio.getText()), btnFoto.getText()); 
+				Producto producto = new Producto((tipo) tipoProductos.getSelectedItem(), tfNombre.getText(), "", Float.valueOf(tfPrecio.getText()), btnFoto.getText()); 
 				ventanaPrincipalAdmin.getProductos().add(producto);
 				JOptionPane.showMessageDialog(null, "El producto se ha añadido correctamente al supermercado.", "Producto añadido correctamente", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
