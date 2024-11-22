@@ -49,6 +49,7 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
+				/*
 				//creación de productos
 				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('Bebidas', 'Agua', '1', '1.95', 'imagenes/agua.jpg');";
 				stmt.executeUpdate(sent);
@@ -64,6 +65,7 @@ public class BaseDeDatos {
 				
 				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('VerduraFruta', 'Kiwi', '5', '0.97', 'imagenes/kiwi.jpg');";
 				stmt.executeUpdate(sent);
+				*/
 			}
 			
 			return true;
