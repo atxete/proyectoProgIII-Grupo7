@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
+import domain.BaseDeDatos;
 import domain.GestorUsuarios;
 
 public class VentanaInicial extends JFrame{
@@ -15,6 +16,9 @@ public class VentanaInicial extends JFrame{
 	private boolean temp = true;
 	
 	public VentanaInicial() {
+		
+		BaseDeDatos.abrirConexion("BaseDatos.db", true);
+		
 		int ancho = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		int alto = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
 		this.setSize(ancho, alto);

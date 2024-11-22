@@ -45,7 +45,7 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
-				sent = "CREATE TABLE IF NOT EXISTS producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), id int, precio float, foto varchar(50));";
+				sent = "CREATE TABLE IF NOT EXISTS producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, tipo varchar(10), nombre varchar(10), id int, precio float, foto varchar(50));";
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
