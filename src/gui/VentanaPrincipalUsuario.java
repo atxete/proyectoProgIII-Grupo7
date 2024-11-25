@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import domain.Comprador;
@@ -40,6 +42,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 	protected JPanel pnlBotones;
 	protected JPanel pnlFiltro;
 	protected JComboBox<String> filtroTipos;
+	protected JTextField buscador;
 	protected List<Producto> productos;
 	protected static VentanaCestaUsuario vcu;
 	
@@ -116,6 +119,9 @@ public class VentanaPrincipalUsuario extends JFrame{
 		
 		filtroTipos = new JComboBox<>();
 		filtroTipos.addItem("Todos"); //de inicio no habra filtro
+		buscador = new JTextField();
+		buscador.setPreferredSize(new Dimension(300,30));
+		JButton btnBuscar = new JButton("Buscar");
 		
 		 for(Producto.tipo tipo : Producto.tipo.values()){
 		  	filtroTipos.addItem(tipo.name());
@@ -124,12 +130,13 @@ public class VentanaPrincipalUsuario extends JFrame{
 		 //IAG (herramienta: ChatGPT)
 		 //Adaptado: sabiamos por donde empezar pero no acababa de funcionar bien del todo. 
 		 //Tuvimos que buscar lo del revalidate ya que sino se hacia muy lento.
-		 filtroTipos.addActionListener(new ActionListener() {
+		 btnBuscar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String seleccionado = (String) filtroTipos.getSelectedItem();
+				String nombre = buscador.getText().toLowerCase();
 				List<Producto> productosFiltrados = new ArrayList<Producto>();
 				
 				if(seleccionado.equals("Todos")) {
@@ -141,6 +148,14 @@ public class VentanaPrincipalUsuario extends JFrame{
 						}
 					}
 				}
+				if(!nombre.isEmpty()) {
+					productosFiltrados.clear();
+					for(Producto p: productos) {
+						if(p.getTipo().name().equals(seleccionado) && p.getNombre().equals(nombre)) {
+							productosFiltrados.add(p);							
+						}
+					}
+				}
 				actualizarPanel(productosFiltrados);
 				pnlProductos.repaint();
 				pnlProductos.revalidate();
@@ -148,8 +163,10 @@ public class VentanaPrincipalUsuario extends JFrame{
 		});
 		 
 		  
-		pnlFiltro = new JPanel(new BorderLayout());
-		pnlFiltro.add(filtroTipos, BorderLayout.WEST);
+		pnlFiltro = new JPanel();
+		pnlFiltro.add(filtroTipos);
+		pnlFiltro.add(buscador);
+		pnlFiltro.add(btnBuscar);
 		
 		btnCesta = new JButton("Cesta");
 		btnFavoritos = new JButton("Favoritos");
