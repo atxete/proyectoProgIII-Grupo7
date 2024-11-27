@@ -6,7 +6,7 @@ public class Producto {
 	
 	protected String nombre;
 	//NO SE SI SE QUIERE INT O STRING, si eso cambiarlo
-	protected String id;
+	protected int codigo=0;
 	public enum tipo{VerduraFruta, CarnePescado, ProductosSecos, Bebidas, Desayuno};
 	protected tipo tipo;
 	protected float precio;
@@ -48,11 +48,11 @@ public class Producto {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getId() {
-		return id;
+	public int getCodigo() {
+		return codigo;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	public float getPrecio() {
 		return precio;
@@ -72,10 +72,10 @@ public class Producto {
 	public void setTipo(tipo tipo) {
 		this.tipo = tipo;
 	}
-	public Producto(tipo tipo, String nombre, String id, float precio, String foto) {
+	public Producto(tipo tipo, String nombre, int codigo, float precio, String foto) {
 		super();
 		this.nombre = nombre;
-		this.id = id;
+		this.codigo = codigo;
 		this.precio = precio;
 		this.foto = foto;
 	}
@@ -84,7 +84,7 @@ public class Producto {
 	
 	@Override
 	public String toString() {
-		return "Producto [nombre=" + nombre + ", id=" + id + ", precio=" + precio+ "]";
+		return "Producto [nombre=" + nombre + ", codigo=" + codigo + ", precio=" + precio+ "]";
 	}
 	
 	
