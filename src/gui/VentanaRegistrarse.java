@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import domain.BaseDeDatos;
 import domain.Comprador;
 import domain.GestorUsuarios;
 import domain.Usuario;
@@ -315,6 +316,8 @@ public class VentanaRegistrarse extends JFrame{
 		}else {
 			JOptionPane.showMessageDialog(this, "Error al registrar usuario. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+		
+		BaseDeDatos.cerrarConexion();
 	}
 	
 	

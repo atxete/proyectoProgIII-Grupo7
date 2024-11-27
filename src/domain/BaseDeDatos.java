@@ -78,7 +78,7 @@ public class BaseDeDatos {
 	//cerramos la conexión con la base de datos
 	public static void cerrarConexion() {
 		try {
-			logger.log(Level.INFO, "Cerrando conexión");
+			logger.log(Level.INFO, "Conexión cerrada");
 			conexion.close();
 		}catch(SQLException e) {
 			logger.log(Level.SEVERE, "Excepción", e);

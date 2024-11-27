@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import domain.BaseDeDatos;
 import domain.GestorUsuarios;
 import domain.Usuario;
 
@@ -151,6 +152,8 @@ public class VentanaInicioSesion extends JFrame{
 		});
 		
 		setVisible(true);
+		BaseDeDatos.cerrarConexion();
+
 	}
 
 	private void iniciarSesion() {
@@ -185,6 +188,7 @@ public class VentanaInicioSesion extends JFrame{
 		}else {
 			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+		
 	}
 	
 	public static void main(String[] args) {

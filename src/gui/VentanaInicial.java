@@ -87,6 +87,7 @@ public class VentanaInicial extends JFrame{
 		
 		this.setVisible(true);
 	
+		BaseDeDatos.cerrarConexion();
 		
 	}
 	public static void main(String[] args) {
