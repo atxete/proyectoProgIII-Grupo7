@@ -23,20 +23,32 @@ public class Comprador extends Usuario{
 	
 	public Comprador(String nombre, String apellidos, String usuario, String contrasenya,
 			String email, int admin, ArrayList<Producto> cesta, ArrayList<Producto> listaFavoritos) {
-		super(nombre, apellidos, usuario, contrasenya, email, 0);
+		super(nombre, apellidos, usuario, contrasenya, email, admin);
 		this.cesta = cesta;
 		this.listaFavoritos = listaFavoritos;
 	}
 	
-	public Comprador(String nombre, String apellidos, String usuario, String contrasenya, String email) {
-		super(nombre, apellidos, usuario, contrasenya, email, 0);
-		// TODO Auto-generated constructor stub
+	public Comprador(String nombre, String apellidos, String usuario, String contrasenya, String email, int admin) {
+		super(nombre, apellidos, usuario, contrasenya, email, admin);
+		
 	}
 	
 	@Override
 	public String toString() {
 		return "Comprador [cesta=" + cesta + ", listaFavoritos=" + listaFavoritos + "]";
 	}
+	
+	
+	//añadir producto a favoritos
+	public void anyadirWishList(Producto p) {
+		listaFavoritos.add(p);
+	}
+	
+	
+	//añadir producto a cesta
+		public void anyadirCesta(Producto p) {
+			cesta.add(p);
+		}
 	
 
 }

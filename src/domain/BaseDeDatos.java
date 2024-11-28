@@ -119,7 +119,7 @@ public class BaseDeDatos {
 					a.setCodigoUsuario(id);
 					users.put(email, a);
 				}else {
-					Comprador c = new Comprador(nombre, apellidos, usuario, contrasenya, email);
+					Comprador c = new Comprador(nombre, apellidos, usuario, contrasenya, email,rs.getInt("admin"));
 					c.setCodigoUsuario(id);
 					users.put(email, c);
 				}
@@ -152,7 +152,7 @@ public class BaseDeDatos {
 					a.setCodigoUsuario(id);
 					return a;
 				}else {
-					Comprador c = new Comprador(nombre, apellidos, usuario, contrasenya, email);
+					Comprador c = new Comprador(nombre, apellidos, usuario, contrasenya, email,rs.getInt("admin"));
 					c.setCodigoUsuario(id);
 					return c;
 				}
@@ -268,6 +268,96 @@ public class BaseDeDatos {
 		}
 	}
 	
+	
+	//añadir nueva compra a la base de datos una vez esta es confirmada por el usuario
+	public static int anyadirCompra(int idUsuario, long fecha, double precio) {
+		
+		String sent="";
+		try(Statement statement = conexion.createStatement()){
+			sent="INSERT INTO compra (idUsuario, fecha, precio) VALUES("+idUsuario+", '"+fecha+"',"+(float)precio+");";
+			logger.log(Level.INFO, "Lanzada la actualización a la base de datos: "+sent);
+			int val=statement.executeUpdate(sent);
+			logger.log(Level.INFO, "Añadida "+val+" fila a base de datos\t"+sent);
+			sent="SELECT id FROM compra ORDER BY id DESC";
+			ResultSet rs = statement.executeQuery(sent);
+			while(rs.next()) {
+				int id=rs.getInt("id");
+				return id;
+			}
+		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Error en inserción de base de datos\t"+e);
+		}
+		return 0;
+	}
+	
+	
+	//añadir los productos que se han adquirido en una compra
+	public static void anyadirCompraP(int idCompra, int idProducto) {
+		String sent = "";
+		try(Statement statement = conexion.createStatement()){
+			sent="INSERT INTO compraP(id, idProducto) VALUES ("+idCompra+","+idProducto+")";
+			logger.log(Level.INFO, "Lanzada actualización a la base de datos:"+sent);
+			int val = statement.executeUpdate(sent);
+			logger.log(Level.INFO, "Añadida "+val+" fila a base de datos\t"+sent);
+			
+		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Error en inserción de base de datos\t"+e);
+		}
+	}
+	
+	
+	//obtener las compras registradas en la base de datos
+	//se podran obtener compras hechas entre dos fechas (type=1)
+	public static HashMap<Integer, Compra> getCompras(int type, long fecha1, long fecha2){
+		HashMap<Integer, Compra> mapaCompras = new HashMap<>();
+		ArrayList<Producto> ps = new ArrayList<Producto>();
+		String sent="";
+		try(Statement statement = conexion.createStatement()){
+			if(type==1) sent = "SELECT * FROM compra WHERE fecha BETWEEN " + fecha1 + " AND " + fecha2 ;
+			else sent = "SELECT * FROM compra";
+			logger.log(Level.INFO, "Statement: " + sent);
+			ResultSet rs = statement.executeQuery(sent);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int idUsuario = rs.getInt("idUsuario");
+				long fecha = rs.getLong("fecha");
+				float precio = rs.getFloat("precio");
+				sent = "SELECT idProducto FROM compraP WHERE id = " + id;
+				logger.log(Level.INFO, "Statement: "+sent);
+				ResultSet rs2 = statement.executeQuery(sent);
+				while(rs2.next()) {
+					int idProducto=rs2.getInt("idUsuario");
+					for(Producto p : Logica.getListaProductos()) {
+						if(idProducto==p.getCodigo()) {
+							ps.add(p);
+							break;
+						}
+					}
+					
+				}
+				Compra c = new Compra(id, getUsuarioId(idUsuario), ps, fecha, (double) precio);
+				mapaCompras.put(id, c);
+			} 
+			return mapaCompras;
+			
+			}catch(Exception e) {
+				logger.log(Level.SEVERE, "Excepción", e);
+				return null;
+		}
+		
+	}
+	
+	
+	
+	
+	public static Producto obtenerProducto(String nombre, ArrayList<Producto> listaProductos) {
+		for(Producto p : listaProductos) {
+			if(p.getNombre().equals(nombre)) {
+				return p;
+			}
+		}
+		return null;
+	}
 	
 	
 	

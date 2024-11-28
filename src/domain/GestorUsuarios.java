@@ -14,15 +14,16 @@ public class GestorUsuarios {
 		usuariosRegistrados.add(new Administrador("Xabier", "Aguiriano Fernández", "XabierAguiriano", "1234","xabier.aguiriano@opendeusto.es"));
 		usuariosRegistrados.add(new Administrador("Naroa", "Manterola Nazabal", "naroaManterola", "1234","n.manterola@opendeusto.es"));
 		usuariosRegistrados.add(new Administrador("Jon", "Ruiz Mezo", "jonru21", "1234","jon.r@opendeusto.es"));
-		usuariosRegistrados.add(new Comprador("Juan", "Gallego Rica", "juanga", "1234","juanga@opendeusto.es"));
-		usuariosRegistrados.add(new Comprador("Iker", "Carrasco Llorente", "ikerca", "1234","ikerca@opendeusto.es"));
+		usuariosRegistrados.add(new Comprador("Juan", "Gallego Rica", "juanga", "1234","juanga@opendeusto.es",0));
+		usuariosRegistrados.add(new Comprador("Iker", "Carrasco Llorente", "ikerca", "1234","ikerca@opendeusto.es",0));
+		
 	}
 	
 	public boolean registrarUsuario(String nombre, String apellidos, String usuario, String contrasenya, String repetirContrasenya, String email, int admin) {
 		if(buscarUsuarioPorNombreDeUsuario(usuario) == null && contrasenya.equals(repetirContrasenya)) {
 			Usuario nuevoUsuario;
 			if(admin == 0) {
-				nuevoUsuario = new Comprador(nombre, apellidos, usuario, contrasenya, email);
+				nuevoUsuario = new Comprador(nombre, apellidos, usuario, contrasenya, email,admin);
 			}else {
 				nuevoUsuario = new Administrador(nombre, apellidos, usuario, contrasenya, email);
 			}
