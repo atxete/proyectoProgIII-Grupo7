@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -69,9 +70,9 @@ public class VentanaPrincipalUsuario extends JFrame{
 		        );
 		        
 		        if(opcion == JOptionPane.YES_OPTION) {
+		        	vActual.dispose();
 		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());
 		        	vis.setVisible(true);
-		        	vActual.dispose();
 		        }
 			}
 		});
@@ -87,20 +88,20 @@ public class VentanaPrincipalUsuario extends JFrame{
 		 * productos = crearProductos()
 		 */
 		List<Producto> productos = new ArrayList();
-		Producto p1 = new Producto(tipo.Bebidas, "P1", "id1", 1, "imagenes/agua.jpg");
-		//p1.setTipo(Producto.tipo.Bebidas);
-		Producto p2 = new Producto(tipo.Desayuno, "P2", "id2", 2, "imagenes/cerealesFibra.jpg");
-		//p2.setTipo(Producto.tipo.Desayuno);
-		Producto p3 = new Producto(tipo.Bebidas, "P3", "id3", 3, "imagenes/cerveza.jpg");
-		//p3.setTipo(Producto.tipo.Bebidas);
-		Producto p4 = new Producto(tipo.Desayuno, "P4", "id4", 4, "imagenes/donuts.jpg");
-		//p4.setTipo(Producto.tipo.Desayuno);
-		Producto p5 = new Producto(tipo.CarnePescado, "P5", "id4", 4, "imagenes/fileteDeCarne.jpg");
-		//p5.setTipo(Producto.tipo.CarnePescado);
-		Producto p6 = new Producto(tipo.CarnePescado, "P6", "id4", 4, "imagenes/merluza.jpg");
-		//p6.setTipo(Producto.tipo.CarnePescado);
-		Producto p7 = new Producto(tipo.CarnePescado, "P7", "id4", 4, "imagenes/entrecot.jpg");
-		//p7.setTipo(Producto.tipo.CarnePescado);
+		Producto p1 = new Producto(null, "P1", 0, 1, "imagenes/agua.jpg");
+		p1.setTipo(Producto.tipo.Bebidas);
+		Producto p2 = new Producto(null, "P2",1, 2, "imagenes/cerealesFibra.jpg");
+		p2.setTipo(Producto.tipo.Desayuno);
+		Producto p3 = new Producto(null, "P3", 2, 3, "imagenes/cerveza.jpg");
+		p3.setTipo(Producto.tipo.Bebidas);
+		Producto p4 = new Producto(null, "P4", 3, 4, "imagenes/donuts.jpg");
+		p4.setTipo(Producto.tipo.Desayuno);
+		Producto p5 = new Producto(null, "P5",5, 4, "imagenes/fileteDeCarne.jpg");
+		p5.setTipo(Producto.tipo.CarnePescado);
+		Producto p6 = new Producto(null, "P6",6, 4, "imagenes/merluza.jpg");
+		p6.setTipo(Producto.tipo.CarnePescado);
+		Producto p7 = new Producto(null, "P7", 7, 4, "imagenes/entrecot.jpg");
+		p7.setTipo(Producto.tipo.CarnePescado);
 		productos.add(p1);
 		productos.add(p2);
 		productos.add(p3);
@@ -130,13 +131,12 @@ public class VentanaPrincipalUsuario extends JFrame{
 		 //IAG (herramienta: ChatGPT)
 		 //Adaptado: sabiamos por donde empezar pero no acababa de funcionar bien del todo. 
 		 //Tuvimos que buscar lo del revalidate ya que sino se hacia muy lento.
-		 btnBuscar.addActionListener(new ActionListener() {
+		 filtroTipos.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String seleccionado = (String) filtroTipos.getSelectedItem();
-				String nombre = buscador.getText().toLowerCase();
 				List<Producto> productosFiltrados = new ArrayList<Producto>();
 				
 				if(seleccionado.equals("Todos")) {
@@ -148,20 +148,40 @@ public class VentanaPrincipalUsuario extends JFrame{
 						}
 					}
 				}
-				if(!nombre.isEmpty()) {
-					productosFiltrados.clear();
-					for(Producto p: productos) {
-						if(p.getTipo().name().equals(seleccionado) && p.getNombre().equals(nombre)) {
-							productosFiltrados.add(p);							
-						}
-					}
-				}
 				actualizarPanel(productosFiltrados);
 				pnlProductos.repaint();
 				pnlProductos.revalidate();
 			}
 		});
 		 
+		 btnBuscar.addActionListener(new ActionListener() {
+			String nombre = buscador.getText();
+			List<Producto> pf = new ArrayList<Producto>();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(!nombre.isBlank()) {
+					for(Producto p : productos) {
+						if(nombre.equals(p.getNombre())) {
+							pf.add(p);
+						}
+					}
+				} else {
+					pf = productos;
+				}
+				actualizarPanel(pf);
+				pnlProductos.repaint();
+				pnlProductos.revalidate();
+			}
+		});
+		 
+		buscador.addKeyListener(new KeyAdapter() {
+			public void KeyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					btnBuscar.doClick();
+				}
+			}	
+		});
 		  
 		pnlFiltro = new JPanel();
 		pnlFiltro.add(filtroTipos);
@@ -222,7 +242,8 @@ public class VentanaPrincipalUsuario extends JFrame{
 				}
 			});
 			JPanel pnlPrincipal = new JPanel(new BorderLayout());
-			pnlPrincipal.setPreferredSize(new Dimension(200,100));
+			pnlPrincipal.setSize(new Dimension(200,100));
+			pnlProductos.setMaximumSize(new Dimension(200,100));
 			JPanel pnlCentral = new JPanel();
 			JPanel pnlBtnProd = new JPanel(new GridLayout(1,2));
 			
