@@ -138,7 +138,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Producto producto = new Producto((tipo) tipoProductos.getSelectedItem(), tfNombre.getText(), "", Float.valueOf(tfPrecio.getText()), btnFoto.getText()); 
+				Producto producto = new Producto((tipo) tipoProductos.getSelectedItem(), tfNombre.getText(), Float.valueOf(tfPrecio.getText()), lblFoto.getText());
 				ventanaPrincipalAdmin.getProductos().add(producto);
 				JOptionPane.showMessageDialog(null, "El producto se ha añadido correctamente al supermercado.", "Producto añadido correctamente", JOptionPane.INFORMATION_MESSAGE);
 				dispose();

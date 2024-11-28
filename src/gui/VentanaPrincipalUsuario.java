@@ -88,19 +88,19 @@ public class VentanaPrincipalUsuario extends JFrame{
 		 * productos = crearProductos()
 		 */
 		List<Producto> productos = new ArrayList();
-		Producto p1 = new Producto(null, "P1", 0, 1, "imagenes/agua.jpg");
+		Producto p1 = new Producto(null, "P1",  1, "imagenes/agua.jpg");
 		p1.setTipo(Producto.tipo.Bebidas);
-		Producto p2 = new Producto(null, "P2",1, 2, "imagenes/cerealesFibra.jpg");
+		Producto p2 = new Producto(null, "P2", 2, "imagenes/cerealesFibra.jpg");
 		p2.setTipo(Producto.tipo.Desayuno);
-		Producto p3 = new Producto(null, "P3", 2, 3, "imagenes/cerveza.jpg");
+		Producto p3 = new Producto(null, "P3",  3, "imagenes/cerveza.jpg");
 		p3.setTipo(Producto.tipo.Bebidas);
-		Producto p4 = new Producto(null, "P4", 3, 4, "imagenes/donuts.jpg");
+		Producto p4 = new Producto(null, "P4",  4, "imagenes/donuts.jpg");
 		p4.setTipo(Producto.tipo.Desayuno);
-		Producto p5 = new Producto(null, "P5",5, 4, "imagenes/fileteDeCarne.jpg");
+		Producto p5 = new Producto(null, "P5", 4, "imagenes/fileteDeCarne.jpg");
 		p5.setTipo(Producto.tipo.CarnePescado);
-		Producto p6 = new Producto(null, "P6",6, 4, "imagenes/merluza.jpg");
+		Producto p6 = new Producto(null, "P6", 4, "imagenes/merluza.jpg");
 		p6.setTipo(Producto.tipo.CarnePescado);
-		Producto p7 = new Producto(null, "P7", 7, 4, "imagenes/entrecot.jpg");
+		Producto p7 = new Producto(null, "P7",  4, "imagenes/entrecot.jpg");
 		p7.setTipo(Producto.tipo.CarnePescado);
 		productos.add(p1);
 		productos.add(p2);

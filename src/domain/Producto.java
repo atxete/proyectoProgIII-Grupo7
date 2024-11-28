@@ -72,16 +72,27 @@ public class Producto {
 	public void setTipo(tipo tipo) {
 		this.tipo = tipo;
 	}
-	public Producto(tipo tipo, String nombre, int codigo, float precio, String foto) {
+	public Producto(tipo tipo, String nombre, float precio, String foto) {
 		super();
-		this.nombre = nombre;
+		this.tipo=tipo;
 		this.codigo = codigo;
-		this.precio = precio;
+		this.nombre = nombre;
+		
+		if(precio>0) {
+			this.precio=precio;
+		}
 		this.foto = foto;
 	}
 	
 	
 	
+	public Producto() {
+		codigo = codigo++;
+		this.nombre="";
+		this.precio=0;
+		this.tipo=null;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [nombre=" + nombre + ", codigo=" + codigo + ", precio=" + precio+ "]";
