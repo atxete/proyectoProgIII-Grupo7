@@ -155,20 +155,19 @@ public class VentanaPrincipalUsuario extends JFrame{
 		});
 		 
 		 btnBuscar.addActionListener(new ActionListener() {
-			String nombre = buscador.getText();
-			List<Producto> pf = new ArrayList<Producto>();
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if(!nombre.isBlank()) {
-					for(Producto p : productos) {
-						if(nombre.equals(p.getNombre())) {
-							pf.add(p);
-						}
-					}
-				} else {
-					pf = productos;
-				}
+				String nombre = buscador.getText().trim();
+				String tipo = (String) filtroTipos.getSelectedItem();
+				List<Producto> pf = new ArrayList<Producto>();
+				 for (Producto p : productos) {
+					 boolean coincideTipo = tipo.equals("Todos") || p.getTipo().name().equals(tipo);
+			         boolean coincideNombre = nombre.isBlank() || p.getNombre().toLowerCase().contains(nombre.toLowerCase());
+			            
+			         if (coincideTipo && coincideNombre) {
+			              pf.add(p);
+			            }
+			        }
 				actualizarPanel(pf);
 				pnlProductos.repaint();
 				pnlProductos.revalidate();
