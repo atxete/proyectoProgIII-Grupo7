@@ -175,7 +175,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		});
 		 
 		buscador.addKeyListener(new KeyAdapter() {
-			public void KeyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 					btnBuscar.doClick();
 				}
