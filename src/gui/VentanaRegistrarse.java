@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -53,7 +56,7 @@ public class VentanaRegistrarse extends JFrame{
 	    setSize(625, 325);
 	    setLocationRelativeTo(null);
 	    setResizable(false);
-	    //setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);   descomentar más tarde
+	    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);  // descomentar más tarde
 		
 	    lblNombre = new JLabel("Nombre: ");
 	    lblApellidos = new JLabel("Apellidos: ");
@@ -113,7 +116,7 @@ public class VentanaRegistrarse extends JFrame{
 	    	GestorUsuarios gestorUsuarios = new GestorUsuarios();
 			VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion(gestorUsuarios);
 			ventanaInicioSesion.setVisible(true);
-			dispose();
+			//dispose();
 		});
 	    
 	    btnRegistrarse.addActionListener(new ActionListener() {
@@ -278,6 +281,16 @@ public class VentanaRegistrarse extends JFrame{
 		});
 	    
 	    setVisible(true);
+	    this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				BaseDeDatos.cerrarConexion();
+			}
+			
+		});
+		//BaseDeDatos.cerrarConexion();
 	}
 	
 	private void registrarUsuario() {
@@ -310,14 +323,15 @@ public class VentanaRegistrarse extends JFrame{
 		if(registroExitoso) {
 			JOptionPane.showMessageDialog(this, "Bienvenido comprador", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 			VentanaLoadingUsuario vlu = new VentanaLoadingUsuario(v);
-			dispose();
+			//dispose();
+			this.setVisible(false);
 			vlu.setVisible(true);			
 			//new VentanaPrincipalUsuario();
 		}else {
 			JOptionPane.showMessageDialog(this, "Error al registrar usuario. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
-		BaseDeDatos.cerrarConexion();
+		
 	}
 	
 	

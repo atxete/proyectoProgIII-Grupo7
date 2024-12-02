@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +25,7 @@ import domain.BaseDeDatos;
 import domain.GestorUsuarios;
 import domain.Usuario;
 
-public class VentanaInicioSesion extends JFrame{
+public class VentanaInicioSesion extends JFrame {
 	private JLabel lblUsuario;
 	private JLabel lblContrasenya;
 	private JTextField tfUsuario;
@@ -152,7 +155,16 @@ public class VentanaInicioSesion extends JFrame{
 		});
 		
 		setVisible(true);
-		BaseDeDatos.cerrarConexion();
+		//BaseDeDatos.cerrarConexion();
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				BaseDeDatos.cerrarConexion();
+			}
+			
+		});
 
 	}
 
@@ -195,4 +207,6 @@ public class VentanaInicioSesion extends JFrame{
 		GestorUsuarios gestorUsuarios = new GestorUsuarios();
 		new VentanaInicioSesion(gestorUsuarios);
 	}
+
+	
 }

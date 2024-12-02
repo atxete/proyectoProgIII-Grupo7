@@ -5,19 +5,25 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.*;
 
 import domain.BaseDeDatos;
 import domain.GestorUsuarios;
 
-public class VentanaInicial extends JFrame{
+public class VentanaInicial extends JFrame {
 	
 	private boolean temp = true;
+	
 	
 	public VentanaInicial() {
 		
 		BaseDeDatos.abrirConexion("BaseDatos.db", true);
+		
+		VentanaInicial ventanaActual = this;
 		
 		int ancho = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		int alto = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
@@ -49,7 +55,7 @@ public class VentanaInicial extends JFrame{
 		
 		Timer temporizador = new Timer(5000, (e)->{
 			if(temp) {
-				VentanaInicial.this.dispose();
+				VentanaInicial.this.setVisible(false);
 				GestorUsuarios gestorUsuarios = new GestorUsuarios();
 				new VentanaInicioSesion(gestorUsuarios);
 			}
@@ -78,7 +84,8 @@ public class VentanaInicial extends JFrame{
 				if(e.getKeyCode() == KeyEvent.VK_D && e.isControlDown()) {
 					GestorUsuarios gestorUsuarios = new GestorUsuarios();
 					VentanaInicioSesion v = new VentanaInicioSesion(gestorUsuarios);
-					VentanaInicial.this.dispose();
+					ventanaActual.setVisible(false);
+					//VentanaInicial.this.dispose();
 					temp=false;
 				}
 			}
@@ -86,8 +93,19 @@ public class VentanaInicial extends JFrame{
 		
 		
 		this.setVisible(true);
-	
-		BaseDeDatos.cerrarConexion();
+		//BaseDeDatos.cerrarConexion();
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				BaseDeDatos.cerrarConexion();
+			}
+			
+			
+		});
+		
+		
 		
 	}
 	public static void main(String[] args) {
