@@ -23,12 +23,25 @@ import javax.swing.WindowConstants;
 
 import domain.BaseDeDatos;
 import domain.GestorUsuarios;
+import domain.Logica;
 import domain.Usuario;
 
+
+import java.util.regex.Pattern;
+
+import javax.swing.*;
+
+import domain.Comprador;
+import domain.BaseDeDatos;
+import domain.Logica;
+import gui.VentanaPrincipalAdmin;
+
+
+
 public class VentanaInicioSesion extends JFrame {
-	private JLabel lblUsuario;
+	private JLabel lblEmail;
 	private JLabel lblContrasenya;
-	private JTextField tfUsuario;
+	private JTextField tfEmail;
 	private JPasswordField psContrasenya;
 	private JButton btnIniciarSesion;
 	private JButton btnRegistrarse;
@@ -38,11 +51,13 @@ public class VentanaInicioSesion extends JFrame {
 	private JPanel panelBotones;
 	private JPanel panelInformacion;
 	private JPanel panelSur;
+	private JFrame ventanaActual;
 	
 	private GestorUsuarios gestorUsuarios;
 	public VentanaInicioSesion(GestorUsuarios gestor){
 		this.gestorUsuarios = gestor;
 		
+		ventanaActual = this;
 		
 		setTitle("Registro/Inicio Sesión");
 	    setSize(400, 200);
@@ -51,16 +66,16 @@ public class VentanaInicioSesion extends JFrame {
 	    //setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);   descomentar más tarde
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		lblUsuario = new JLabel("Usuario: ");
+		lblEmail = new JLabel("Email: ");
 		lblContrasenya = new JLabel("Contraseña: ");
-		tfUsuario = new JTextField();
+		tfEmail = new JTextField();
 		psContrasenya = new JPasswordField();
-		tfUsuario.setPreferredSize(new Dimension(150,25));
+		tfEmail.setPreferredSize(new Dimension(150,25));
 		psContrasenya.setPreferredSize(new Dimension(150,25));
 		
 		panelTexto = new JPanel(new GridLayout(2,2,10,10));
-		panelTexto.add(lblUsuario);
-		panelTexto.add(tfUsuario);
+		panelTexto.add(lblEmail);
+		panelTexto.add(tfEmail);
 		panelTexto.add(lblContrasenya);
 		panelTexto.add(psContrasenya);
 		
@@ -96,7 +111,33 @@ public class VentanaInicioSesion extends JFrame {
 		btnIniciarSesion.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				iniciarSesion();
+				//iniciarSesion();
+				if(!tfEmail.getText().equals("") && !psContrasenya.getText().equals("")) {
+					if(Logica.existeUsuario(tfEmail.getText())) {
+						if(Logica.usuarioCorrecto(tfEmail.getText(), psContrasenya.getText())!=null) {
+							if(Logica.UsuarioComprador(tfEmail.getText())) {
+								((Comprador) Logica.getUsuario()).setListaFavoritos(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 0));
+								((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 1));
+								VentanaLoadingUsuario vl = new VentanaLoadingUsuario(ventanaActual);
+								dispose();
+								vl.setVisible(true);
+								
+							}else {
+								VentanaLoadingAdmin vl2 = new VentanaLoadingAdmin(ventanaActual);
+								dispose();
+								vl2.setVisible(true);
+							}
+						}else {
+							JOptionPane.showMessageDialog(null, "ERROR: Contraseña incorrecta. Vuelve a intentarlo");
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "ERROR: No existe ninguna cuenta con ese email. REGISTRESE");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los datos");
+				}
+				tfEmail.setText("");
+				psContrasenya.setText("");
 			}
 		});
 		
@@ -104,8 +145,8 @@ public class VentanaInicioSesion extends JFrame {
 	    //IAG: (herramienta: chatGPT)
 	    //ADAPTADO (crear el keyListener lo sabíamos hacer, y saber cuál teníamos que usar también.
 	    //Sin embargo, no sabíamos como acceder exactamente a la tecla enter para todos los keyListener creados.)
-		tfUsuario.addKeyListener(new KeyListener() {
-
+		tfEmail.addKeyListener(new KeyListener() {
+//estaba puesto tfUsuario
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
@@ -173,7 +214,7 @@ public class VentanaInicioSesion extends JFrame {
 		JFrame v = new JFrame();
 		v = this;
 		
-		String usuario = tfUsuario.getText();
+		String usuario = tfEmail.getText(); // (aqui esta hecho cuando ponia tfUsuario)
 		String contrasenya = String.valueOf(psContrasenya.getPassword());
 		
 		if(usuario.isEmpty() || contrasenya.isEmpty()) {

@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import domain.Logica;
 import domain.Producto;
 import domain.Producto.tipo;
 
@@ -42,6 +45,11 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 	private String nuevaFoto;
 	private ImageIcon nuevaImagenIcon;
 	private VentanaPrincipalAdmin ventanaPrincipalAdmin;
+	private boolean fotoSeleccionada = false;
+	
+	
+	private static Logger logger = Logger.getLogger("AnyadirProducto");
+	
 	
 	public VentanaAnadirProductoAdmin(VentanaPrincipalAdmin ventanaPrincipalAdmin) {
 		this.ventanaPrincipalAdmin = ventanaPrincipalAdmin;
@@ -73,7 +81,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 		pnlTexto = new JPanel(new GridLayout(3,2,10,20));
 		pnlTexto.add(lblNombre);
 		pnlTexto.add(tfNombre);
-		pnlTexto.add(lblPrecio);
+		{		pnlTexto.add(lblPrecio);
 		pnlTexto.add(tfPrecio);
 		pnlTexto.add(lblFoto);
 		pnlTexto.add(btnFoto);
@@ -117,15 +125,17 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 
 		       
 		        if (nuevaImagenIcon.getIconWidth() > 0) {
-		           
+		           fotoSeleccionada=true;
 		            // p.setFoto(nuevaFoto);
 
 		            JOptionPane.showMessageDialog(null, "La imagen del producto se ha actualizado.");
 		        } else {
+		        	fotoSeleccionada=false;
 		            JOptionPane.showMessageDialog(null, "El archivo seleccionado no es una imagen válida.", 
 		                                          "Error en la imagen", JOptionPane.ERROR_MESSAGE);
 		        }
 		    } else {
+		    	fotoSeleccionada=false;
 		        JOptionPane.showMessageDialog(null, "No se realizó ningún cambio en la imagen del producto.", 
 		                                      "Cambio Cancelado", JOptionPane.WARNING_MESSAGE);
 		    }
@@ -138,32 +148,66 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Producto producto = new Producto((tipo) tipoProductos.getSelectedItem(), tfNombre.getText(), Float.valueOf(tfPrecio.getText()), lblFoto.getText());
+			/*	Producto producto = new Producto((tipo) tipoProductos.getSelectedItem(), tfNombre.getText(), Float.valueOf(tfPrecio.getText()), lblFoto.getText());
 				ventanaPrincipalAdmin.getProductos().add(producto);
 				JOptionPane.showMessageDialog(null, "El producto se ha añadido correctamente al supermercado.", "Producto añadido correctamente", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
-				ventanaPrincipalAdmin.setVisible(true);
-			}
-			
+				ventanaPrincipalAdmin.setVisible(true);*/
+				
+				Producto p;
+				if(tipoProductos.getSelectedItem()!=null && !tfNombre.getText().equals("") && !tfPrecio.getText().equals("") && fotoSeleccionada) {
+					if(esNumero(tfPrecio.getText())) {
+						Producto.tipo tipo;
+						tipo = (domain.Producto.tipo) tipoProductos.getSelectedItem();
+						
+						p = new Producto((tipo)tipoProductos.getSelectedItem(), tfNombre.getText(), Float.parseFloat(tfPrecio.getText()), nuevaFoto);
+						
+						//INSERT
+						Logica.listaProductos.add(p);
+						logger.log(Level.INFO, p.getNombre()+" añadido correctamente");
+						Logica.guardarProductos("ProductosFinales.dat");
+						dispose();
+					}else {
+						MensajeAutomatico ma = new MensajeAutomatico("El precio debe ser un número entero o un decimal (con punto)","Error");
+						
+					}
+				}else {
+					MensajeAutomatico ma2 = new MensajeAutomatico("Todos los campos son obligatorios", "Error");
+				}
+			}		
 		});
 		
 		btnCancelar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				dispose();
-				ventanaPrincipalAdmin.setVisible(true);
+				//en ningún momento se cierra la ventana principal admin, se queda atrás abierta;
+				//asi que con que se cierre la de añadir producto, se ve la otra.
+				//ventanaPrincipalAdmin.setVisible(true);
 			}
 			
 		});
 		
 		setVisible(true);
 	}
-
+	}
+	
+	/*
 	public static void main(String[] args) {
 		VentanaPrincipalAdmin ventanaPrincipalAdmin = new VentanaPrincipalAdmin();
 		ventanaPrincipalAdmin.setVisible(false);
 		new VentanaAnadirProductoAdmin(ventanaPrincipalAdmin);
 	}
+	*/
+	public boolean esNumero(String s) {
+		try {
+			Float.parseFloat(s);
+			return true;
+		}catch(NumberFormatException e) {
+			return false;
+		}
+	}
 }
+	
+	
