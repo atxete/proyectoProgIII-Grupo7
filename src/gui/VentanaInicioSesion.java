@@ -106,7 +106,7 @@ public class VentanaInicioSesion extends JFrame {
 			ventanaRegistrarse.setVisible(true);
 			dispose();
 		});
-		
+		  
 		
 		btnIniciarSesion.addActionListener(new ActionListener(){
 			@Override

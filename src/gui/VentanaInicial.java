@@ -18,7 +18,7 @@ public class VentanaInicial extends JFrame {
 	
 	private boolean temp = true;
 	
-	
+	 
 	public VentanaInicial() {
 		
 		BaseDeDatos.abrirConexion("BaseDatos.db", true);

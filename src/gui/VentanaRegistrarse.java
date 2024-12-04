@@ -125,7 +125,7 @@ public class VentanaRegistrarse extends JFrame{
 	    		registrarUsuario();
 	    	}
 	    });
-	    
+	     
 	    //IAG: (herramienta: chatGPT)
 	    //ADAPTADO (crear el keyListener lo sabíamos hacer, y saber cuál teníamos que usar también.
 	    //Sin embargo, no sabíamos como acceder exactamente a la tecla enter para todos los keyListener creados.)

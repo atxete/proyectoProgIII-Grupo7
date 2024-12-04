@@ -9,7 +9,7 @@ public abstract class Usuario {
 	String email;
 	int admin; //si es administrador (1) o si es comprador (0)
 	
-	
+	 
 	public int getCodigoUsuario() {
 		return codigoUsuario;
 	}

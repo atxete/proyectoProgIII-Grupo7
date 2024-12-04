@@ -193,7 +193,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 	}
 	}
 	
-	/*
+	/* 
 	public static void main(String[] args) {
 		VentanaPrincipalAdmin ventanaPrincipalAdmin = new VentanaPrincipalAdmin();
 		ventanaPrincipalAdmin.setVisible(false);

@@ -140,7 +140,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 			
 		};
 		tablaFavoritos.addKeyListener(kl);
-        
+         
         
 		
 		setVisible(true);
