@@ -154,7 +154,8 @@ public class VentanaRegistrarse extends JFrame{
 
 	            // Si todo es correcto, crear el nuevo usuario
 	            Logica.crearUsuario(nombre, apellidos, usuario, email, contrasenya);
-
+	            BaseDeDatos.anyadirUsuario(nombre, apellidos, usuario, email, contrasenya);
+	            
 	            // Mostrar mensaje de éxito
 	            JOptionPane.showMessageDialog(null, "¡Registro exitoso! Bienvenido, " + nombre + " " + apellidos + ".", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 
