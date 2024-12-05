@@ -70,6 +70,25 @@ public class BaseDeDatos {
 				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('VerduraFruta', 'Kiwi', '5', '0.97', 'imagenes/kiwi.jpg');";
 				stmt.executeUpdate(sent);
 				*/
+				
+				//creación de usuarios base (administradores y algún comprador)
+				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Aratz', 'Bergado Fuentes', 'atxete', '1234', 'ianaratz.bergado@opendeusto.es', 1);";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Xabier', 'Aguiriano Fernández', 'XabierAguiriano', '1234', 'xabier.aguiriano@opendeusto.es', 1);";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Naroa', 'Manterola Nazabal', 'naroaManterola', '1234', 'n.manterola@opendeusto.es', 1);";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Jon', 'Ruiz Mezo', 'jonru21', '1234', 'jon.r@opendeusto.es', 1);";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Juan', 'Gallego Rica', 'juanga', '1234', 'juanga@opendeusto.es', 0);";
+				stmt.executeUpdate(sent);
+				
+				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Iker', 'Carrasco Llorente', 'ikerca', '1234', 'ikerca@opendeusto.es', 0);";
+				stmt.executeUpdate(sent);
 			}
 			
 			return true;
@@ -191,10 +210,10 @@ public class BaseDeDatos {
 			Statement statement = conexion.createStatement();
 			switch(tipo) {
 				case 0: //si tipo=0 -> WishList
-					sent="SELECT idProducto FROM wishList WHERE idUsurario = "+id+"";
+					sent="SELECT idProducto FROM wishList WHERE idUsuario = "+id+"";
 					break;
 				case 1: //si tipo=1 -> cesta
-					sent="SELECT idProducto FROM cestas WHERE idUsurario = "+id+"";
+					sent="SELECT idProducto FROM cestas WHERE idUsuario = "+id+"";
 					break;
 				default:
 					throw new SQLException("type not defined");

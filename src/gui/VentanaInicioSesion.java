@@ -118,11 +118,13 @@ public class VentanaInicioSesion extends JFrame {
 							if(Logica.UsuarioComprador(tfEmail.getText())) {
 								((Comprador) Logica.getUsuario()).setListaFavoritos(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 0));
 								((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 1));
+								JOptionPane.showMessageDialog(ventanaActual, "Bienvenido comprador (" + Logica.getUsuario().getNombre() + " " + Logica.getUsuario().getApellidos() +")" , "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
 								VentanaLoadingUsuario vl = new VentanaLoadingUsuario(ventanaActual);
 								dispose();
 								vl.setVisible(true);
 								
 							}else {
+								JOptionPane.showMessageDialog(ventanaActual, "Bienvenido administrador (" + Logica.getUsuario().getNombre() + " " + Logica.getUsuario().getApellidos() +")", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
 								VentanaLoadingAdmin vl2 = new VentanaLoadingAdmin(ventanaActual);
 								dispose();
 								vl2.setVisible(true);

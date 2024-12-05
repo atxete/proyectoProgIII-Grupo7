@@ -10,17 +10,17 @@ public class GestorUsuarios {
 	public GestorUsuarios() {
 		usuariosRegistrados = new ArrayList<>();
 		//usuarios de prueba
-		usuariosRegistrados.add(new Administrador("Aratz", "Bergado Fuentes", "atxete", "1234","ianaratz.bergado@opendeusto.es"));
-		usuariosRegistrados.add(new Administrador("Xabier", "Aguiriano Fernández", "XabierAguiriano", "1234","xabier.aguiriano@opendeusto.es"));
-		usuariosRegistrados.add(new Administrador("Naroa", "Manterola Nazabal", "naroaManterola", "1234","n.manterola@opendeusto.es"));
-		usuariosRegistrados.add(new Administrador("Jon", "Ruiz Mezo", "jonru21", "1234","jon.r@opendeusto.es"));
-		usuariosRegistrados.add(new Comprador("Juan", "Gallego Rica", "juanga", "1234","juanga@opendeusto.es",0));
-		usuariosRegistrados.add(new Comprador("Iker", "Carrasco Llorente", "ikerca", "1234","ikerca@opendeusto.es",0));
+		//usuariosRegistrados.add(new Administrador("Aratz", "Bergado Fuentes", "atxete", "1234","ianaratz.bergado@opendeusto.es"));
+		//usuariosRegistrados.add(new Administrador("Xabier", "Aguiriano Fernández", "XabierAguiriano", "1234","xabier.aguiriano@opendeusto.es"));
+		//usuariosRegistrados.add(new Administrador("Naroa", "Manterola Nazabal", "naroaManterola", "1234","n.manterola@opendeusto.es"));
+		//usuariosRegistrados.add(new Administrador("Jon", "Ruiz Mezo", "jonru21", "1234","jon.r@opendeusto.es"));
+		//usuariosRegistrados.add(new Comprador("Juan", "Gallego Rica", "juanga", "1234","juanga@opendeusto.es",0));
+		//usuariosRegistrados.add(new Comprador("Iker", "Carrasco Llorente", "ikerca", "1234","ikerca@opendeusto.es",0));
 		
 	}
 	
 	public boolean registrarUsuario(String nombre, String apellidos, String usuario, String contrasenya, String repetirContrasenya, String email, int admin) {
-		if(buscarUsuarioPorNombreDeUsuario(usuario) == null && contrasenya.equals(repetirContrasenya)) {
+		if(buscarUsuarioPorNombreDeEmail(email) == null && contrasenya.equals(repetirContrasenya)) {
 			Usuario nuevoUsuario;
 			if(admin == 0) {
 				nuevoUsuario = new Comprador(nombre, apellidos, usuario, contrasenya, email,admin);
@@ -33,8 +33,8 @@ public class GestorUsuarios {
 		return false;
 	}
 	
-	public Usuario iniciarSesion(String usuario, String contrasenya) {
-		Usuario usuarioEncontrado = buscarUsuarioPorNombreDeUsuario(usuario);
+	public Usuario iniciarSesion(String email, String contrasenya) {
+		Usuario usuarioEncontrado = buscarUsuarioPorNombreDeEmail(email);
 		if(usuarioEncontrado != null && usuarioEncontrado.getContrasenya().equals(contrasenya)) {
 			return usuarioEncontrado;
 		}
@@ -72,9 +72,9 @@ public class GestorUsuarios {
 		return listadoUsuarios.toString(); 
 	}
 	
-	public Usuario buscarUsuarioPorNombreDeUsuario(String usuario) {
+	public Usuario buscarUsuarioPorNombreDeEmail(String email) {
 		for(Usuario u: usuariosRegistrados) {
-			if(u.getUsuario().equals(usuario)) {
+			if(u.getEmail().equals(email)) {
 				return u;
 			}
 		}

@@ -24,6 +24,7 @@ import javax.swing.WindowConstants;
 import domain.BaseDeDatos;
 import domain.Comprador;
 import domain.GestorUsuarios;
+import domain.Logica;
 import domain.Usuario;
 
 public class VentanaRegistrarse extends JFrame{
@@ -47,10 +48,13 @@ public class VentanaRegistrarse extends JFrame{
 	private JLabel lblInformacion;
 	private JPanel panelInformacion;
 	private JPanel panelSur;
+	private JFrame ventanaActual;
 	
 	private GestorUsuarios gestorUsuarios;
 	public VentanaRegistrarse(GestorUsuarios gestor) {
 		this.gestorUsuarios = gestor;
+		
+		ventanaActual = this;
 		
 		setTitle("Registro/Inicio Sesión");
 	    setSize(625, 325);
@@ -116,15 +120,51 @@ public class VentanaRegistrarse extends JFrame{
 	    	GestorUsuarios gestorUsuarios = new GestorUsuarios();
 			VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion(gestorUsuarios);
 			ventanaInicioSesion.setVisible(true);
-			//dispose();
+			dispose();
 		});
 	    
 	    btnRegistrarse.addActionListener(new ActionListener() {
-	    	@Override
-	    	public void actionPerformed(ActionEvent e) {
-	    		registrarUsuario();
-	    	}
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            // Obtener los datos del formulario
+	            String nombre = tfNombre.getText();
+	            String apellidos = tfApellidos.getText();
+	            String usuario = tfUsuario.getText();
+	            String email = tfEmail.getText();
+	            String contrasenya = new String(psContrasenya.getPassword());
+	            String repetirContrasenya = new String(psRepetirContrasenya.getPassword());
+
+	            // Verificar si hay campos vacíos
+	            if (nombre.equals("") || apellidos.equals("") || usuario.equals("") || email.equals("") || contrasenya.equals("") || repetirContrasenya.equals("")) {
+	                JOptionPane.showMessageDialog(null, "ERROR: Todos los campos son obligatorios. Por favor, complete todos los datos.");
+	                return; // Salir del método si falta algún dato
+	            }
+
+	            // Verificar si las contraseñas coinciden
+	            if (!contrasenya.equals(repetirContrasenya)) {
+	                JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden. Por favor, inténtelo de nuevo.");
+	                return; // Salir del método si las contraseñas no coinciden
+	            }
+
+	            // Verificar si el email ya está en uso
+	            if (Logica.existeUsuario(email)) {
+	                JOptionPane.showMessageDialog(null, "ERROR: El email ya está en uso. Por favor, ingrese otro email.");
+	                return; // Salir del método si el email ya está registrado
+	            }
+
+	            // Si todo es correcto, crear el nuevo usuario
+	            Logica.crearUsuario(nombre, apellidos, usuario, email, contrasenya);
+
+	            // Mostrar mensaje de éxito
+	            JOptionPane.showMessageDialog(null, "¡Registro exitoso! Bienvenido, " + nombre + " " + apellidos + ".", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+	            VentanaLoadingUsuario vl = new VentanaLoadingUsuario(ventanaActual);
+				dispose();
+				vl.setVisible(true);
+				
+	        }
 	    });
+
 	     
 	    //IAG: (herramienta: chatGPT)
 	    //ADAPTADO (crear el keyListener lo sabíamos hacer, y saber cuál teníamos que usar también.
@@ -309,7 +349,7 @@ public class VentanaRegistrarse extends JFrame{
 			return;
 		}
 		
-		if(gestorUsuarios.buscarUsuarioPorNombreDeUsuario(usuario) != null) {
+		if(gestorUsuarios.buscarUsuarioPorNombreDeEmail(email) != null) {
 			JOptionPane.showMessageDialog(this, "El usuario ya existe. Inténtalo con otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
