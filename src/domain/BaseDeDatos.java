@@ -49,25 +49,26 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
-				sent = "CREATE TABLE IF NOT EXISTS producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, tipo varchar(10), nombre varchar(10), id int, precio float, foto varchar(50));";
+				
+				sent = "CREATE TABLE IF NOT EXISTS producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, tipo varchar(10), nombre varchar(10), id int, precio float, foto varchar(50), cantidad int);";
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
 				/*
 				//creación de productos
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('Bebidas', 'Agua', '1', '1.95', 'imagenes/agua.jpg');";
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('Bebidas', 'Agua', '1', '1.95', 'imagenes/agua.jpg', 22);";
 				stmt.executeUpdate(sent);
 				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('CarnePescado', 'Entrecot', '2', '8.5', 'imagenes/entrecot.jpg');";
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('CarnePescado', 'Entrecot', '2', '8.5', 'imagenes/entrecot.jpg', 22);";
 				stmt.executeUpdate(sent);
 				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('ProductosSecos', 'Almendras', '3', '2.45', 'imagenes/almendras.jpg');";
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('ProductosSecos', 'Almendras', '3', '2.45', 'imagenes/almendras.jpg', 22);";
 				stmt.executeUpdate(sent);
 				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('Desayuno', 'Cereales de fibra', '4', '3.69', 'imagenes/cerealesFibra.jpg');";
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('Desayuno', 'Cereales de fibra', '4', '3.69', 'imagenes/cerealesFibra.jpg', 22);";
 				stmt.executeUpdate(sent);
 				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto) VALUES ('VerduraFruta', 'Kiwi', '5', '0.97', 'imagenes/kiwi.jpg');";
+				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('VerduraFruta', 'Kiwi', '5', '0.97', 'imagenes/kiwi.jpg', 22);";
 				stmt.executeUpdate(sent);
 				*/
 				
@@ -240,7 +241,7 @@ public class BaseDeDatos {
 	}
 	
 	
-	//añadir un nueco producto a la cesta o a la wishlist dentro de la base de datos
+	//añadir un nuevo producto a la cesta o a la wishlist dentro de la base de datos
 	public static void anyadirProducto(int idUsuario, int idProducto, int tipo) throws SQLException{ //tipo se refiere si lo queremos guardar en la wishlist(0) o en la compra(1)
 		String sent="";
 		switch(tipo) {
