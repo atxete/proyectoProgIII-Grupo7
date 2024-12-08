@@ -8,7 +8,9 @@ import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -154,8 +156,8 @@ public class VentanaCestaUsuario extends JFrame{
 						ex.printStackTrace();
 					}
 					c1.getCesta().remove(pos);
-					//ACTUALIZARLISTA();  --> como ha cambiado la lista de los producto, habria que cambiar los productos de la tabla
-					//(JLabel) totalPrecio.setText("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getCesta())) + "€");
+					actualizarLista();
+					valorTotal.setText(String.format("%.2f", actualizarPrecio(c1.getCesta()))+"€");
 				}
 			}
 			
@@ -177,6 +179,23 @@ public class VentanaCestaUsuario extends JFrame{
 	
 	}*/
 	
+	public void actualizarLista() {
+		List<Producto> anyadidos = new ArrayList<Producto>();
+		modeloCestaUsuario = new ModeloCestaUsuario(new ArrayList<Producto>());
+		for(Producto p : c1.getCesta()) {
+			int cont=0;
+			for(Producto p2:c1.getCesta()) {
+				if(p.equals(p2)) {
+					cont++;
+				}
+			}
+			if(!anyadidos.contains(p)) {
+				modeloCestaUsuario.addRow(new Object[] {p.getNombre(), p.getCodigo(),p.getClass().getSimpleName(), p.getPrecio()+"€", cont});
+				anyadidos.add(p);
+			}
+		}
+		tabla.setModel(modeloCestaUsuario);
+	}
 	
 	public double actualizarPrecio(List<Producto> lista) { //lista es la lista de los productos del que queremos obtener el precio total --> se calcula el precio total de los productos en esa lista
 		double precioT =0.0;
