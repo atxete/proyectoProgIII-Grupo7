@@ -60,7 +60,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 		this.ventanaPrincipalAdmin = ventanaPrincipalAdmin;
 		
 		setTitle("Añadir producto administrador");
-		setSize(600,300);
+		setSize(700,300);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
