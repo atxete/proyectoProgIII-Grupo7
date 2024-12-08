@@ -38,7 +38,7 @@ public class VentanaProductoUsuario extends JFrame{
 	private ImageIcon iconoNegroRedimensionado;
 	
 	public VentanaProductoUsuario(/**Producto p**/ VentanaPrincipalUsuario ventAnt) {
-		
+		 
 		JFrame ventanaAnterior = ventAnt;
 		
 		setBounds(300, 100, 700, 500);

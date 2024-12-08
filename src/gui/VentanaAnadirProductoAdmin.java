@@ -174,7 +174,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 				}else {
 					MensajeAutomatico ma2 = new MensajeAutomatico("Todos los campos son obligatorios", "Error");
 				}
-			}		
+			}		 
 		});
 		
 		btnCancelar.addActionListener(new ActionListener() {

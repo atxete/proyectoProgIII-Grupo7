@@ -44,7 +44,7 @@ public class VentanaInicial extends JFrame {
             imagen.setBackground(Color.WHITE);
             
             
-            this.add(imagen);
+            this.add(imagen); 
 			
 		}catch (Exception e) {
 			e.printStackTrace();
