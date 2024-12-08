@@ -183,7 +183,7 @@ public class VentanaCestaUsuario extends JFrame{
 		
 		DecimalFormat df = new DecimalFormat("#.00"); //el formato del decimal es el siguiente: cualquier digito antes del punto decimal + punto decimal se indicará mediante un punto '.' + debe tener exactamente dos digitos después del punto decimal
 		for(Producto p : productos) {
-			precioT += p.getPrecioTotal();
+			precioT += p.getPrecio();
 		}
 		
 		return precioT;

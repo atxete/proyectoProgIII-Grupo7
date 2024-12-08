@@ -11,23 +11,13 @@ public class Producto {
 	protected tipo tipo;
 	protected float precio;
 	protected String foto;
-	protected TipoIva TipoIva;
 	protected int cantidad;
-	protected int precioTotal;
-	
-	
-	
+
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public TipoIva getTipoIva() {
-		return TipoIva;
-	}
-
-	public void setTipoIva(TipoIva tipoIva) {
-		TipoIva = tipoIva;
-	}
+	
 
 	public int getCantidad() {
 		return cantidad;
@@ -37,13 +27,6 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 
-	public int getPrecioTotal() {
-		return precioTotal;
-	}
-
-	public void setPrecioTotal(int precioTotal) {
-		this.precioTotal = precioTotal;
-	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -72,7 +55,7 @@ public class Producto {
 	public void setTipo(tipo tipo) {
 		this.tipo = tipo;
 	}
-	public Producto(tipo tipo, String nombre, float precio, String foto) {
+	public Producto(tipo tipo, String nombre, float precio, String foto, int cantidad) {
 		super();
 		this.tipo=tipo;
 		this.codigo = codigo;
@@ -82,6 +65,7 @@ public class Producto {
 			this.precio=precio;
 		}
 		this.foto = foto;
+		this.cantidad = cantidad;
 	}
 	
 	
@@ -91,12 +75,18 @@ public class Producto {
 		this.nombre="";
 		this.precio=0;
 		this.tipo=null;
+		this.cantidad=0;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "Producto [nombre=" + nombre + ", codigo=" + codigo + ", precio=" + precio+ "]";
+		return "Producto [nombre=" + nombre + ", codigo=" + codigo + ", tipo=" + tipo + ", precio=" + precio + ", foto="
+				+ foto + ", cantidad=" + cantidad + "]";
 	}
+
+	
 	
 	
 	

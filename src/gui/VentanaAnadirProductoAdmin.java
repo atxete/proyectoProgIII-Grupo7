@@ -19,7 +19,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 import domain.Logica;
 import domain.Producto;
@@ -46,6 +48,9 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 	private ImageIcon nuevaImagenIcon;
 	private VentanaPrincipalAdmin ventanaPrincipalAdmin;
 	private boolean fotoSeleccionada = false;
+	
+	private JLabel lblCantidad;
+	private JSpinner spinnerCant;
 	
 	
 	private static Logger logger = Logger.getLogger("AnyadirProducto");
@@ -77,14 +82,21 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 		lblFoto = new JLabel("Foto:");
 		btnFoto = new JButton("Seleccionar foto");
 		btnFoto.setPreferredSize(new Dimension(150,25));
+		lblCantidad = new JLabel("Cantidad: ");
+		SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1); //valor que aparece, min, max, +1
+	    spinnerCant = new JSpinner(model);
 		
-		pnlTexto = new JPanel(new GridLayout(3,2,10,20));
+		pnlTexto = new JPanel(new GridLayout(4,2,10,20));
 		pnlTexto.add(lblNombre);
 		pnlTexto.add(tfNombre);
 		{		pnlTexto.add(lblPrecio);
 		pnlTexto.add(tfPrecio);
 		pnlTexto.add(lblFoto);
 		pnlTexto.add(btnFoto);
+		pnlTexto.add(lblCantidad);
+		pnlTexto.add(spinnerCant);
+		
+		
 		
 		pnlTextoTamanyo = new JPanel(new FlowLayout(FlowLayout.CENTER,30,30));
 		pnlTextoTamanyo.add(pnlTexto);
@@ -160,7 +172,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 						Producto.tipo tipo;
 						tipo = (domain.Producto.tipo) tipoProductos.getSelectedItem();
 						
-						p = new Producto((tipo)tipoProductos.getSelectedItem(), tfNombre.getText(), Float.parseFloat(tfPrecio.getText()), nuevaFoto);
+						p = new Producto((tipo)tipoProductos.getSelectedItem(), tfNombre.getText(), Float.parseFloat(tfPrecio.getText()), nuevaFoto, Integer.parseInt(spinnerCant.getValue().toString()));
 						
 						//INSERT
 						Logica.listaProductos.add(p);

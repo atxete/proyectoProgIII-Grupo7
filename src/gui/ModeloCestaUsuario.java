@@ -74,9 +74,8 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 			case 0: return p.getCodigo();
 			case 1: return p.getNombre();
 			case 2: return p.getPrecio();
-			case 3: return p.getTipoIva();
-			case 4: return p.getCantidad();
-			case 6: return p.getCantidad()*p.getPrecio();
+			case 3: return p.getCantidad();
+			case 5: return p.getCantidad()*p.getPrecio();
 			default: return null;
 		}
 	}
