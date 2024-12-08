@@ -237,7 +237,10 @@ public class VentanaPrincipalUsuario extends JFrame{
 			lblFoto.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					dispose();
-					new VentanaProductoUsuario(/*p*/ ventPrinUsu);
+					//AQUI DA ERRO PORQUE HAY QUE PASARLE COMO PARAMETRO
+					// EL PRODUCTO -> mirarlo en bitxi-bitxiak (está puesto dentro de
+					//un for que pone todos los productos de la base de datos en el grid layout)
+					new VentanaProductoUsuario( ventPrinUsu);
 				}
 			});
 			JPanel pnlPrincipal = new JPanel(new BorderLayout());

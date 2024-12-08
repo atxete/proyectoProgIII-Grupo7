@@ -4,7 +4,6 @@ import java.awt.*;
 import java.io.File;
 
 import javax.swing.*;
-
 public class VentanaProductoAdmin extends JFrame{
 	
 	JPanel pnlBotones;
@@ -28,6 +27,8 @@ public class VentanaProductoAdmin extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		/**SE PUEDE AÑADIR EN EL PANEL NORTE DE LA VENTANA EL LOGO DEL SUPERMERCADO**/
+		
+		
 		
 		pnlBotones = new JPanel(new GridLayout(1, 4));
 		pnlInfoProd = new JPanel(new GridLayout(1,2));

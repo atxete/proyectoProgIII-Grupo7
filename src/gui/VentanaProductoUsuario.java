@@ -11,7 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
+import domain.BaseDeDatos;
+import domain.Comprador;
+import domain.Logica;
 import domain.Producto;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -37,7 +41,7 @@ public class VentanaProductoUsuario extends JFrame{
 	private ImageIcon iconoBlancoRedimensionado;
 	private ImageIcon iconoNegroRedimensionado;
 	
-	public VentanaProductoUsuario(/**Producto p**/ VentanaPrincipalUsuario ventAnt) {
+	public VentanaProductoUsuario(Producto p, VentanaPrincipalUsuario ventAnt) {
 		 
 		JFrame ventanaAnterior = ventAnt;
 		
@@ -59,7 +63,7 @@ public class VentanaProductoUsuario extends JFrame{
 		btnVolver = new JButton("VOLVER");**/
 		
 		
-		
+		Comprador c1 = (Comprador) Logica.getUsuario();
 		
 		
 		
@@ -188,11 +192,36 @@ public class VentanaProductoUsuario extends JFrame{
         	//el producto que recibe la ventana como parametro a la lista 
         	//de los productos que él tenga en favoritos, para así poder visualizarlo en la tabla
         	 esFavorito = !esFavorito;
-        	
+        	 
+        	 int cantidad = (int) spinnerCantidad.getValue();
+         	
+        	 
         	if (esFavorito && iconoNegroRedimensionado != null) {
                 btnAnyadirWish.setIcon(iconoNegroRedimensionado);
+                //Se ha añadido a favoritos
+                c1.anyadirWishList(p);
+                
+                try {
+                	BaseDeDatos.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 0, cantidad);
+                }catch(SQLException e1) {
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Producto añadido a tu wishlist");
+                
             } else if (!esFavorito && iconoBlancoRedimensionado != null) {
                 btnAnyadirWish.setIcon(iconoBlancoRedimensionado);
+                
+                //Se ha eliminado de favoritos
+                /**ELIMINAR PRODUCTO DE LA LISTA DE FAVORITOS DEL COMPRADOR**/
+                
+                try {
+                	BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 0);
+                }catch(SQLException e1) {
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Producto eliminado de tu wishlist");
+                
+                
             }
         
         });
@@ -204,7 +233,30 @@ public class VentanaProductoUsuario extends JFrame{
         	//el producto que recibe la ventana como parametro a la lista 
         	//de los productos que él tenga en compra por la cantidad que pone, (excepto si es 0, se elimina de la compra)
         	// para así poder visualizarlo en la tabla
+        	
+        	        	
+        	int cantidad = (int) spinnerCantidad.getValue();
+        	if(cantidad==0) {
+        		/** (?) AQUI FALTA PONER QUE SE BORRE DE LA LISTA DE LA CESTA DEL COMPRADOR**/
+        		try {
+        			BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1);
+        			System.out.println("Producto eliminado de la cesta.");
+        		}catch(Exception ex) {
+        			ex.printStackTrace();
+        		}
+        	}else {
+        		c1.anyadirCesta(p);
+        		try {
+        			BaseDeDatos.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, cantidad);
+        			System.out.println("Producto añadido/actualizado en la cesta con cantidad: " + cantidad);
+        		}catch(Exception ex) {
+        			ex.printStackTrace();
+        		}
+        	}
+        	
+        	
         });
+        
         
         
 		setVisible(true);

@@ -242,14 +242,14 @@ public class BaseDeDatos {
 	
 	
 	//añadir un nuevo producto a la cesta o a la wishlist dentro de la base de datos
-	public static void anyadirProducto(int idUsuario, int idProducto, int tipo) throws SQLException{ //tipo se refiere si lo queremos guardar en la wishlist(0) o en la compra(1)
+	public static void anyadirProducto(int idUsuario, int idProducto, int tipo, int cantidad) throws SQLException{ //tipo se refiere si lo queremos guardar en la wishlist(0) o en la compra(1)
 		String sent="";
 		switch(tipo) {
 		case 0:
 			sent = "INSERT INTO wishList(idUsuario, idProducto) VALUES("+idUsuario+", "+idProducto+")";
 			break;
 		case 1:
-			sent = "INSERT INTO cestas (idUsuario, idProducto) VALUES ("+idUsuario + ", " + idProducto + ")";
+			sent = "INSERT INTO cestas (idUsuario, idProducto, cantidad) VALUES ("+idUsuario + ", " + idProducto + ", " + cantidad + ")";
 			break;
 		default:
 			throw new SQLException("type not defined");
