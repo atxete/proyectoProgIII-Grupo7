@@ -107,7 +107,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 			lblFoto.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					dispose();
-					new VentanaProductoAdmin(/*p*/ ventPrinAdmin);
+					new VentanaProductoAdmin(p, ventPrinAdmin);
 				}
 			});
 			

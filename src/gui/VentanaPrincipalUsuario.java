@@ -33,6 +33,7 @@ import javax.swing.SpinnerNumberModel;
 import domain.BaseDeDatos;
 import domain.Comprador;
 import domain.GestorUsuarios;
+import domain.Logica;
 import domain.Producto;
 import domain.Producto.tipo;
 
@@ -52,6 +53,8 @@ public class VentanaPrincipalUsuario extends JFrame{
 	public VentanaPrincipalUsuario() {
 		
 		JFrame vActual = this;
+		
+		Comprador c1 = (Comprador) Logica.getUsuario();
 		
 		setBounds(300, 100, 700, 500);
 		setTitle("Ventana Principal Usuario");
@@ -224,6 +227,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 	        spinnerCantidad.addChangeListener(e->{
 	        	int cantidad = (Integer) ((JSpinner)e.getSource()).getValue();
 	        	//vcu.anyadirProducto(p, cantidad);
+	        	
 	        });
 			
 			ImageIcon imagenProducto = new ImageIcon(p.getFoto());

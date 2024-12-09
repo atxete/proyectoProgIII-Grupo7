@@ -38,7 +38,7 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
-				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto int);";
+				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto int, cantidad int);";
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				

@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.File;
 
 import javax.swing.*;
+
+import domain.Logica;
+import domain.Producto;
 public class VentanaProductoAdmin extends JFrame{
 	
 	JPanel pnlBotones;
@@ -20,7 +23,7 @@ public class VentanaProductoAdmin extends JFrame{
 	JLabel lblFoto;
 	
 	
-	public VentanaProductoAdmin(/*Producto p*/ VentanaPrincipalAdmin ventAnt) {
+	public VentanaProductoAdmin(Producto p, VentanaPrincipalAdmin ventAnt) {
 		JFrame ventanaAnterior = ventAnt;
 		setTitle("Ventana Producto Administrador");
 		setBounds(300, 100, 700, 500);
@@ -50,11 +53,11 @@ public class VentanaProductoAdmin extends JFrame{
 		btnModNombre = new JButton("Cambiar Nombre");
 		btnModPrecio = new JButton("Cambiar Precio");
 		btnModFoto = new JButton("Cambiar Foto");
-		lblNombreProd = new JLabel("Nombre Producto"  /*p.getNombre()*/);
-		lblPrecioProd = new JLabel("Precio Producto"  /*p.getPrecio()*/);
+		lblNombreProd = new JLabel("Nombre Producto: " + p.getNombre());
+		lblPrecioProd = new JLabel("Precio Producto: "  +p.getPrecio());
 		
-		imagenProducto = new ImageIcon("imagenes/Logo.jpg");
-		Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+		imagenProducto = new ImageIcon(p.getFoto());
+		Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(200, 300, Image.SCALE_SMOOTH);
 		ImageIcon imagenRedimensionadaIcono = new ImageIcon(imagenRedimensionada);
 		lblFoto = new JLabel(imagenRedimensionadaIcono);
 		
@@ -88,8 +91,9 @@ public class VentanaProductoAdmin extends JFrame{
 			String nuevoNombre = JOptionPane.showInputDialog("Introduce el nuevo nombre para este producto");
 			
 			if(nuevoNombre!=null && !nuevoNombre.trim().isEmpty()) {
-				/*p.setNombre(nuevoNombre);*/
+				p.setNombre(nuevoNombre);
 				JOptionPane.showMessageDialog(null, "El nombre del producto se ha cambiado a: "+nuevoNombre);
+				Logica.guardarProductos("ProductosFinales.dat");
 			}else {
 		        JOptionPane.showMessageDialog(null, "No se realizó ningún cambio en el nombre del producto.", 
 		                                      "Cambio Cancelado", JOptionPane.WARNING_MESSAGE);
@@ -106,10 +110,12 @@ public class VentanaProductoAdmin extends JFrame{
 		            Float nuevoPrecio = Float.parseFloat(nuevoPrecioStr);
 
 		            
-		            // p.setPrecio(nuevoPrecio);
+		            p.setPrecio(nuevoPrecio);
 
 		            
 		            JOptionPane.showMessageDialog(null, "El precio del producto se ha cambiado a: " + nuevoPrecio);
+		            
+		            Logica.guardarProductos("ProductosFinales.dat");
 		        } catch (NumberFormatException ex) {
 		            
 		            JOptionPane.showMessageDialog(null, "Por favor, introduce un valor numérico válido para el precio.", 
@@ -153,9 +159,10 @@ public class VentanaProductoAdmin extends JFrame{
 		       
 		        if (nuevaImagenIcon.getIconWidth() > 0) {
 		           
-		            // p.setFoto(nuevaFoto);
+		             p.setFoto(nuevaFoto);
 
-		            JOptionPane.showMessageDialog(null, "La imagen del producto se ha actualizado.");
+		            JOptionPane.showMessageDialog(null, "La imagen del producto se ha actualizado a: "+p.getFoto());
+		            Logica.guardarProductos("ProductosFinales.dat");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "El archivo seleccionado no es una imagen válida.", 
 		                                          "Error en la imagen", JOptionPane.ERROR_MESSAGE);

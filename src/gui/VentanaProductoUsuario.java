@@ -65,17 +65,38 @@ public class VentanaProductoUsuario extends JFrame{
 		
 		Comprador c1 = (Comprador) Logica.getUsuario();
 		
+		for(Producto pr:c1.listaFavoritos) {
+			if (pr.getCodigo() == p.getCodigo()) {
+				esFavorito=true;
+			}
+		}
 		
-		
-		nombreProducto = new JLabel("Nombre: " );
-		precioProducto = new JLabel("Precio: ");
+		nombreProducto = new JLabel("Nombre: " + p.getNombre());
+		precioProducto = new JLabel("Precio: "+p.getPrecio());
 		cantidadProducto = new JLabel("Cantidad: ");
 		
-        SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1); //valor que aparece, min, max, +1
-        spinnerCantidad = new JSpinner(model);
+		int posicionProductoListaCesta=-1;
+		for(int i=0; i<c1.cesta.size(); i++) {
+			if(p.getCodigo()==c1.cesta.get(i).getCodigo()) {
+				posicionProductoListaCesta=i;
+			}
+		}
+		int cantidadInicial = 0;
+		if (posicionProductoListaCesta != -1) {
+		    // Si el producto ya está en la cesta, obtenemos su cantidad
+		    cantidadInicial = c1.cesta.get(posicionProductoListaCesta).getCantidad();
+		}
+
+		// Configuramos el modelo del spinner con el valor inicial correcto
+		SpinnerNumberModel model = new SpinnerNumberModel(cantidadInicial, 0, 100, 1);
+		spinnerCantidad = new JSpinner(model);
+		
+		//c1.cesta.get(posicionProductoListaCesta).getCantidad()
+        //SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1); //valor que aparece, min, max, +1
+        //spinnerCantidad = new JSpinner(model);
 		
 		
-		imagenProducto = new ImageIcon("imagenes/Logo.jpg");
+		imagenProducto = new ImageIcon(p.getFoto());
 		
 		//Redimensiono la imagen
 		Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
@@ -124,7 +145,8 @@ public class VentanaProductoUsuario extends JFrame{
         }
 
         
-        btnAnyadirWish = new JButton(iconoBlancoRedimensionado);
+        //btnAnyadirWish = new JButton(iconoBlancoRedimensionado);
+        btnAnyadirWish = new JButton(esFavorito ? iconoNegroRedimensionado : iconoBlancoRedimensionado);
         btnAnyadirWish.setBackground(Color.WHITE);
         
         
@@ -191,7 +213,8 @@ public class VentanaProductoUsuario extends JFrame{
         	//hecha para poder añadirle al usuario que ha iniciado sesión
         	//el producto que recibe la ventana como parametro a la lista 
         	//de los productos que él tenga en favoritos, para así poder visualizarlo en la tabla
-        	 esFavorito = !esFavorito;
+        	
+        	esFavorito = !esFavorito;
         	 
         	 int cantidad = (int) spinnerCantidad.getValue();
          	
@@ -233,13 +256,22 @@ public class VentanaProductoUsuario extends JFrame{
         	//el producto que recibe la ventana como parametro a la lista 
         	//de los productos que él tenga en compra por la cantidad que pone, (excepto si es 0, se elimina de la compra)
         	// para así poder visualizarlo en la tabla
-        	
+        	int pSelectPosLista=-1;
+        	for(int i=0; i<c1.cesta.size(); i++) {
+        			Producto pr = c1.cesta.get(i);
+        			if(pr.getCodigo() == p.getCodigo()) {
+        				pSelectPosLista=i;
+        			}
+        		}
         	        	
         	int cantidad = (int) spinnerCantidad.getValue();
         	if(cantidad==0) {
-        		/** (?) AQUI FALTA PONER QUE SE BORRE DE LA LISTA DE LA CESTA DEL COMPRADOR**/
+        		
         		try {
         			BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1);
+        			c1.getCesta().remove(pSelectPosLista);
+        			/** (?) AQUI FALTA PONER QUE SE BORRE DE LA LISTA DE LA CESTA DEL COMPRADOR**/
+            		
         			System.out.println("Producto eliminado de la cesta.");
         		}catch(Exception ex) {
         			ex.printStackTrace();
