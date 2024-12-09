@@ -23,6 +23,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import domain.BaseDeDatos;
 import domain.Logica;
 import domain.Producto;
 import domain.Producto.tipo;
@@ -178,6 +179,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 						Logica.listaProductos.add(p);
 						logger.log(Level.INFO, p.getNombre()+" añadido correctamente");
 						Logica.guardarProductos("ProductosFinales.dat");
+						BaseDeDatos.anyadirProductoaPagina(p);
 						dispose();
 					}else {
 						MensajeAutomatico ma = new MensajeAutomatico("El precio debe ser un número entero o un decimal (con punto)","Error");

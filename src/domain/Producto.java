@@ -53,11 +53,11 @@ public class Producto {
 		return tipo;
 	}
 	public void setTipo(tipo tipo) {
-		this.tipo = tipo;
+		Producto.tipo = tipo;
 	}
 	public Producto(tipo tipo, String nombre, float precio, String foto, int cantidad) {
 		super();
-		this.tipo=tipo;
+		Producto.tipo=tipo;
 		this.codigo = codigo;
 		this.nombre = nombre;
 		
@@ -74,7 +74,7 @@ public class Producto {
 		codigo = codigo++;
 		this.nombre="";
 		this.precio=0;
-		this.tipo=null;
+		Producto.tipo=null;
 		this.cantidad=0;
 	}
 

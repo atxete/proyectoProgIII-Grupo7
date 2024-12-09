@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import domain.Producto.tipo;
+
 public class BaseDeDatos {
 
 	public static Connection conexion;
@@ -34,11 +36,11 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
-				sent = "CREATE TABLE IF NOT EXISTS wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto int);";
+				sent = "CREATE TABLE IF NOT EXISTS wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto (codigo));";
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
-				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto int, cantidad int);";
+				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto (codigo), cantidad int);";
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
@@ -46,7 +48,7 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
-				sent = "CREATE TABLE IF NOT EXISTS compraP (id INTEGER REFERENCES compra(id), idProducto int);";
+				sent = "CREATE TABLE IF NOT EXISTS compraP (idCompra INTEGER REFERENCES compra(id), idProducto INTEGER REFERENCES producto (codigo));";
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
@@ -379,7 +381,7 @@ public class BaseDeDatos {
 			
 			while(rs.next()) {
 				Producto p = new Producto();
-				p.setTipo(Producto.tipo.valueOf(rs.getString("tipo")));
+				p.setTipo(tipo.valueOf(rs.getString("tipo")));
 				p.setNombre(rs.getString("nombre"));
 				p.setPrecio(rs.getFloat("precio"));
 				p.setFoto(rs.getString(/*"images/" + */ "foto"));
@@ -394,6 +396,19 @@ public class BaseDeDatos {
 		}
 		
 		return productos;
+	}
+	
+	public static void anyadirProductoaPagina(Producto p) {
+		String sent = "";
+		try(Statement statement = conexion.createStatement()) {
+			sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES (" + p.getTipo().name() + ", " + p.getNombre() + ", " + p.getCodigo() + ", " + p.getPrecio() + ", " + p.getFoto() + ", " + p.getCantidad() + ");";
+			logger.log(Level.INFO, "Lanzada actualización a la base de datos:"+sent);
+			int val = statement.executeUpdate(sent);
+			logger.log(Level.INFO, "Añadida "+val+" fila a base de datos\t"+sent);
+			
+		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Error en inserción de base de datos\t"+e);
+		}
 	}
 	 
 	

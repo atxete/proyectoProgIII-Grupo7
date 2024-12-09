@@ -147,7 +147,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 					productosFiltrados = productos;
 				} else {
 					for(Producto p : productos) {
-						if(p.getTipo().name().equals(seleccionado)) {
+						if(p.getTipo().equals(Producto.tipo.valueOf(seleccionado))) {
 							productosFiltrados.add(p);
 						}
 					}
