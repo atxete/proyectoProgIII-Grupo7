@@ -10,7 +10,7 @@ import domain.Producto;
 public class ModeloCestaUsuario extends DefaultTableModel{
 
 	
-	//
+	//  dz
 	
 	private List<Producto> listaProductos;
 	private List<String> listaTitulos = Arrays.asList("codigo", "Nombre", "Precio", "Cantidad","Precio final");
