@@ -10,6 +10,7 @@ public class Main {
 		BaseDeDatos.abrirConexion("src/BaseDatos.db", true);
 		
 		new VentanaInicial();
+		
 	}
 
 }
