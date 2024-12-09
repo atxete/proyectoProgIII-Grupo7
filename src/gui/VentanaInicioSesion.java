@@ -53,9 +53,9 @@ public class VentanaInicioSesion extends JFrame {
 	private JPanel panelSur;
 	private JFrame ventanaActual;
 	
-	private GestorUsuarios gestorUsuarios;
+	//private GestorUsuarios gestorUsuarios;
 	public VentanaInicioSesion(GestorUsuarios gestor){
-		this.gestorUsuarios = gestor;
+		//this.gestorUsuarios = gestor;
 		
 		ventanaActual = this;
 		
