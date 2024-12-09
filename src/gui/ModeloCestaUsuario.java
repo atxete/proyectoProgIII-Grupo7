@@ -13,7 +13,7 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 	//  dz
 	
 	private List<Producto> listaProductos;
-	private List<String> listaTitulos = Arrays.asList("codigo", "Nombre", "Precio", "Cantidad","Precio final");
+	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio", "Cantidad","Precio final");
 	
 	
 	
@@ -63,12 +63,20 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 		// TODO Auto-generated method stub
 		return listaTitulos.get(column);
 	}
+	
+	
+
+
+
+	@Override
+	public boolean isCellEditable(int row, int column) {
+		return false;
+	}
 
 
 
 	@Override  
 	public Object getValueAt(int row, int column) {
-		// TODO Auto-generated method stub
 		Producto p = listaProductos.get(row);
 		switch (column){
 			case 0: return p.getCodigo();
@@ -77,7 +85,9 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 			case 3: return p.getCantidad();
 			case 4: return p.getCantidad()*p.getPrecio();
 			default: return null;
-		}
+			} 
+		
+
 	}
 
 

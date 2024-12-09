@@ -9,7 +9,7 @@ import domain.Producto;
 
 public class ModeloFavoritosUsuario extends DefaultTableModel{
 	private List<Producto> listaProductos;
-	private List<String> listaTitulos = Arrays.asList("codigo", "Nombre", "Precio", "Cantidad", "Precio final");
+	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio", "Cantidad", "Precio final");
 
 	public ModeloFavoritosUsuario(List<Producto> lp) {
 		this.listaProductos = lp;
