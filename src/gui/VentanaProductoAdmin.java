@@ -92,6 +92,7 @@ public class VentanaProductoAdmin extends JFrame{
 			
 			if(nuevoNombre!=null && !nuevoNombre.trim().isEmpty()) {
 				p.setNombre(nuevoNombre);
+				Logica.listaProductos.replaceAll(prod -> prod.getCodigo() == p.getCodigo() ? p : prod);
 				JOptionPane.showMessageDialog(null, "El nombre del producto se ha cambiado a: "+nuevoNombre);
 				Logica.guardarProductos("ProductosFinales.dat");
 			}else {
@@ -112,6 +113,7 @@ public class VentanaProductoAdmin extends JFrame{
 		            
 		            p.setPrecio(nuevoPrecio);
 
+		            Logica.listaProductos.replaceAll(prod -> prod.getCodigo() == p.getCodigo() ? p : prod);
 		            
 		            JOptionPane.showMessageDialog(null, "El precio del producto se ha cambiado a: " + nuevoPrecio);
 		            
@@ -160,9 +162,11 @@ public class VentanaProductoAdmin extends JFrame{
 		        if (nuevaImagenIcon.getIconWidth() > 0) {
 		           
 		             p.setFoto(nuevaFoto);
+		             
+		             Logica.listaProductos.replaceAll(prod -> prod.getCodigo() == p.getCodigo() ? p : prod);
 
-		            JOptionPane.showMessageDialog(null, "La imagen del producto se ha actualizado a: "+p.getFoto());
-		            Logica.guardarProductos("ProductosFinales.dat");
+		             JOptionPane.showMessageDialog(null, "La imagen del producto se ha actualizado a: "+p.getFoto());
+		             Logica.guardarProductos("ProductosFinales.dat");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "El archivo seleccionado no es una imagen válida.", 
 		                                          "Error en la imagen", JOptionPane.ERROR_MESSAGE);
