@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import domain.BaseDeDatos;
 import domain.GestorUsuarios;
 import domain.Producto;
 import domain.Producto.tipo;
@@ -58,10 +59,10 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 		
 		//cargamos los productos (funcion que generara una lista de productos)
-		/* 
-		 * productos = crearProductos()
-		 */
-		List<Producto> productos = new ArrayList();
+		
+		 productos = BaseDeDatos.getProductos();
+		 
+		/*List<Producto> productos = new ArrayList();
 		Producto p1 = new Producto(tipo.Bebidas, "P1",  1, "imagenes/agua.jpg", 22);
 		//p1.setTipo(Producto.tipo.Bebidas);
 		Producto p2 = new Producto(tipo.Desayuno, "P2", 2, "imagenes/cerealesFibra.jpg", 22);
@@ -83,6 +84,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		productos.add(p5);
 		productos.add(p6);
 		productos.add(p7);
+		*/
 		
 		pnlProductos = new JPanel(new GridLayout(0, 2, 10, 10));
 		JScrollPane scrollProductos = new JScrollPane(pnlProductos);

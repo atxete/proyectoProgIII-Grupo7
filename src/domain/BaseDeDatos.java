@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -365,6 +366,34 @@ public class BaseDeDatos {
 				return null;
 		}
 		
+	}
+	
+	public static ArrayList<Producto> getProductos(){
+		ArrayList<Producto> productos = new ArrayList<>();
+		String sent = "";
+		
+		try(Statement statement = conexion.createStatement()){
+			sent = "SELECT * FROM producto";
+			logger.log(Level.INFO, "Statement: " + sent);
+			ResultSet rs = statement.executeQuery(sent);
+			
+			while(rs.next()) {
+				Producto p = new Producto();
+				p.setTipo(Producto.tipo.valueOf(rs.getString("tipo")));
+				p.setNombre(rs.getString("nombre"));
+				p.setPrecio(rs.getFloat("precio"));
+				p.setFoto(rs.getString(/*"images/" + */ "foto"));
+				//p.setCantidad(rs.getInt("cantidad"));
+				p.setCodigo(rs.getInt("codigo"));
+				productos.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logger.log(Level.SEVERE, "Error al obtener productos de la base de datos", e);
+		}
+		
+		return productos;
 	}
 	 
 	

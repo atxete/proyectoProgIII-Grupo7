@@ -8,7 +8,7 @@ public class Producto {
 	//NO SE SI SE QUIERE INT O STRING, si eso cambiarlo
 	protected int codigo=0;
 	public enum tipo{VerduraFruta, CarnePescado, ProductosSecos, Bebidas, Desayuno};
-	protected tipo tipo;
+	protected static tipo tipo;
 	protected float precio;
 	protected String foto;
 	protected int cantidad;

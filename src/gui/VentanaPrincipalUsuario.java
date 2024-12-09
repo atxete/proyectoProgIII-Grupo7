@@ -30,6 +30,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import domain.BaseDeDatos;
 import domain.Comprador;
 import domain.GestorUsuarios;
 import domain.Producto;
@@ -84,10 +85,9 @@ public class VentanaPrincipalUsuario extends JFrame{
 		
 		
 		//cargamos los productos (funcion que generara una lista de productos)
-		/* 
-		 * productos = crearProductos()
-		 */
-		List<Producto> productos = new ArrayList();
+		 productos = BaseDeDatos.getProductos();
+		
+		/*List<Producto> productos = new ArrayList();
 		Producto p1 = new Producto(null, "P1",  1, "imagenes/agua.jpg", 22);
 		p1.setTipo(Producto.tipo.Bebidas);
 		Producto p2 = new Producto(null, "P2", 2, "imagenes/cerealesFibra.jpg", 22);
@@ -109,6 +109,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		productos.add(p5);
 		productos.add(p6);
 		productos.add(p7);
+		*/
 		
 		
 		
@@ -240,7 +241,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 					//AQUI DA ERRO PORQUE HAY QUE PASARLE COMO PARAMETRO
 					// EL PRODUCTO -> mirarlo en bitxi-bitxiak (está puesto dentro de
 					//un for que pone todos los productos de la base de datos en el grid layout)
-					new VentanaProductoUsuario( ventPrinUsu);
+					new VentanaProductoUsuario( p, ventPrinUsu);
 				}
 			});
 			JPanel pnlPrincipal = new JPanel(new BorderLayout());
