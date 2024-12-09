@@ -195,7 +195,7 @@ public class BaseDeDatos {
 		try{
 			Statement statement = conexion.createStatement();
 			
-			sent="INSERT INTO usuario (nombre, apellidos, usuario, contrasenya, email, admin) values ('"+nombre+"', '"+apellidos+"', '"+usuario+"', '"+contrasenya+"', '"+email+"', 1)";
+			sent="INSERT INTO usuario (nombre, apellidos, usuario, contrasenya, email, admin) values ('"+nombre+"', '"+apellidos+"', '"+usuario+"', '"+contrasenya+"', '"+email+"', 0)";
 			logger.log(Level.INFO, "Lanzada actualización a la base de datos "+sent);
 			int val = statement.executeUpdate(sent);
 			logger.log(Level.INFO, "Añadida "+val+" fila a la base de datos\t" + sent);

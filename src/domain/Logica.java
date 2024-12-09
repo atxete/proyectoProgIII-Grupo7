@@ -55,8 +55,8 @@ public class Logica implements Serializable {
         }
     }
 
-    public static Usuario usuarioCorrecto(String email, String contraseya) {
-        if (BaseDeDatos.getUsuarios().get(email).getContrasenya().equals(contraseya)) {
+    public static Usuario usuarioCorrecto(String email, String contrasenya) {
+        if (BaseDeDatos.getUsuarios().get(email).getContrasenya().equals(contrasenya)) {
             Logica.usuario = BaseDeDatos.getUsuarios().get(email);
             logger.log(Level.INFO, "Existe usuario en la BD");
             return BaseDeDatos.getUsuarios().get(email);

@@ -215,9 +215,10 @@ public class VentanaInicioSesion extends JFrame {
 
 	private void iniciarSesion() {
 		
-		if(!tfEmail.getText().equals("") && !psContrasenya.getText().equals("")) {
+		if(!tfEmail.getText().equals("") && !psContrasenya.toString().equals("")) {
 			if(Logica.existeUsuario(tfEmail.getText())) {
-				if(Logica.usuarioCorrecto(tfEmail.getText(), psContrasenya.getText())!=null) {
+				String contrasenyaIngresada = new String(psContrasenya.getPassword());
+				if(Logica.usuarioCorrecto(tfEmail.getText(), contrasenyaIngresada)!=null) {
 					if(Logica.UsuarioComprador(tfEmail.getText())) {
 						((Comprador) Logica.getUsuario()).setListaFavoritos(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 0));
 						((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 1));
