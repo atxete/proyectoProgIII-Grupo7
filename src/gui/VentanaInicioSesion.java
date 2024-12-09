@@ -111,7 +111,8 @@ public class VentanaInicioSesion extends JFrame {
 		btnIniciarSesion.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//iniciarSesion();
+				iniciarSesion();
+				/*
 				if(!tfEmail.getText().equals("") && !psContrasenya.getText().equals("")) {
 					if(Logica.existeUsuario(tfEmail.getText())) {
 						if(Logica.usuarioCorrecto(tfEmail.getText(), psContrasenya.getText())!=null) {
@@ -140,6 +141,7 @@ public class VentanaInicioSesion extends JFrame {
 				}
 				tfEmail.setText("");
 				psContrasenya.setText("");
+				*/
 			}
 		});
 		
@@ -213,35 +215,31 @@ public class VentanaInicioSesion extends JFrame {
 
 	private void iniciarSesion() {
 		
-		JFrame v = new JFrame();
-		v = this;
-		
-		String usuario = tfEmail.getText(); // (aqui esta hecho cuando ponia tfUsuario)
-		String contrasenya = String.valueOf(psContrasenya.getPassword());
-		
-		if(usuario.isEmpty() || contrasenya.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "El campo de usuario y contraseña son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		
-		Usuario loginExitoso = gestorUsuarios.iniciarSesion(usuario, contrasenya);
-		
-		if(loginExitoso != null) {
-			if(loginExitoso.getAdmin() == 1) {
-				JOptionPane.showMessageDialog(this, "Bienvenido administrador", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
-				//new VentanaPrincipalAdmin();
-				VentanaLoadingAdmin vla = new VentanaLoadingAdmin(v);
-				dispose();
-				vla.setVisible(true);
+		if(!tfEmail.getText().equals("") && !psContrasenya.getText().equals("")) {
+			if(Logica.existeUsuario(tfEmail.getText())) {
+				if(Logica.usuarioCorrecto(tfEmail.getText(), psContrasenya.getText())!=null) {
+					if(Logica.UsuarioComprador(tfEmail.getText())) {
+						((Comprador) Logica.getUsuario()).setListaFavoritos(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 0));
+						((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 1));
+						JOptionPane.showMessageDialog(ventanaActual, "Bienvenido comprador (" + Logica.getUsuario().getNombre() + " " + Logica.getUsuario().getApellidos() +")" , "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
+						VentanaLoadingUsuario vl = new VentanaLoadingUsuario(ventanaActual);
+						dispose();
+						vl.setVisible(true);
+						
+					}else {
+						JOptionPane.showMessageDialog(ventanaActual, "Bienvenido administrador (" + Logica.getUsuario().getNombre() + " " + Logica.getUsuario().getApellidos() +")", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
+						VentanaLoadingAdmin vl2 = new VentanaLoadingAdmin(ventanaActual);
+						dispose();
+						vl2.setVisible(true);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "ERROR: Contraseña incorrecta. Vuelve a intentarlo");
+				}
 			}else {
-				JOptionPane.showMessageDialog(this, "Bienvenido comprador", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
-				VentanaLoadingUsuario vlu = new VentanaLoadingUsuario(v);
-				dispose();
-				vlu.setVisible(true);
-				//new VentanaPrincipalUsuario();
+				JOptionPane.showMessageDialog(null, "ERROR: No existe ninguna cuenta con ese email. REGISTRESE");
 			}
-			dispose();
 		}else {
-			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los datos");
 		}
 		
 	}

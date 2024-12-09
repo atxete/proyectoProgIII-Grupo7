@@ -127,6 +127,7 @@ public class VentanaRegistrarse extends JFrame{
 	    btnRegistrarse.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
+	        	registrarUsuario();
 	           /**
 	        	// Obtener los datos del formulario
 	            String nombre = tfNombre.getText();
@@ -166,11 +167,12 @@ public class VentanaRegistrarse extends JFrame{
 				vl.setVisible(true);
 				**/
 	        	
+	        	/*
 	        	if(Logica.existeUsuario(tfEmail.getText())) {
 	        		JOptionPane.showMessageDialog(null, "ERROR: Ya existe una cuenta con ese email. Utilice otro");
 	        		tfEmail.setText("");
 	        	}
-	        	
+	        	*/
 	        	//esto lo he puesto para comprobar si las dos veces que pone la contraseña pone la misma
 	        	
 	        	/*if(!psContrasenya.getPassword().toString().equals(psRepetirContrasenya.getPassword().toString())) {
@@ -179,6 +181,7 @@ public class VentanaRegistrarse extends JFrame{
 	        		psRepetirContrasenya.setText("");
 	        		
 	        	}*/
+	        	/*
 	        	if(!tfEmail.getText().equals("") && psContrasenya.getPassword().equals(psRepetirContrasenya.getPassword()) && !psContrasenya.getPassword().equals("") && !tfNombre.getText().equals("") && !tfApellidos.getText().equals("") && !tfUsuario.getText().equals("")) {
 	        		String er="[a-zA-Z]{1,}.{0,}[a-zA-Z]{0,}@[a-zA-Z]{1,}\\.[a-z]{2,}";
 	        		String email = tfEmail.getText();
@@ -192,6 +195,7 @@ public class VentanaRegistrarse extends JFrame{
 	        		}
 	        	}else JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los campos");
 				
+	        	*/
 	        }
 	    });
 
@@ -364,6 +368,53 @@ public class VentanaRegistrarse extends JFrame{
 	}
 	
 	private void registrarUsuario() {
+	    String email = tfEmail.getText();
+	    String contrasena = String.valueOf(psContrasenya.getPassword());
+	    String repetirContrasena = String.valueOf(psRepetirContrasenya.getPassword());
+	    String nombre = tfNombre.getText();
+	    String apellidos = tfApellidos.getText();
+	    String usuario = tfUsuario.getText();
+
+	    if (email.isEmpty() || contrasena.isEmpty() || repetirContrasena.isEmpty() || nombre.isEmpty() || apellidos.isEmpty() || usuario.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    if (!contrasena.equals(repetirContrasena)) {
+	        JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    String er = "[a-zA-Z]{1,}.{0,}[a-zA-Z]{0,}@[a-zA-Z]{1,}\\.[a-z]{2,}";
+	    if (!Pattern.matches(er, email)) {
+	        JOptionPane.showMessageDialog(null, "ERROR: El formato del email no es correcto", "Error", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    if (Logica.existeUsuario(email)) {
+	        JOptionPane.showMessageDialog(null, "ERROR: Ya existe una cuenta con ese email. Utilice otro", "Error", JOptionPane.ERROR_MESSAGE);
+	        tfEmail.setText(""); 
+	        return;
+	    }
+
+	    Logica.crearUsuario(nombre, apellidos, usuario, email, contrasena);
+	    BaseDeDatos.anyadirUsuario(nombre, apellidos, usuario, email, contrasena);
+	    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente (" + nombre + " " + apellidos +")", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	    VentanaLoadingUsuario vl = new VentanaLoadingUsuario(ventanaActual);
+		dispose();
+		vl.setVisible(true);
+		
+	    
+	    tfEmail.setText("");
+	    psContrasenya.setText("");
+	    psRepetirContrasenya.setText("");
+	    tfNombre.setText("");
+	    tfApellidos.setText("");
+	    tfUsuario.setText("");
+	}
+
+		
+		/*
 		JFrame v = new JFrame();
 		v = this;
 		
@@ -403,7 +454,7 @@ public class VentanaRegistrarse extends JFrame{
 		
 		
 	}
-	
+	*/
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
