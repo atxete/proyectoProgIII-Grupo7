@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		BaseDeDatos.abrirConexion("src/BaseDatos.db", true);
+		BaseDeDatos.abrirConexion("db/BaseDatos.db", true);
 		
 		new VentanaInicial();
 		

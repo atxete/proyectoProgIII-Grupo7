@@ -57,42 +57,42 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "Statement: " + sent);
 				stmt.executeUpdate(sent);
 				
-				/*
+				
 				//creación de productos
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('Bebidas', 'Agua', '1', '1.95', 'imagenes/agua.jpg', 22);";
-				stmt.executeUpdate(sent);
-				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('CarnePescado', 'Entrecot', '2', '8.5', 'imagenes/entrecot.jpg', 22);";
-				stmt.executeUpdate(sent);
-				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('ProductosSecos', 'Almendras', '3', '2.45', 'imagenes/almendras.jpg', 22);";
-				stmt.executeUpdate(sent);
-				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('Desayuno', 'Cereales de fibra', '4', '3.69', 'imagenes/cerealesFibra.jpg', 22);";
-				stmt.executeUpdate(sent);
-				
-				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('VerduraFruta', 'Kiwi', '5', '0.97', 'imagenes/kiwi.jpg', 22);";
-				stmt.executeUpdate(sent);
-				*/
-				
-				//creación de usuarios base (administradores y algún comprador)
-				//sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Aratz', 'Bergado Fuentes', 'atxete', '1234', 'ianaratz.bergado@opendeusto.es', 1);";
-				//stmt.executeUpdate(sent);
-				
-				//sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Xabier', 'Aguiriano Fernández', 'XabierAguiriano', '1234', 'xabier.aguiriano@opendeusto.es', 1);";
-				//stmt.executeUpdate(sent);
-				
-				//sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Naroa', 'Manterola Nazabal', 'naroaManterola', '1234', 'n.manterola@opendeusto.es', 1);";
-				//stmt.executeUpdate(sent);
-				
-				//sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Jon', 'Ruiz Mezo', 'jonru21', '1234', 'jon.r@opendeusto.es', 1);";
-				//stmt.executeUpdate(sent);
-				
-				//sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Juan', 'Gallego Rica', 'juanga', '1234', 'juanga@opendeusto.es', 0);";
-				//stmt.executeUpdate(sent);
-				
-				//sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Iker', 'Carrasco Llorente', 'ikerca', '1234', 'ikerca@opendeusto.es', 0);";
-				//stmt.executeUpdate(sent);
+//				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('Bebidas', 'Agua', '1', '1.95', 'imagenes/agua.jpg', 22);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('CarnePescado', 'Entrecot', '2', '8.5', 'imagenes/entrecot.jpg', 22);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('ProductosSecos', 'Almendras', '3', '2.45', 'imagenes/almendras.jpg', 22);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('Desayuno', 'Cereales de fibra', '4', '3.69', 'imagenes/cerealesFibra.jpg', 22);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('VerduraFruta', 'Kiwi', '5', '0.97', 'imagenes/kiwi.jpg', 22);";
+//				stmt.executeUpdate(sent);
+//				
+//				
+//				//creación de usuarios base (administradores y algún comprador)
+//				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Aratz', 'Bergado Fuentes', 'atxete', '1234', 'ianaratz.bergado@opendeusto.es', 1);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Xabier', 'Aguiriano Fernández', 'XabierAguiriano', '1234', 'xabier.aguiriano@opendeusto.es', 1);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Naroa', 'Manterola Nazabal', 'naroaManterola', '1234', 'n.manterola@opendeusto.es', 1);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Jon', 'Ruiz Mezo', 'jonru21', '1234', 'jon.r@opendeusto.es', 1);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Juan', 'Gallego Rica', 'juanga', '1234', 'juanga@opendeusto.es', 0);";
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "INSERT INTO usuario(nombre, apellidos, usuario, contrasenya, email, admin) VALUES ('Iker', 'Carrasco Llorente', 'ikerca', '1234', 'ikerca@opendeusto.es', 0);";
+//				stmt.executeUpdate(sent);
 			}
 			
 			return true;

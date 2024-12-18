@@ -21,8 +21,6 @@ public class VentanaInicial extends JFrame {
 	 
 	public VentanaInicial() {
 		
-		BaseDeDatos.abrirConexion("BaseDatos.db", true);
-		
 		VentanaInicial ventanaActual = this;
 		
 		int ancho = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
