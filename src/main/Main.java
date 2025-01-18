@@ -1,6 +1,7 @@
 package main;
 
 import domain.BaseDatos1;
+import domain.Logica;
 import gui.VentanaInicial;
 
 public class Main {
@@ -9,6 +10,8 @@ public class Main {
 		
 		//BaseDeDatos.abrirConexion("db/BaseDatos.db", true);
 		BaseDatos1.abrirConexion("BaseDatos.db", true);
+		
+		Logica.cargarProductos("ProductosFinales.dat");
 		
 		new VentanaInicial();
 		

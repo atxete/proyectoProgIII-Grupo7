@@ -5,6 +5,7 @@ import java.io.File;
 
 import javax.swing.*;
 
+import domain.BaseDatos1;
 import domain.Logica;
 import domain.Producto;
 public class VentanaProductoAdmin extends JFrame{
@@ -95,6 +96,9 @@ public class VentanaProductoAdmin extends JFrame{
 				Logica.listaProductos.replaceAll(prod -> prod.getCodigo() == p.getCodigo() ? p : prod);
 				JOptionPane.showMessageDialog(null, "El nombre del producto se ha cambiado a: "+nuevoNombre);
 				Logica.guardarProductos("ProductosFinales.dat");
+				BaseDatos1.cambiarNombreProd(p, nuevoNombre);
+				lblNombreProd.repaint();
+				
 			}else {
 		        JOptionPane.showMessageDialog(null, "No se realizó ningún cambio en el nombre del producto.", 
 		                                      "Cambio Cancelado", JOptionPane.WARNING_MESSAGE);
@@ -114,7 +118,8 @@ public class VentanaProductoAdmin extends JFrame{
 		            p.setPrecio(nuevoPrecio);
 
 		            Logica.listaProductos.replaceAll(prod -> prod.getCodigo() == p.getCodigo() ? p : prod);
-		            
+		            BaseDatos1.cambiarPrecioProd(p, nuevoPrecio);
+		            lblPrecioProd.repaint();
 		            JOptionPane.showMessageDialog(null, "El precio del producto se ha cambiado a: " + nuevoPrecio);
 		            
 		            Logica.guardarProductos("ProductosFinales.dat");
@@ -162,6 +167,7 @@ public class VentanaProductoAdmin extends JFrame{
 		        if (nuevaImagenIcon.getIconWidth() > 0) {
 		           
 		             p.setFoto(nuevaFoto);
+		             BaseDatos1.cambiarFotoProd(p, nuevaFoto);
 		             
 		             Logica.listaProductos.replaceAll(prod -> prod.getCodigo() == p.getCodigo() ? p : prod);
 

@@ -28,32 +28,11 @@ public class Recursividad extends JFrame{
 	
 	
 	public Recursividad() {
-		JFrame vActual = this;
+		
 		
 		setTitle("Calculadora de combinaciones");
 		setBounds(300, 100, 700, 500);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		vActual.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				Object[] opciones = {"Aceptar", "Cancelar"};
-		        int opcion = JOptionPane.showOptionDialog(
-		            vActual,
-		            "¿Está seguro de que desea salir?",
-		            "Confirmación de salida",
-		            JOptionPane.YES_NO_OPTION,
-		            JOptionPane.QUESTION_MESSAGE,
-		            null,
-		            opciones,
-		            opciones[1] // Opciones[1] es "Cancelar", el botón seleccionado por defecto
-		        );
-		         
-		        if(opcion == JOptionPane.YES_OPTION) {
-		        	vActual.dispose();
-		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());
-		        	vis.setVisible(true);
-		        }
-			}
-		});
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		JPanel panelSuperior = new JPanel(new FlowLayout());
 		JLabel lblPresupuesto = new JLabel("Presupuesto (€): ");
@@ -132,7 +111,7 @@ public class Recursividad extends JFrame{
 	private static void calcularCombinacionesR(List<List<Producto>> resultado, List<Producto> temp, double dinero, double cont, List<Producto> lProductos) {
 		if(cont>dinero+5) {
 			return;
-		}else if(cont >= dinero-2 && cont <= dinero+2) {
+		}else if(cont >= dinero-1.5 && cont <= dinero+1.5) {
 			ArrayList<Producto> copia = new ArrayList<Producto>(temp);
 			Comparator<Producto> c = new Comparator<Producto>() {
 				

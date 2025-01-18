@@ -234,11 +234,16 @@ public class VentanaProductoUsuario extends JFrame{
         	//el producto que recibe la ventana como parametro a la lista 
         	//de los productos que él tenga en favoritos, para así poder visualizarlo en la tabla
         	
-        	esFavorito = !esFavorito;
+        	if(esFavorito) {
+        		esFavorito = false;
+        	}else {
+        		esFavorito=true;
+        	}
         	 
-        	 int cantidad = 0; //lo pongo a 0 porque en la wishlist no 
+        	 int cantidad = 1; //lo pongo a 1 porque en la wishlist no 
         	 					//hace falta cantidad, pero en cesta si. y como se 
         	 					//comparte el código hay que ponerle algo
+        	 					//no lo pongo en 0 porque eso quiere decir eliminar el producto
          	
         	 
         	if (esFavorito && iconoNegroRedimensionado != null) {
@@ -257,10 +262,10 @@ public class VentanaProductoUsuario extends JFrame{
                 btnAnyadirWish.setIcon(iconoBlancoRedimensionado);
                 
                 //Se ha eliminado de favoritos
-                c1.getListaFavoritos().remove(posF);
+                //c1.getListaFavoritos().remove(posF);
                 
                 try {
-                	BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 0);
+                	BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 0, 0); 
                 }catch(SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -268,7 +273,10 @@ public class VentanaProductoUsuario extends JFrame{
                 
                 
             }
-        
+        	
+        	
+        	
+        	
         });
         
        
@@ -276,8 +284,9 @@ public class VentanaProductoUsuario extends JFrame{
         	c1.anyadirCesta(p);
         	try {
         		BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1); //borro si habia, para volver a insertar con la nueva cantidad
+        		        		
         		BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, (int) spinnerCantidad.getValue());
-        		c1.getCesta().remove(posC);
+        		
         	}catch(SQLException ex) {
         		ex.printStackTrace();
         	}

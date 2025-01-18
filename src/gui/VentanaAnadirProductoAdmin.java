@@ -132,9 +132,14 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 
 		    if (resultado == JFileChooser.APPROVE_OPTION) {
 		        
-		        nuevaFoto = fileChooser.getSelectedFile().getAbsolutePath();
+		       // nuevaFoto = fileChooser.getSelectedFile().getAbsolutePath();
+		        
+		        String rutaCompleta = fileChooser.getSelectedFile().getAbsolutePath();
+		        String rutaRelativa = "imagenes"+File.separator + new File(rutaCompleta).getName();
+		        nuevaFoto = rutaRelativa;
 
-		        nuevaImagenIcon = new ImageIcon(nuevaFoto);
+		        //nuevaImagenIcon = new ImageIcon(nuevaFoto);
+		        nuevaImagenIcon = new ImageIcon(rutaCompleta);
 
 		       
 		        if (nuevaImagenIcon.getIconWidth() > 0) {

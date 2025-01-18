@@ -418,7 +418,9 @@ public class BaseDatos1 {
 	public static void anyadirProductoaPagina(Producto p) {
 		String sent = "";
 		try(Statement statement = conexion.createStatement()) {
+			
 			sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES (" + p.getTipo().name() + ", " + p.getNombre() + ", " + p.getCodigo() + ", " + p.getPrecio() + ", " + p.getFoto() + ", " + p.getCantidad() + ");";
+			System.out.println(p.getFoto());
 			logger.log(Level.INFO, "Lanzada actualización a la base de datos:"+sent);
 			int val = statement.executeUpdate(sent);
 			logger.log(Level.INFO, "Añadida "+val+" fila a base de datos\t"+sent);
@@ -463,6 +465,46 @@ public class BaseDatos1 {
 	    return cantidad;
 	}
 	
+	public static void cambiarNombreProd(Producto p, String nombreNuevo) {
+		String sql = "UPDATE producto SET nombre = ? WHERE codigo = ?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setString(1, nombreNuevo);
+			ps.setInt(2, p.getCodigo());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
+	public static void cambiarPrecioProd(Producto p, double precioNuevo) {
+		String sql = "UPDATE producto SET precio = ? WHERE codigo = ?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setDouble(1, precioNuevo);
+			ps.setInt(2, p.getCodigo());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void cambiarFotoProd(Producto p, String fotoNueva) {
+		String sql = "UPDATE producto SET foto = ? WHERE codigo = ?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setString(1, fotoNueva);
+			ps.setInt(2, p.getCodigo());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 }
