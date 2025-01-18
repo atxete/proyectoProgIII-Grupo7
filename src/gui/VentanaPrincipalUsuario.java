@@ -193,6 +193,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		
 		btnCesta = new JButton("Cesta");
 		btnFavoritos = new JButton("Favoritos");
+		JButton btnRecursividad = new JButton("Presupuesto");
 		
 		btnCesta.addActionListener((e)->{
 			new VentanaCestaUsuario();
@@ -202,10 +203,15 @@ public class VentanaPrincipalUsuario extends JFrame{
 			new VentanaFavoritosUsuario();
 		});
 		
+		btnRecursividad.addActionListener((e)->{
+			new Recursividad();
+		});
+		
 		pnlBotones = new JPanel();
 		
 		pnlBotones.add(btnCesta);
 		pnlBotones.add(btnFavoritos);
+		pnlBotones.add(btnRecursividad);
 		
 		this.add(pnlFiltro, BorderLayout.NORTH);
 		this.add(scrollProductos, BorderLayout.CENTER);
