@@ -39,6 +39,7 @@ public class VentanaCestaUsuario extends JFrame{
 	
 	//Generar un comprador
 	Comprador c1 = (Comprador) Logica.getUsuario();
+	//prueba
 	
 	
 	public VentanaCestaUsuario() {
