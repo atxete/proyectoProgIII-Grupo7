@@ -37,6 +37,8 @@ public class VentanaProductoUsuario extends JFrame{
 	protected JSpinner spinnerCantidad;
 	protected JPanel pnlSpinner;
 	
+	protected int cantidadEnCesta;
+	
 	private boolean esFavorito = false;
 	private ImageIcon iconoBlancoRedimensionado;
 	private ImageIcon iconoNegroRedimensionado;
@@ -86,9 +88,16 @@ public class VentanaProductoUsuario extends JFrame{
 		    // Si el producto ya está en la cesta, obtenemos su cantidad
 		    cantidadInicial = c1.cesta.get(posicionProductoListaCesta).getCantidad();
 		}
+		
+		try {
+			cantidadEnCesta = BaseDatos1.obtenerCantidadProducto(c1.getCodigoUsuario(), p.getCodigo());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Configuramos el modelo del spinner con el valor inicial correcto
-		SpinnerNumberModel model = new SpinnerNumberModel(cantidadInicial, 0, 100, 1);
+		SpinnerNumberModel model = new SpinnerNumberModel(cantidadEnCesta, 0, 100, 1);
 		spinnerCantidad = new JSpinner(model);
 		
 		//c1.cesta.get(posicionProductoListaCesta).getCantidad()
@@ -177,6 +186,8 @@ public class VentanaProductoUsuario extends JFrame{
 		
 		pnlDerecha.add(pnlSpinner);
 		//pnlBotones.add(btnAnyadirCesta);
+		JButton btnAnyadirCesta = new JButton("añadir a la cesta");
+		pnlBotones.add(btnAnyadirCesta);
 		pnlBotones.add(btnAnyadirWish);
 		pnlBotones.add(btnVolver);
 		pnlDerecha.add(pnlBotones);
@@ -216,7 +227,9 @@ public class VentanaProductoUsuario extends JFrame{
         	
         	esFavorito = !esFavorito;
         	 
-        	 int cantidad = (int) spinnerCantidad.getValue();
+        	 int cantidad = 0; //lo pongo a 0 porque en la wishlist no 
+        	 					//hace falta cantidad, pero en cesta si. y como se 
+        	 					//comparte el código hay que ponerle algo
          	
         	 
         	if (esFavorito && iconoNegroRedimensionado != null) {
@@ -249,45 +262,58 @@ public class VentanaProductoUsuario extends JFrame{
         
         });
         
-        
-        spinnerCantidad.addChangeListener((e)->{
-        	//Para programar esto necesitariamos tener la base de datos 
-        	//hecha para poder añadirle al usuario que ha iniciado sesión
-        	//el producto que recibe la ventana como parametro a la lista 
-        	//de los productos que él tenga en compra por la cantidad que pone, (excepto si es 0, se elimina de la compra)
-        	// para así poder visualizarlo en la tabla
-        	int pSelectPosLista=-1;
-        	for(int i=0; i<c1.cesta.size(); i++) {
-        			Producto pr = c1.cesta.get(i);
-        			if(pr.getCodigo() == p.getCodigo()) {
-        				pSelectPosLista=i;
-        			}
-        		}
-        	        	
-        	int cantidad = (int) spinnerCantidad.getValue();
-        	if(cantidad==0) {
-        		
-        		try {
-        			BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1);
-        			c1.getCesta().remove(pSelectPosLista);
-        			/** (?) AQUI FALTA PONER QUE SE BORRE DE LA LISTA DE LA CESTA DEL COMPRADOR**/
-            		
-        			System.out.println("Producto eliminado de la cesta.");
-        		}catch(Exception ex) {
-        			ex.printStackTrace();
-        		}
-        	}else {
-        		c1.anyadirCesta(p);
-        		try {
-        			BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, cantidad);
-        			System.out.println("Producto añadido/actualizado en la cesta con cantidad: " + cantidad);
-        		}catch(Exception ex) {
-        			ex.printStackTrace();
-        		}
+        int pos = posicionProductoListaCesta;
+        btnAnyadirCesta.addActionListener((e)->{
+        	c1.anyadirCesta(p);
+        	try {
+        		BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1); //borro si habia, para volver a insertar con la nueva cantidad
+        		BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, (int) spinnerCantidad.getValue());
+        		c1.getCesta().remove(pos);
+        	}catch(SQLException ex) {
+        		ex.printStackTrace();
         	}
-        	
-        	
         });
+        
+        
+        
+//        spinnerCantidad.addChangeListener((e)->{
+//        	//Para programar esto necesitariamos tener la base de datos 
+//        	//hecha para poder añadirle al usuario que ha iniciado sesión
+//        	//el producto que recibe la ventana como parametro a la lista 
+//        	//de los productos que él tenga en compra por la cantidad que pone, (excepto si es 0, se elimina de la compra)
+//        	// para así poder visualizarlo en la tabla
+//        	int pSelectPosLista=-1;
+//        	for(int i=0; i<c1.cesta.size(); i++) {
+//        			Producto pr = c1.cesta.get(i);
+//        			if(pr.getCodigo() == p.getCodigo()) {
+//        				pSelectPosLista=i;
+//        			}
+//        		}
+//        	        	
+//        	int cantidad = (int) spinnerCantidad.getValue();
+//        	if(cantidad==0) {
+//        		
+//        		try {
+//        			BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1);
+//        			c1.getCesta().remove(pSelectPosLista);
+//        			/** (?) AQUI FALTA PONER QUE SE BORRE DE LA LISTA DE LA CESTA DEL COMPRADOR**/
+//            		
+//        			System.out.println("Producto eliminado de la cesta.");
+//        		}catch(Exception ex) {
+//        			ex.printStackTrace();
+//        		}
+//        	}else {
+//        		c1.anyadirCesta(p);
+//        		try {
+//        			BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, cantidad);
+//        			System.out.println("Producto añadido/actualizado en la cesta con cantidad: " + cantidad);
+//        		}catch(Exception ex) {
+//        			ex.printStackTrace();
+//        		}
+//        	}
+//        	
+//        	
+//        });
         
         
         

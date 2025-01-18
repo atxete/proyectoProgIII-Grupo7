@@ -2,6 +2,7 @@ package domain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -248,16 +249,31 @@ public class BaseDatos1 {
 	//añadir un nuevo producto a la cesta o a la wishlist dentro de la base de datos
 	public static void anyadirProducto(int idUsuario, int idProducto, int tipo, int cantidad) throws SQLException{ //tipo se refiere si lo queremos guardar en la wishlist(0) o en la compra(1)
 		String sent="";
-		switch(tipo) {
-		case 0:
-			sent = "INSERT INTO wishList(idUsuario, idProducto) VALUES("+idUsuario+", "+idProducto+")";
-			break;
-		case 1:
-			sent = "INSERT INTO cestas (idUsuario, idProducto, cantidad) VALUES ("+idUsuario + ", " + idProducto + ", " + cantidad + ")";
-			break;
-		default:
-			throw new SQLException("type not defined");
+		if(cantidad==0) {
+			switch (tipo) {
+            case 0: // Si es wishlist
+                sent = "DELETE FROM wishList WHERE idUsuario = " + idUsuario + " AND idProducto = " + idProducto;
+                break;
+            case 1: // Si es cesta
+                sent = "DELETE FROM cestas WHERE idUsuario = " + idUsuario + " AND idProducto = " + idProducto;
+                break;
+            default:
+                throw new SQLException("Tipo no definido para eliminación");
+			}
+		}else {
+			switch (tipo) {
+            case 0: // Wishlist
+                sent = "INSERT INTO wishList(idUsuario, idProducto) VALUES(" + idUsuario + ", " + idProducto + ")";
+                break;
+            case 1: // Cesta
+                sent = "INSERT INTO cestas (idUsuario, idProducto, cantidad) VALUES (" + idUsuario + ", " + idProducto + ", " + cantidad + ")";
+                break;
+            default:
+                throw new SQLException("Tipo no definido");
+			}
 		}
+		
+		
 		try(Statement statement = conexion.createStatement()){
 			logger.log(Level.INFO, "Lanzada actualización a base de datos: "+sent);
 			int val = statement.executeUpdate( sent );
@@ -422,6 +438,29 @@ public class BaseDatos1 {
 			}
 		}
 		return null;
+	}
+	
+	public static int obtenerCantidadProducto(int idUsuario, int idProducto) throws SQLException {
+	    String sent = "SELECT cantidad FROM cestas WHERE idUsuario = ? AND idProducto = ?";
+	    int cantidad = 0;
+
+	    try (PreparedStatement preparedStatement = conexion.prepareStatement(sent)) {
+	        // Establecer los parámetros de la consulta
+	        preparedStatement.setInt(1, idUsuario);
+	        preparedStatement.setInt(2, idProducto);
+
+	        // Ejecutar la consulta
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        // Si se encuentra el producto en la cesta, obtenemos la cantidad
+	        if (resultSet.next()) {
+	            cantidad = resultSet.getInt("cantidad");
+	        }
+	    } catch (SQLException e) {
+	        logger.log(Level.SEVERE, "Error al obtener la cantidad del producto en la cesta\t" + e);
+	    }
+
+	    return cantidad;
 	}
 	
 	

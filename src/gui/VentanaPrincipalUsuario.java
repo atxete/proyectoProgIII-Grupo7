@@ -221,14 +221,14 @@ public class VentanaPrincipalUsuario extends JFrame{
 		for(Producto p: listaProductos) {
 			JLabel nombreProducto = new JLabel("Nombre: " + p.getNombre());
 			JLabel precioProducto = new JLabel("Precio: "+p.getPrecio());
-			
-			SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
-	        JSpinner spinnerCantidad = new JSpinner(model);
-	        spinnerCantidad.addChangeListener(e->{
-	        	int cantidad = (Integer) ((JSpinner)e.getSource()).getValue();
-	        	//vcu.anyadirProducto(p, cantidad);
-	        	
-	        });
+//			
+//			SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
+//	        JSpinner spinnerCantidad = new JSpinner(model);
+//	        spinnerCantidad.addChangeListener(e->{
+//	        	int cantidad = (Integer) ((JSpinner)e.getSource()).getValue();
+//	        	//vcu.anyadirProducto(p, cantidad);
+//	        	
+//	        });
 			
 			ImageIcon imagenProducto = new ImageIcon(p.getFoto());
 			Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -254,7 +254,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 			JPanel pnlCentral = new JPanel();
 			JPanel pnlBtnProd = new JPanel(new GridLayout(1,2));
 			
-	        pnlBtnProd.add(spinnerCantidad);
+//	        pnlBtnProd.add(spinnerCantidad);
 	        pnlCentral.add(nombreProducto);
 	        pnlCentral.add(precioProducto);
 	        
