@@ -83,6 +83,14 @@ public class VentanaProductoUsuario extends JFrame{
 				posicionProductoListaCesta=i;
 			}
 		}
+		
+		int posicionProdListaFav=-1;
+		for(int i=0; i<c1.listaFavoritos.size(); i++) {
+			if(p.getCodigo()==c1.listaFavoritos.get(i).getCodigo()) {
+				posicionProdListaFav=i;
+			}
+		}
+		
 		int cantidadInicial = 0;
 		if (posicionProductoListaCesta != -1) {
 		    // Si el producto ya está en la cesta, obtenemos su cantidad
@@ -210,7 +218,8 @@ public class VentanaProductoUsuario extends JFrame{
         pnlIzq.setBackground(Color.WHITE);
         pnlCantidad.setBackground(Color.WHITE);
         
-        
+        int posC = posicionProductoListaCesta;
+        int posF = posicionProdListaFav;
         
         btnVolver.addActionListener((e)->{
         	ventanaAnterior.setVisible(true);
@@ -248,7 +257,7 @@ public class VentanaProductoUsuario extends JFrame{
                 btnAnyadirWish.setIcon(iconoBlancoRedimensionado);
                 
                 //Se ha eliminado de favoritos
-                /**ELIMINAR PRODUCTO DE LA LISTA DE FAVORITOS DEL COMPRADOR**/
+                c1.getListaFavoritos().remove(posF);
                 
                 try {
                 	BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 0);
@@ -262,13 +271,13 @@ public class VentanaProductoUsuario extends JFrame{
         
         });
         
-        int pos = posicionProductoListaCesta;
+       
         btnAnyadirCesta.addActionListener((e)->{
         	c1.anyadirCesta(p);
         	try {
         		BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1); //borro si habia, para volver a insertar con la nueva cantidad
         		BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, (int) spinnerCantidad.getValue());
-        		c1.getCesta().remove(pos);
+        		c1.getCesta().remove(posC);
         	}catch(SQLException ex) {
         		ex.printStackTrace();
         	}
