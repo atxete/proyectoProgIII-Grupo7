@@ -13,7 +13,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.Comprador;
 import domain.Logica;
 import domain.Producto;
@@ -225,7 +225,7 @@ public class VentanaProductoUsuario extends JFrame{
                 c1.anyadirWishList(p);
                 
                 try {
-                	BaseDeDatos.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 0, cantidad);
+                	BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 0, cantidad);
                 }catch(SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -238,7 +238,7 @@ public class VentanaProductoUsuario extends JFrame{
                 /**ELIMINAR PRODUCTO DE LA LISTA DE FAVORITOS DEL COMPRADOR**/
                 
                 try {
-                	BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 0);
+                	BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 0);
                 }catch(SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -268,7 +268,7 @@ public class VentanaProductoUsuario extends JFrame{
         	if(cantidad==0) {
         		
         		try {
-        			BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1);
+        			BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), p.getCodigo(), 1);
         			c1.getCesta().remove(pSelectPosLista);
         			/** (?) AQUI FALTA PONER QUE SE BORRE DE LA LISTA DE LA CESTA DEL COMPRADOR**/
             		
@@ -279,7 +279,7 @@ public class VentanaProductoUsuario extends JFrame{
         	}else {
         		c1.anyadirCesta(p);
         		try {
-        			BaseDeDatos.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, cantidad);
+        			BaseDatos1.anyadirProducto(c1.getCodigoUsuario(), p.getCodigo(), 1, cantidad);
         			System.out.println("Producto añadido/actualizado en la cesta con cantidad: " + cantidad);
         		}catch(Exception ex) {
         			ex.printStackTrace();

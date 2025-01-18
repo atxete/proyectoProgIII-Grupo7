@@ -48,7 +48,7 @@ public class Logica implements Serializable {
     }
     
     public static boolean existeUsuario(String email) {
-        if (BaseDeDatos.getUsuarios().containsKey(email)) {
+        if (BaseDatos1.getUsuarios().containsKey(email)) {
             return true;
         } else {
             return false;
@@ -56,17 +56,17 @@ public class Logica implements Serializable {
     }
 
     public static Usuario usuarioCorrecto(String email, String contrasenya) {
-        if (BaseDeDatos.getUsuarios().get(email).getContrasenya().equals(contrasenya)) {
-            Logica.usuario = BaseDeDatos.getUsuarios().get(email);
+        if (BaseDatos1.getUsuarios().get(email).getContrasenya().equals(contrasenya)) {
+            Logica.usuario = BaseDatos1.getUsuarios().get(email);
             logger.log(Level.INFO, "Existe usuario en la BD");
-            return BaseDeDatos.getUsuarios().get(email);
+            return BaseDatos1.getUsuarios().get(email);
         } else {
             return null;
         }
     }
 
     public static boolean UsuarioComprador(String email) {
-        if (BaseDeDatos.getUsuarios().get(email) instanceof Comprador) {
+        if (BaseDatos1.getUsuarios().get(email) instanceof Comprador) {
             return true;
         } else {
             return false;
@@ -81,7 +81,7 @@ public class Logica implements Serializable {
         }
         
         Comprador c1 = new Comprador(nombre, apellidos, usuario, contrasenya, email, 0);
-        BaseDeDatos.getUsuarios().put(c1.getEmail(), c1);
+        BaseDatos1.getUsuarios().put(c1.getEmail(), c1);
     }
 
     public static void guardarProductos(String fichero) {

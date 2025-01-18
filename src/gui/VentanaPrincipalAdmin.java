@@ -14,7 +14,7 @@ import java.util.List;
 
 import javax.swing.*;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.GestorUsuarios;
 import domain.Producto;
 import domain.Producto.tipo;
@@ -60,7 +60,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 		//cargamos los productos (funcion que generara una lista de productos)
 		
-		 productos = BaseDeDatos.getProductos();
+		 productos = BaseDatos1.getProductos();
 		 
 		/*List<Producto> productos = new ArrayList();
 		Producto p1 = new Producto(tipo.Bebidas, "P1",  1, "imagenes/agua.jpg", 22);

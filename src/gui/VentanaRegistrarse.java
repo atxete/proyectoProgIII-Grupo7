@@ -22,7 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.Comprador;
 import domain.GestorUsuarios;
 import domain.Logica;
@@ -360,7 +360,7 @@ public class VentanaRegistrarse extends JFrame{
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
-				BaseDeDatos.cerrarConexion();
+				BaseDatos1.cerrarConexion();
 			}
 			
 		});
@@ -398,7 +398,7 @@ public class VentanaRegistrarse extends JFrame{
 	    }
 
 	    Logica.crearUsuario(nombre, apellidos, usuario, email, contrasena);
-	    BaseDeDatos.anyadirUsuario(nombre, apellidos, usuario, email, contrasena);
+	    BaseDatos1.anyadirUsuario(nombre, apellidos, usuario, email, contrasena);
 	    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente (" + nombre + " " + apellidos +")", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 	    VentanaLoadingUsuario vl = new VentanaLoadingUsuario(ventanaActual);
 		dispose();

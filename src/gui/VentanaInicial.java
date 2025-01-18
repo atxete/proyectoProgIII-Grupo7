@@ -11,7 +11,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.*;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.GestorUsuarios;
 
 public class VentanaInicial extends JFrame {
@@ -97,7 +97,7 @@ public class VentanaInicial extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
-				BaseDeDatos.cerrarConexion();
+				BaseDatos1.cerrarConexion();
 			}
 			
 			

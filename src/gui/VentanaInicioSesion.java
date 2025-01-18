@@ -21,7 +21,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.GestorUsuarios;
 import domain.Logica;
 import domain.Usuario;
@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 import javax.swing.*;
 
 import domain.Comprador;
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.Logica;
 import gui.VentanaPrincipalAdmin;
 
@@ -206,7 +206,7 @@ public class VentanaInicioSesion extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
-				BaseDeDatos.cerrarConexion();
+				BaseDatos1.cerrarConexion();
 			}
 			
 		});
@@ -220,8 +220,8 @@ public class VentanaInicioSesion extends JFrame {
 				String contrasenyaIngresada = new String(psContrasenya.getPassword());
 				if(Logica.usuarioCorrecto(tfEmail.getText(), contrasenyaIngresada)!=null) {
 					if(Logica.UsuarioComprador(tfEmail.getText())) {
-						((Comprador) Logica.getUsuario()).setListaFavoritos(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 0));
-						((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 1));
+						((Comprador) Logica.getUsuario()).setListaFavoritos(BaseDatos1.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 0));
+						((Comprador) Logica.getUsuario()).setCesta(BaseDatos1.getWishListOCesta(Logica.getUsuario().getCodigoUsuario(), 1));
 						JOptionPane.showMessageDialog(ventanaActual, "Bienvenido comprador (" + Logica.getUsuario().getNombre() + " " + Logica.getUsuario().getApellidos() +")" , "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
 						VentanaLoadingUsuario vl = new VentanaLoadingUsuario(ventanaActual);
 						dispose();

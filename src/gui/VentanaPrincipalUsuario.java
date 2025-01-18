@@ -30,7 +30,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.Comprador;
 import domain.GestorUsuarios;
 import domain.Logica;
@@ -88,7 +88,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		
 		
 		//cargamos los productos (funcion que generara una lista de productos)
-		 productos = BaseDeDatos.getProductos();
+		 productos = BaseDatos1.getProductos();
 		
 		/*List<Producto> productos = new ArrayList();
 		Producto p1 = new Producto(null, "P1",  1, "imagenes/agua.jpg", 22);

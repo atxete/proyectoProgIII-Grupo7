@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.Comprador;
 import domain.Logica;
 import domain.Producto;
@@ -128,7 +128,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 				if(e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
 					int pos = tablaFavoritos.getSelectedRow();
 					try {
-						BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), c1.listaFavoritos.get(pos).getCodigo(), 0);
+						BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), c1.listaFavoritos.get(pos).getCodigo(), 0);
 					}catch(SQLException ex) {
 						ex.printStackTrace();
 					}

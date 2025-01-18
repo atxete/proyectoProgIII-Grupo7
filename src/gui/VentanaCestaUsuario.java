@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import domain.BaseDeDatos;
+import domain.BaseDatos1;
 import domain.Comprador;
 import domain.Logica;
 import domain.Producto;
@@ -76,9 +76,9 @@ public class VentanaCestaUsuario extends JFrame{
 			
 			if(!c1.getCesta().isEmpty()) {
 				long fecha = System.currentTimeMillis();
-				int id = BaseDeDatos.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(c1.getCesta()));
+				int id = BaseDatos1.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(c1.getCesta()));
 				for(Producto p : c1.getCesta()) {
-					BaseDeDatos.anyadirCompraP(id, p.getCodigo());
+					BaseDatos1.anyadirCompraP(id, p.getCodigo());
 				}
 				/**TOTALPRECIO.SETTEXT(PRECIO TOTAL: 0.00 €");**/
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
@@ -151,7 +151,7 @@ public class VentanaCestaUsuario extends JFrame{
 				if(e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
 					int pos = tabla.getSelectedRow();
 					try {
-						BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), c1.cesta.get(pos).getCodigo(), 1);
+						BaseDatos1.eliminarProducto(c1.getCodigoUsuario(), c1.cesta.get(pos).getCodigo(), 1);
 					}catch(SQLException ex) {
 						ex.printStackTrace();
 					}

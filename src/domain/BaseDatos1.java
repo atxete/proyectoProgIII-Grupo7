@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 import domain.Producto.tipo;
 
-public class BaseDeDatos {
+public class BaseDatos1 {
 
 	public static Connection conexion;
 	private static Logger logger = Logger.getLogger("BaseDeDatos");
@@ -33,33 +33,33 @@ public class BaseDeDatos {
 				
 				
 				//creación de tablas
-				String sent = "CREATE TABLE IF NOT EXISTS usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), apellidos varchar(25), usuario varchar(15), contrasenya varchar(25), email varchar(25), admin int);";
-				logger.log(Level.INFO, "Statement: " + sent);
-				stmt.executeUpdate(sent);
-				
-				sent = "CREATE TABLE IF NOT EXISTS wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto (codigo));";
-				logger.log(Level.INFO, "Statement: " + sent);
-				stmt.executeUpdate(sent);
-				
-				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto (codigo), cantidad int);";
-				logger.log(Level.INFO, "Statement: " + sent);
-				stmt.executeUpdate(sent);
-				
-				sent = "CREATE TABLE IF NOT EXISTS compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha bigint, precio float);";
-				logger.log(Level.INFO, "Statement: " + sent);
-				stmt.executeUpdate(sent);
-				
-				sent = "CREATE TABLE IF NOT EXISTS compraP (idCompra INTEGER REFERENCES compra(id), idProducto INTEGER REFERENCES producto (codigo));";
-				logger.log(Level.INFO, "Statement: " + sent);
-				stmt.executeUpdate(sent);
-				
-				
-				sent = "CREATE TABLE IF NOT EXISTS producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, tipo varchar(10), nombre varchar(10), id int, precio float, foto varchar(50), cantidad int);";
-				logger.log(Level.INFO, "Statement: " + sent);
-				stmt.executeUpdate(sent);
-				
-				
-				//creación de productos
+//				String sent = "CREATE TABLE IF NOT EXISTS usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), apellidos varchar(25), usuario varchar(15), contrasenya varchar(25), email varchar(25), admin int);";
+//				logger.log(Level.INFO, "Statement: " + sent);
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "CREATE TABLE IF NOT EXISTS wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto (codigo));";
+//				logger.log(Level.INFO, "Statement: " + sent);
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto (codigo), cantidad int);";
+//				logger.log(Level.INFO, "Statement: " + sent);
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "CREATE TABLE IF NOT EXISTS compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha bigint, precio float);";
+//				logger.log(Level.INFO, "Statement: " + sent);
+//				stmt.executeUpdate(sent);
+//				
+//				sent = "CREATE TABLE IF NOT EXISTS compraP (idCompra INTEGER REFERENCES compra(id), idProducto INTEGER REFERENCES producto (codigo));";
+//				logger.log(Level.INFO, "Statement: " + sent);
+//				stmt.executeUpdate(sent);
+//				
+//				
+//				sent = "CREATE TABLE IF NOT EXISTS producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, tipo varchar(10), nombre varchar(10), id int, precio float, foto varchar(50), cantidad int);";
+//				logger.log(Level.INFO, "Statement: " + sent);
+//				stmt.executeUpdate(sent);
+//				
+//				
+//				//creación de productos
 //				sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('Bebidas', 'Agua', '1', '1.95', 'imagenes/agua.jpg', 22);";
 //				stmt.executeUpdate(sent);
 //				
