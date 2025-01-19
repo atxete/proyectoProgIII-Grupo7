@@ -49,12 +49,22 @@ public class VentanaPrincipalUsuario extends JFrame{
 	protected List<Producto> productos;
 	protected static VentanaCestaUsuario vcu;
 	
+	protected ArrayList<Producto> productosCestaComprador;
 	
 	public VentanaPrincipalUsuario() {
 		
 		JFrame vActual = this;
 		
 		Comprador c1 = (Comprador) Logica.getUsuario();
+		
+		productosCestaComprador = BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1);
+		
+		for(Producto p : productosCestaComprador) {
+//			c1.cesta.add(p);
+			System.out.println(p);
+		}
+		
+		
 		
 		setBounds(300, 100, 700, 500);
 		setTitle("Ventana Principal Usuario");
@@ -197,6 +207,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		
 		btnCesta.addActionListener((e)->{
 			new VentanaCestaUsuario();
+			
 		});
 		
 		btnFavoritos.addActionListener((e)->{

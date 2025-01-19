@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -242,6 +243,75 @@ public class BaseDatos1 {
 		}catch(Exception e) {
 			logger.log(Level.SEVERE, "Excepción",e);
 			return null;
+		}
+	}
+	
+	public static List<Producto> obtenerProductosCesta(int idUsuario){
+		List<Producto> productosCesta = new ArrayList<Producto>();
+		
+		String sql = "SELECT p.nombre, p.tipo, p.precio, p.foto, c.cantidad " +
+                "FROM producto p " +
+                "JOIN cestas c ON p.codigo = c.idProducto " +
+                "WHERE c.idUsuario = ?";
+		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setInt(1, idUsuario);  // Pasamos el idUsuario de la sesión
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        while (rs.next()) {
+	        	String tipo = rs.getString("tipo");
+	            String nombre = rs.getString("nombre");
+	            float precio = rs.getFloat("precio");
+	            String foto = rs.getString("foto");
+	            int cantidad = rs.getInt("cantidad");
+	            Producto producto = new Producto(domain.Producto.tipo.valueOf(tipo), nombre, precio, foto, cantidad);
+	            productosCesta.add(producto);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return productosCesta;
+	}
+	
+	
+	public static List<Producto> obtenerProductosWishList(int idUsuario){
+		List<Producto> productosWishList = new ArrayList<Producto>();
+		
+		 String query = "SELECT p.nombre, p.tipo, p.foto, p.precio, p.cantidad " +
+                 "FROM producto p " +
+                 "JOIN wishlist w ON p.codigo = w.idProducto " +
+                 "WHERE w.idUsuario = ?";
+		 
+		 try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+		        stmt.setInt(1, idUsuario);  
+		        ResultSet rs = stmt.executeQuery();
+		        
+		        while (rs.next()) {
+		        	String tipo = rs.getString("tipo");
+		            String nombre = rs.getString("nombre");
+		            float precio = rs.getFloat("precio");
+		            String foto = rs.getString("foto");
+		            int cantidad = rs.getInt("cantidad");
+		            Producto producto = new Producto(domain.Producto.tipo.valueOf(tipo), nombre, precio, foto, cantidad);
+		            productosWishList.add(producto);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		    return productosWishList ;
+		 
+	}
+
+	
+	public static void eliminarCestaUsuario(int idUsuario) {
+		String sql ="DELETE FROM cestas WHERE id = ?;";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setInt(1, idUsuario);
+			ps.execute();
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	

@@ -45,12 +45,14 @@ public class VentanaCestaUsuario extends JFrame{
 	public VentanaCestaUsuario() {
 		super();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		productos = c1.getCesta();
+		//productos = c1.getCesta();
+		productos = BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1); // 1 -> cesta,  0 -> wish
 		modeloCestaUsuario = new ModeloCestaUsuario(productos);
 		tabla = new JTable(modeloCestaUsuario);
 		scrolltabla = new JScrollPane(tabla);
 		getContentPane().add(scrolltabla, BorderLayout.CENTER);
 		
+				
 		/*
 		panelTotal = new JPanel();
 		textoTotal = new JLabel("Total a pagar: ");
@@ -62,6 +64,9 @@ public class VentanaCestaUsuario extends JFrame{
 		
 		getContentPane().add(panelTotal, BorderLayout.SOUTH);
 		*/
+		
+		
+		cargarTablaCesta(c1.getCodigoUsuario());
 		
 		panelBotones = new JPanel();
 		
@@ -82,15 +87,20 @@ public class VentanaCestaUsuario extends JFrame{
 		botonPagar.addActionListener((e)->{
 			JOptionPane.showMessageDialog(VentanaCestaUsuario.this, "Compra pagada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 			
-			if(!c1.getCesta().isEmpty()) {
+			if(!BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1).isEmpty() /*!c1.getCesta().isEmpty()*/) {
 				long fecha = System.currentTimeMillis();
-				int id = BaseDatos1.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(c1.getCesta()));
-				for(Producto p : c1.getCesta()) {
+				int id = BaseDatos1.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1)/*c1.getCesta()*/));
+				for(Producto p : BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1)/*c1.getCesta()*/) {
 					BaseDatos1.anyadirCompraP(id, p.getCodigo());
 				}
+				
 				/**TOTALPRECIO.SETTEXT(PRECIO TOTAL: 0.00 €");**/
+				precioTotal.setText("Precio total: " + actualizarPrecio(productos));
+				
+				
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
 				c1.getCesta().removeAll(c1.getCesta());
+				BaseDatos1.eliminarCestaUsuario(c1.getCodigoUsuario());
 				actualizarLista();
 			}else {
 				JOptionPane.showMessageDialog(null, "ERROR: Cesta vacia");
@@ -114,18 +124,31 @@ public class VentanaCestaUsuario extends JFrame{
 
         tabla.setDefaultRenderer(Object.class, (table, value, isSelected, hasFocus, row, column) -> {
            JLabel labelCestaUsuario = new JLabel(value.toString());
+           labelCestaUsuario.setOpaque(true);
         	if(column==2) {
-        	   float precio = (float) value;
-        	   if(precio <10) {
-        		   labelCestaUsuario.setBackground(Color.GREEN);
+        	   float precio = Float.parseFloat(value.toString());
+        	   if(precio <1) {
+        		   labelCestaUsuario.setBackground(new Color(173, 216, 230));
         	   }
-        	   else if(precio <50) {
-        		   labelCestaUsuario.setBackground(Color.yellow);
-        	   }else if(precio <100) {
+        	   else if(precio <2) {
+        		   labelCestaUsuario.setBackground(new Color(255, 255, 204));
+        	   }else if(precio <4) {
         		   labelCestaUsuario.setBackground(Color.orange);
         	   }else {
-        		   labelCestaUsuario.setBackground(Color.red);
+        		   labelCestaUsuario.setBackground(new Color(255, 182, 193));
         	   }
+        	}
+        	else if(column ==4) {
+        		float precio1 = (float) value;
+         	   	if(precio1 <10) {
+         		   labelCestaUsuario.setBackground(new Color(204, 255, 204));
+         	   	}
+         	   	else {
+         		   labelCestaUsuario.setBackground(new Color(255, 182, 193));
+         	   	}
+        	}else {
+        		labelCestaUsuario.setBackground(Color.white);
+        		labelCestaUsuario.setForeground(Color.black);
         	}
         	/*
         	if(column ==3) {
@@ -142,10 +165,7 @@ public class VentanaCestaUsuario extends JFrame{
         	}
         	*/
         	
-        	else {
-        		labelCestaUsuario.setBackground(Color.white);
-        		labelCestaUsuario.setForeground(Color.black);
-        	}
+        	
         	
         	return labelCestaUsuario;
         });
@@ -166,7 +186,10 @@ public class VentanaCestaUsuario extends JFrame{
 						ex.printStackTrace();
 					}
 					c1.getCesta().remove(pos);
+					
 					actualizarLista();
+					
+					cargarTablaCesta(c1.getCodigoUsuario());
 					precioTotal.setText(String.format("%.2f", actualizarPrecio(productos/*c1.getCesta()*/))+"€");
 				}
 			}
@@ -179,6 +202,7 @@ public class VentanaCestaUsuario extends JFrame{
 	
 	public void anyadirProducto(Producto p, Integer cantidad) {
 		productos.add(p);
+		cargarTablaCesta(c1.getCodigoUsuario());
 	}
 	
 	/*
@@ -192,17 +216,18 @@ public class VentanaCestaUsuario extends JFrame{
 	public void actualizarLista() {
 		List<Producto> anyadidos = new ArrayList<Producto>();
 		modeloCestaUsuario = new ModeloCestaUsuario(new ArrayList<Producto>());
-		for(Producto p : c1.getCesta()) {
+		for(Producto p : BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1) /*c1.getCesta()*/) {
 			int cont=0;
-			for(Producto p2:c1.getCesta()) {
+			for(Producto p2:BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1)/*c1.getCesta()*/) {
 				if(p.equals(p2)) {
 					cont++;
 				}
 			}
 			if(!anyadidos.contains(p)) {
-				modeloCestaUsuario.addRow(new Object[] {p.getNombre(), p.getCodigo(),p.getClass().getSimpleName(), p.getPrecio()+"€", cont});
+				modeloCestaUsuario.addRow(new Object[] {p.getCodigo(), p.getNombre(), p.getPrecio()+"€", cont, p.getPrecio()*cont});
 				anyadidos.add(p);
 			}
+			
 		}
 		tabla.setModel(modeloCestaUsuario);
 	}
@@ -210,12 +235,25 @@ public class VentanaCestaUsuario extends JFrame{
 	public double actualizarPrecio(List<Producto> lista) { //lista es la lista de los productos del que queremos obtener el precio total --> se calcula el precio total de los productos en esa lista
 		double precioT =0.0;
 		
-		DecimalFormat df = new DecimalFormat("#.00"); //el formato del decimal es el siguiente: cualquier digito antes del punto decimal + punto decimal se indicará mediante un punto '.' + debe tener exactamente dos digitos después del punto decimal
+		DecimalFormat df = new DecimalFormat("#,00"); //el formato del decimal es el siguiente: cualquier digito antes del punto decimal + punto decimal se indicará mediante un punto '.' + debe tener exactamente dos digitos después del punto decimal
 		for(Producto p : productos) {
 			precioT += p.getPrecio();
 		}
 		
 		return Double.parseDouble(df.format(precioT));
+	}
+	
+	
+	public void cargarTablaCesta(int idUsuario) {
+	    List<Producto> productosCesta = BaseDatos1.obtenerProductosCesta(idUsuario);
+	    
+	    ModeloCestaUsuario model = new ModeloCestaUsuario(productosCesta);
+	    
+	    tabla.setModel(model);  
+	    tabla.revalidate();
+	    tabla.repaint();
+
+
 	}
 	
 	

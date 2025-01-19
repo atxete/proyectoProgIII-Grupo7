@@ -40,12 +40,14 @@ public class VentanaFavoritosUsuario extends JFrame{
 		super();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
-		List<Producto> productos = c1.getListaFavoritos(); 
+		List<Producto> productos = BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 0); 
 		modeloFavoritosUsuarios = new ModeloFavoritosUsuario(productos);
 		tablaFavoritos = new JTable(modeloFavoritosUsuarios);
 		scrollFavoritos = new JScrollPane(tablaFavoritos);
 		
 		getContentPane().add(scrollFavoritos, BorderLayout.CENTER);
+		
+		cargarTablaWishList(c1.getCodigoUsuario());
 	
 		panelBotones = new JPanel();
 		cesta = new JButton("Cesta");
@@ -82,18 +84,22 @@ public class VentanaFavoritosUsuario extends JFrame{
 		
         tablaFavoritos.setDefaultRenderer(Object.class, (table, value, isSelected, hasFocus, row, column) -> {
             JLabel labelCestaUsuario = new JLabel(value.toString());
+            labelCestaUsuario.setOpaque(true);
          	if(column==2) {
          	   float precio = (float) value;
-         	   if(precio <10) {
-         		   labelCestaUsuario.setBackground(Color.GREEN);
+         	   if(precio <1) {
+         		   labelCestaUsuario.setBackground(new Color(173, 216, 230));
          	   }
-         	   else if(precio <50) {
-         		   labelCestaUsuario.setBackground(Color.yellow);
-         	   }else if(precio <100) {
+         	   else if(precio <2) {
+         		   labelCestaUsuario.setBackground(new Color(255, 255, 204));
+         	   }else if(precio <4) {
          		   labelCestaUsuario.setBackground(Color.orange);
          	   }else {
-         		   labelCestaUsuario.setBackground(Color.red);
+         		   labelCestaUsuario.setBackground(new Color(255, 182, 193));
          	   }
+         	}else {
+         		labelCestaUsuario.setBackground(Color.white);
+         		labelCestaUsuario.setForeground(Color.black);
          	}
          	/*
          	if(column ==3) {
@@ -110,10 +116,7 @@ public class VentanaFavoritosUsuario extends JFrame{
          	}
          	*/
          	
-         	else {
-         		labelCestaUsuario.setBackground(Color.white);
-         		labelCestaUsuario.setForeground(Color.black);
-         	}
+         	
          	
          	return labelCestaUsuario;
          });
@@ -137,6 +140,8 @@ public class VentanaFavoritosUsuario extends JFrame{
 					c1.getListaFavoritos().remove(pos);
 					actualizarLista();
 					
+					cargarTablaWishList(c1.getCodigoUsuario());
+					
 				}
 			}
 			
@@ -153,14 +158,15 @@ public class VentanaFavoritosUsuario extends JFrame{
 		modeloFavoritosUsuarios = new ModeloFavoritosUsuario(new ArrayList<Producto>());
 		for(Producto p : c1.getListaFavoritos()) {
 			int cont=0;
-			for(Producto p2:c1.getListaFavoritos()) {
+			for(Producto p2: BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 0) /*c1.getListaFavoritos()*/) {
 				if(p.equals(p2)) {
 					cont++;
 				}
 			}
 			if(!anyadidos.contains(p)) {
-				modeloFavoritosUsuarios.addRow(new Object[] {p.getNombre(), p.getCodigo(),p.getClass().getSimpleName(), p.getPrecio()+"€", cont});
+				modeloFavoritosUsuarios.addRow(new Object[] {p.getCodigo(), p.getNombre(), p.getPrecio()+"€", p.getPrecio()});
 				anyadidos.add(p);
+				
 			}
 		}
 		tablaFavoritos.setModel(modeloFavoritosUsuarios);
@@ -170,5 +176,19 @@ public class VentanaFavoritosUsuario extends JFrame{
 	public static void main(String[] args) {
 		new VentanaFavoritosUsuario();
 	}
-
+	
+	
+	public void cargarTablaWishList(int idUsuario) {
+		List<Producto> productosWishlist = BaseDatos1.obtenerProductosWishList(idUsuario);
+	    
+	    ModeloFavoritosUsuario model = new ModeloFavoritosUsuario(productosWishlist);
+	    
+	    
+	    tablaFavoritos.setModel(model); 
+	    tablaFavoritos.revalidate();
+	    tablaFavoritos.repaint();
+	}
+	
+	
+	
 }
