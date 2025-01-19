@@ -87,19 +87,22 @@ public class VentanaCestaUsuario extends JFrame{
 		botonPagar.addActionListener((e)->{
 			JOptionPane.showMessageDialog(VentanaCestaUsuario.this, "Compra pagada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 			
-			if(!BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1).isEmpty() /*!c1.getCesta().isEmpty()*/) {
+			List<Producto> productosEnCesta = BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1);
+
+			
+			if(!productosEnCesta.isEmpty() /*!c1.getCesta().isEmpty()*/) {
 				long fecha = System.currentTimeMillis();
-				int id = BaseDatos1.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1)/*c1.getCesta()*/));
-				for(Producto p : BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1)/*c1.getCesta()*/) {
+				int id = BaseDatos1.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(productosEnCesta/*c1.getCesta()*/));
+				for(Producto p : productosEnCesta/*c1.getCesta()*/) {
 					BaseDatos1.anyadirCompraP(id, p.getCodigo());
 				}
 				
 				/**TOTALPRECIO.SETTEXT(PRECIO TOTAL: 0.00 €");**/
-				precioTotal.setText("Precio total: " + actualizarPrecio(productos));
+				precioTotal.setText("Precio total: 0.00" );
 				
 				
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
-				c1.getCesta().removeAll(c1.getCesta());
+				//c1.getCesta().removeAll(c1.getCesta());
 				BaseDatos1.eliminarCestaUsuario(c1.getCodigoUsuario());
 				actualizarLista();
 			}else {
