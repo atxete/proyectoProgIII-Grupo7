@@ -11,6 +11,13 @@ public class ModeloFavoritosUsuario extends DefaultTableModel{
 	private List<Producto> listaProductos;
 	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio",  "Precio final");
 
+	@Override
+	public boolean isCellEditable(int row, int column) {
+		
+		return false;
+	}
+
+
 	public ModeloFavoritosUsuario(List<Producto> lp) {
 		this.listaProductos = lp;
 	}
