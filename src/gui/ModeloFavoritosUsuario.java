@@ -9,7 +9,7 @@ import domain.Producto;
 
 public class ModeloFavoritosUsuario extends DefaultTableModel{
 	private List<Producto> listaProductos;
-	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio",  "Precio final");
+	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio");
 
 	@Override
 	public boolean isCellEditable(int row, int column) {
@@ -59,12 +59,11 @@ public class ModeloFavoritosUsuario extends DefaultTableModel{
 	
 	@Override
 	public Object getValueAt(int row, int column) {
-		Producto p = listaProductos.get(row);
+		Producto p = listaProductos.get(row); 
 		switch(column) {
 			case 0: return p.getCodigo();
 			case 1: return p.getNombre();
 			case 2: return p.getPrecio();
-			case 3: return p.getPrecio();
 			default: return null;
 		}
 			

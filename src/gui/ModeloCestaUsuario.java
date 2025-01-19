@@ -16,7 +16,7 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio", "Cantidad","Precio final");
 	
 	
-	
+	 
 	public ModeloCestaUsuario(List<Producto> lp) {
 		listaProductos = lp; 		
 	}
