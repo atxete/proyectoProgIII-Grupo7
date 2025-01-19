@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Comprador;
 import domain.Logica;
 import domain.Producto;

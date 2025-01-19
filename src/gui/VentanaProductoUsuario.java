@@ -13,13 +13,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
-import domain.BaseDatos1;
 import domain.Comprador;
 import domain.Logica;
 import domain.Producto;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import db.BaseDatos1;
 
 public class VentanaProductoUsuario extends JFrame{
 	

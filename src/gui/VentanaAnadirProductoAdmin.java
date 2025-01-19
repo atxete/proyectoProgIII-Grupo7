@@ -23,7 +23,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Logica;
 import domain.Producto;
 import domain.Producto.tipo;

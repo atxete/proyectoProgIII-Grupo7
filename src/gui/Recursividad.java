@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.sqlite.jdbc4.JDBC4PreparedStatement;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Producto;
 
 public class Recursividad extends JFrame{

@@ -22,7 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Logica;
 import domain.Usuario;
 
@@ -32,7 +32,6 @@ import java.util.regex.Pattern;
 import javax.swing.*;
 
 import domain.Comprador;
-import domain.BaseDatos1;
 import domain.Logica;
 import gui.VentanaPrincipalAdmin;
 

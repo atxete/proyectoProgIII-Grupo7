@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import db.BaseDatos1;
+
 public class Logica implements Serializable {
     
     public static ArrayList<Producto> listaProductos = new ArrayList<>();

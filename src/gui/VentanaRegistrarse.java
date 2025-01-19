@@ -23,7 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Comprador;
 import domain.Logica;
 import domain.Usuario;

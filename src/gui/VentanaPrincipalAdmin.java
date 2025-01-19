@@ -15,7 +15,7 @@ import java.util.List;
 
 import javax.swing.*;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Producto;
 import domain.Producto.tipo;
 

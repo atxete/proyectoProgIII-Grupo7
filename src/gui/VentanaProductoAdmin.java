@@ -5,7 +5,7 @@ import java.io.File;
 
 import javax.swing.*;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Logica;
 import domain.Producto;
 public class VentanaProductoAdmin extends JFrame{

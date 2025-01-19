@@ -1,6 +1,6 @@
 package main;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 import domain.Logica;
 import gui.VentanaInicial;
 

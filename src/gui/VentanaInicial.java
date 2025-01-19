@@ -12,7 +12,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.*;
 
-import domain.BaseDatos1;
+import db.BaseDatos1;
 
 public class VentanaInicial extends JFrame {
 	
