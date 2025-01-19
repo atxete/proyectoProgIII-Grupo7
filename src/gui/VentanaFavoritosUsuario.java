@@ -164,7 +164,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 				}
 			}
 			if(!anyadidos.contains(p)) {
-				modeloFavoritosUsuarios.addRow(new Object[] {p.getCodigo(), p.getNombre(), p.getPrecio()+"€", p.getPrecio()});
+				modeloFavoritosUsuarios.addRow(new Object[] {p.getCodigo(), p.getNombre(), p.getPrecio()+"€"});
 				anyadidos.add(p);
 				
 			}
