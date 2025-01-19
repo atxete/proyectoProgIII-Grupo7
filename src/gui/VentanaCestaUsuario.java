@@ -215,7 +215,7 @@ public class VentanaCestaUsuario extends JFrame{
 			precioT += p.getPrecio();
 		}
 		
-		return precioT;
+		return Double.parseDouble(df.format(precioT));
 	}
 	
 	

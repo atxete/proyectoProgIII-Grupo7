@@ -9,7 +9,7 @@ import domain.Producto;
 
 public class ModeloFavoritosUsuario extends DefaultTableModel{
 	private List<Producto> listaProductos;
-	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio", "Cantidad", "Precio final");
+	private List<String> listaTitulos = Arrays.asList("Código", "Nombre", "Precio",  "Precio final");
 
 	public ModeloFavoritosUsuario(List<Producto> lp) {
 		this.listaProductos = lp;
@@ -57,8 +57,7 @@ public class ModeloFavoritosUsuario extends DefaultTableModel{
 			case 0: return p.getCodigo();
 			case 1: return p.getNombre();
 			case 2: return p.getPrecio();
-			case 3: return p.getCantidad();
-			case 4: return p.getCantidad()*p.getPrecio();
+			case 3: return p.getPrecio();
 			default: return null;
 		}
 			
