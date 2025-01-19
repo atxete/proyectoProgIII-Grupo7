@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -24,7 +25,6 @@ import javax.swing.WindowConstants;
 
 import domain.BaseDatos1;
 import domain.Comprador;
-import domain.GestorUsuarios;
 import domain.Logica;
 import domain.Usuario;
 
@@ -52,7 +52,7 @@ public class VentanaRegistrarse extends JFrame{
 	private JFrame ventanaActual;
 	
 	//private GestorUsuarios gestorUsuarios;
-	public VentanaRegistrarse(GestorUsuarios gestor) {
+	public VentanaRegistrarse(/*GestorUsuarios gestor*/) {
 		//this.gestorUsuarios = gestor;
 		
 		ventanaActual = this;
@@ -118,8 +118,8 @@ public class VentanaRegistrarse extends JFrame{
 	    getContentPane().add(panelSur, BorderLayout.SOUTH);
 	    
 	    btnInicioSesion.addActionListener((e)->{
-	    	GestorUsuarios gestorUsuarios = new GestorUsuarios();
-			VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion(gestorUsuarios);
+	    	//GestorUsuarios gestorUsuarios = new GestorUsuarios();
+			VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
 			ventanaInicioSesion.setVisible(true);
 			dispose();
 		});
@@ -458,9 +458,9 @@ public class VentanaRegistrarse extends JFrame{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GestorUsuarios gestorUsuarios = new GestorUsuarios();
+		//GestorUsuarios gestorUsuarios = new GestorUsuarios();
 		//new VentanaRegistrarse(gestorUsuarios);
-		System.out.println(gestorUsuarios.verUsuariosRegistrados());
+		//System.out.println(gestorUsuarios.verUsuariosRegistrados());
 	}
 
 }

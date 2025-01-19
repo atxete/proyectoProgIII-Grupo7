@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -15,7 +16,6 @@ import java.util.List;
 import javax.swing.*;
 
 import domain.BaseDatos1;
-import domain.GestorUsuarios;
 import domain.Producto;
 import domain.Producto.tipo;
 
@@ -49,7 +49,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		         
 		        if(opcion == JOptionPane.YES_OPTION) {
 		        	ventanaPrincipalAdmin.dispose();
-		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());
+		        	VentanaInicioSesion vis = new VentanaInicioSesion();
 		        	vis.setVisible(true);
 		        }
 			}

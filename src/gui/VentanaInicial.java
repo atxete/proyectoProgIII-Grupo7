@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -12,7 +13,6 @@ import java.awt.event.WindowListener;
 import javax.swing.*;
 
 import domain.BaseDatos1;
-import domain.GestorUsuarios;
 
 public class VentanaInicial extends JFrame {
 	
@@ -54,8 +54,8 @@ public class VentanaInicial extends JFrame {
 		Timer temporizador = new Timer(5000, (e)->{
 			if(temp) {
 				VentanaInicial.this.setVisible(false);
-				GestorUsuarios gestorUsuarios = new GestorUsuarios();
-				new VentanaInicioSesion(gestorUsuarios);
+				//GestorUsuarios gestorUsuarios = new GestorUsuarios();
+				new VentanaInicioSesion();
 			}
 		});
 		
@@ -80,8 +80,8 @@ public class VentanaInicial extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_D && e.isControlDown()) {
-					GestorUsuarios gestorUsuarios = new GestorUsuarios();
-					VentanaInicioSesion v = new VentanaInicioSesion(gestorUsuarios);
+					//GestorUsuarios gestorUsuarios = new GestorUsuarios();
+					VentanaInicioSesion v = new VentanaInicioSesion();
 					ventanaActual.setVisible(false);
 					//VentanaInicial.this.dispose();
 					temp=false;

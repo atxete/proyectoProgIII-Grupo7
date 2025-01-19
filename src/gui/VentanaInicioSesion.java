@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -22,7 +23,6 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import domain.BaseDatos1;
-import domain.GestorUsuarios;
 import domain.Logica;
 import domain.Usuario;
 
@@ -54,7 +54,7 @@ public class VentanaInicioSesion extends JFrame {
 	private JFrame ventanaActual;
 	
 	//private GestorUsuarios gestorUsuarios;
-	public VentanaInicioSesion(GestorUsuarios gestor){
+	public VentanaInicioSesion(/*GestorUsuarios gestor*/){
 		//this.gestorUsuarios = gestor;
 		
 		ventanaActual = this;
@@ -101,8 +101,8 @@ public class VentanaInicioSesion extends JFrame {
 		getContentPane().add(panelSur, BorderLayout.SOUTH);
 		
 		btnRegistrarse.addActionListener((e)->{
-			GestorUsuarios gestorUsuarios = new GestorUsuarios();
-			VentanaRegistrarse ventanaRegistrarse = new VentanaRegistrarse(gestorUsuarios);
+			//GestorUsuarios gestorUsuarios = new GestorUsuarios();
+			VentanaRegistrarse ventanaRegistrarse = new VentanaRegistrarse();
 			ventanaRegistrarse.setVisible(true);
 			dispose();
 		});
@@ -246,8 +246,8 @@ public class VentanaInicioSesion extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		GestorUsuarios gestorUsuarios = new GestorUsuarios();
-		new VentanaInicioSesion(gestorUsuarios);
+		//GestorUsuarios gestorUsuarios = new GestorUsuarios();
+		new VentanaInicioSesion();
 	}
 
 	

@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -32,7 +33,6 @@ import javax.swing.SpinnerNumberModel;
 
 import domain.BaseDatos1;
 import domain.Comprador;
-import domain.GestorUsuarios;
 import domain.Logica;
 import domain.Producto;
 import domain.Producto.tipo;
@@ -85,7 +85,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		          
 		        if(opcion == JOptionPane.YES_OPTION) {
 		        	vActual.dispose();
-		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());
+		        	VentanaInicioSesion vis = new VentanaInicioSesion();
 		        	vis.setVisible(true);
 		        }
 			}
