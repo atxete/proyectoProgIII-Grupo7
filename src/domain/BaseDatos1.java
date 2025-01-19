@@ -273,7 +273,9 @@ public class BaseDatos1 {
 	    return productosCesta;
 	}
 	
-	
+	//IAG (herramienta: ChatGPT)
+	 //Adaptado: sabiamos lo que queriamos conseguir y teniamos un codigo de base 
+	// y nos lo mejoro para conseguir finalmente lo que queriamos
 	public static List<Producto> obtenerProductosWishList(int idUsuario){
 		List<Producto> productosWishList = new ArrayList<Producto>();
 		

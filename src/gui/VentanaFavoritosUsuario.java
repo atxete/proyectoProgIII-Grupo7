@@ -101,6 +101,8 @@ public class VentanaFavoritosUsuario extends JFrame{
          		labelCestaUsuario.setBackground(Color.white);
          		labelCestaUsuario.setForeground(Color.black);
          	}
+         	//IAG (herramienta: ChatGPT)
+   		 // Sin cambios: no sabiamos lo que fallaba y gracias a pasarle el codigo nos dimos cuenta q era esto
          	/*
          	if(column ==3) {
          		TipoIva tipoIva = (TipoIva) value;
