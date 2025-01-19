@@ -27,12 +27,12 @@ public class Recursividad extends JFrame{
 	private DefaultTableModel modeloTabla;
 	
 	
-	public Recursividad() {
+	public Recursividad(/*VentanaPrincipalUsuario vAnterior*/) {
 		
 		
 		setTitle("Calculadora de combinaciones");
 		setBounds(300, 100, 700, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		JPanel panelSuperior = new JPanel(new FlowLayout());
 		JLabel lblPresupuesto = new JLabel("Presupuesto (€): ");
