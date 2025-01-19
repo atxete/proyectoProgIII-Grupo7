@@ -148,4 +148,38 @@ public class VentanaPrincipalAdmin extends JFrame{
 		new VentanaPrincipalAdmin();
 		
 	}
+	public void actualizarProductos() {
+		productos = BaseDatos1.getProductos();
+		pnlProductos.removeAll();
+		
+		for(Producto p:productos) {
+			JLabel nombreProducto = new JLabel("Nombre: " + p.getNombre());
+	        JLabel precioProducto = new JLabel("Precio: " + p.getPrecio());
+
+	        ImageIcon imagenProducto = new ImageIcon(p.getFoto());
+	        Image imagenRedimensionada = imagenProducto.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+	        ImageIcon imagen = new ImageIcon(imagenRedimensionada);
+	        JLabel lblFoto = new JLabel(imagen);
+	        lblFoto.addMouseListener(new MouseAdapter() {
+	            public void mouseClicked(MouseEvent e) {
+	                dispose();
+	                new VentanaProductoAdmin(p, ventanaPrincipalAdmin);
+	            }
+	        });
+
+	        JPanel pnlPrincipal = new JPanel(new BorderLayout());
+	        pnlPrincipal.setPreferredSize(new Dimension(200, 100));
+	        JPanel pnlCentral = new JPanel();
+
+	        pnlCentral.add(nombreProducto);
+	        pnlCentral.add(precioProducto);
+
+	        pnlPrincipal.add(lblFoto, BorderLayout.NORTH);
+	        pnlPrincipal.add(pnlCentral, BorderLayout.SOUTH);
+
+	        pnlProductos.add(pnlPrincipal);
+		}
+		pnlProductos.revalidate();
+		pnlProductos.repaint();
+	}
 }

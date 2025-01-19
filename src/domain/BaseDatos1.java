@@ -489,7 +489,7 @@ public class BaseDatos1 {
 		String sent = "";
 		try(Statement statement = conexion.createStatement()) {
 			
-			sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES (" + p.getTipo().name() + ", " + p.getNombre() + ", " + p.getCodigo() + ", " + p.getPrecio() + ", " + p.getFoto() + ", " + p.getCantidad() + ");";
+			sent = "INSERT INTO producto(tipo, nombre, id, precio, foto, cantidad) VALUES ('" + p.getTipo().name() + "', '" + p.getNombre() + "', " + p.getCodigo() + ", " + p.getPrecio() + ", '" + p.getFoto() + "', " + p.getCantidad() + ");";
 			System.out.println(p.getFoto());
 			logger.log(Level.INFO, "Lanzada actualización a la base de datos:"+sent);
 			int val = statement.executeUpdate(sent);

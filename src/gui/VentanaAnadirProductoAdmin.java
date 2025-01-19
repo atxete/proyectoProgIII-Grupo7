@@ -178,6 +178,8 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 						Producto.tipo tipo;
 						tipo = (domain.Producto.tipo) tipoProductos.getSelectedItem();
 						
+						nuevaFoto = nuevaFoto.replace("\\", "/"); //java utiliza "\" como caracter especial, por lo que no interpreta bien la dirección de la foto
+						
 						p = new Producto((tipo)tipoProductos.getSelectedItem(), tfNombre.getText(), Float.parseFloat(tfPrecio.getText()), nuevaFoto, Integer.parseInt(spinnerCant.getValue().toString()));
 						
 						//INSERT
@@ -185,6 +187,7 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 						logger.log(Level.INFO, p.getNombre()+" añadido correctamente");
 						Logica.guardarProductos("ProductosFinales.dat");
 						BaseDatos1.anyadirProductoaPagina(p);
+						ventanaPrincipalAdmin.actualizarProductos();
 						dispose();
 					}else {
 						MensajeAutomatico ma = new MensajeAutomatico("El precio debe ser un número entero o un decimal (con punto)","Error");
