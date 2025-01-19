@@ -178,6 +178,12 @@ public class VentanaAnadirProductoAdmin  extends JFrame{
 						Producto.tipo tipo;
 						tipo = (domain.Producto.tipo) tipoProductos.getSelectedItem();
 						
+						
+						
+						//IAG (herramienta: ChatGPT)
+						 //nos daba error al añadir un producto nuevo desde administrdor, y no entendiamos el error. Le preguntamos a ChatGPT que nos 
+						//explicara el error y nos explicó que debiamos hacer esto ya que java interpreta "\" como un caracter especial.
+						
 						nuevaFoto = nuevaFoto.replace("\\", "/"); //java utiliza "\" como caracter especial, por lo que no interpreta bien la dirección de la foto
 						
 						p = new Producto((tipo)tipoProductos.getSelectedItem(), tfNombre.getText(), Float.parseFloat(tfPrecio.getText()), nuevaFoto, Integer.parseInt(spinnerCant.getValue().toString()));
