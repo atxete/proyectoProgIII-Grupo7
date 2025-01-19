@@ -39,7 +39,7 @@ public class VentanaProductoAdmin extends JFrame{
 		pnlFoto = new JPanel();
 		pnlCentro = new JPanel(new GridLayout(2,1));
 		//btnVolver = new JButton("VOLVER");
-		
+		 
 		 
         ImageIcon iconoOriginalFlecha = new ImageIcon("imagenes/flechaVolver.png");
         if (iconoOriginalFlecha.getIconWidth() != -1) {

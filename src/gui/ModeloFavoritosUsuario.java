@@ -27,7 +27,7 @@ public class ModeloFavoritosUsuario extends DefaultTableModel{
 		
 		super.removeRow(row);
 	}
-
+ 
 
 	@Override
 	public int getRowCount() {

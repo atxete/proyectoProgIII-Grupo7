@@ -28,7 +28,7 @@ public class MensajeAutomatico {
 				dialogo.dispose();
 				
 			}
-			 
+			  
 		});
 		
 		temporizador.setRepeats(false);

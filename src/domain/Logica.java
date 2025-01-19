@@ -21,7 +21,7 @@ public class Logica implements Serializable {
         super();
         Logica.usuario = usuario;
     }
-
+ 
     public Logica() {
         super();
     }

@@ -15,7 +15,7 @@ public abstract class Usuario {
 	}
 	public void setCodigoUsuario(int codigoUsuario) {
 		this.codigoUsuario = codigoUsuario;
-	}
+	} 
 	public String getNombre() {
 		return nombreUsuario;
 	}

@@ -9,7 +9,7 @@ public class Compra {
 	private ArrayList<Producto> productosComprados;
 	private long fecha;
 	private double precio;
-	
+	 
 	
 	public int getIdCompra() {
 		return idCompra;

@@ -68,7 +68,7 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 	
-	
+	 
 	
 	public Producto() {
 		codigo = codigo++;

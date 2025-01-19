@@ -49,7 +49,7 @@ public class VentanaInicial extends JFrame {
 		}
 		
 		
-		
+		 
 		
 		Timer temporizador = new Timer(5000, (e)->{
 			if(temp) {

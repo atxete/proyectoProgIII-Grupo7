@@ -72,7 +72,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 		            opciones,
 		            opciones[1] // Opciones[1] es "Cancelar", el botón seleccionado por defecto
 		        );
-		         
+		          
 		        if(opcion == JOptionPane.YES_OPTION) {
 		        	vActual.dispose();
 		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());

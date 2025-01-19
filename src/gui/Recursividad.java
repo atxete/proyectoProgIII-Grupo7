@@ -38,7 +38,7 @@ public class Recursividad extends JFrame{
 		JLabel lblPresupuesto = new JLabel("Presupuesto (€): ");
 		txtPresupuesto = new JTextField(10);
 		btnCalcular = new JButton("Calcular");
-		
+		 
 		panelSuperior.add(lblPresupuesto);
 		panelSuperior.add(txtPresupuesto);
 		panelSuperior.add(btnCalcular);

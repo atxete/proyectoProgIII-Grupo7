@@ -490,7 +490,7 @@ public class BaseDatos1 {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		 
 	}
 	
 	public static void cambiarFotoProd(Producto p, String fotoNueva) {

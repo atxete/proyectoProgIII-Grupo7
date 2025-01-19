@@ -25,7 +25,7 @@ public class VentanaLoadingUsuario extends JFrame{
 		lblTitulo = new JLabel("CARGANDO...");
 		lblTitulo.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		pnlTitulo.add(lblTitulo);
-		
+		 
 		JFrame v = this;
 		
 		progressBar = new JProgressBar(0,100);

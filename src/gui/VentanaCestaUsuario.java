@@ -58,7 +58,7 @@ public class VentanaCestaUsuario extends JFrame{
 		
 		panelTotal.add(textoTotal);
 		panelTotal.add(valorTotal);
-		
+		 
 		
 		getContentPane().add(panelTotal, BorderLayout.SOUTH);
 		*/

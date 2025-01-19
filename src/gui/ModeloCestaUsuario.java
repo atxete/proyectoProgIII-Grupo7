@@ -29,7 +29,7 @@ public class ModeloCestaUsuario extends DefaultTableModel{
 		super.addRow(rowData);
 	}
 
-
+ 
 
 	@Override
 	public void removeRow(int row) {

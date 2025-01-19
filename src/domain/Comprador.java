@@ -10,7 +10,7 @@ public class Comprador extends Usuario{
 	
 	public ArrayList<Producto> getCesta() {
 		return cesta;
-	}
+	} 
 	public void setCesta(ArrayList<Producto> cesta) {
 		this.cesta = cesta;
 	}

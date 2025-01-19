@@ -62,7 +62,7 @@ public class VentanaRegistrarse extends JFrame{
 	    setLocationRelativeTo(null);
 	    setResizable(false);
 	    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);  // descomentar más tarde
-		
+		 
 	    lblNombre = new JLabel("Nombre: ");
 	    lblApellidos = new JLabel("Apellidos: ");
 	    lblUsuario = new JLabel("Usuario: ");

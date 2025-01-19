@@ -58,7 +58,7 @@ public class VentanaInicioSesion extends JFrame {
 		//this.gestorUsuarios = gestor;
 		
 		ventanaActual = this;
-		
+		 
 		setTitle("Registro/Inicio Sesión");
 	    setSize(400, 200);
 	    setLocationRelativeTo(null);

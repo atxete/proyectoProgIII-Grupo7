@@ -46,7 +46,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		            opciones,
 		            opciones[1] // Opciones[1] es "Cancelar", el botón seleccionado por defecto
 		        );
-		        
+		         
 		        if(opcion == JOptionPane.YES_OPTION) {
 		        	ventanaPrincipalAdmin.dispose();
 		        	VentanaInicioSesion vis = new VentanaInicioSesion(new GestorUsuarios());

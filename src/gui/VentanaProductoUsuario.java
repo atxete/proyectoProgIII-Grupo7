@@ -155,7 +155,7 @@ public class VentanaProductoUsuario extends JFrame{
         if (iconoNegro.getIconWidth() == -1) {
             System.out.println("Error: No se pudo cargar corazonNegro.png");
         }
-        
+         
         
         //Se redimensionan las imagenes, pero solo una vez que se hayan cargado correctamente
         if (iconoBlanco.getIconWidth() != -1) {
