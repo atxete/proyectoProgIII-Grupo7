@@ -44,7 +44,7 @@ public class VentanaPrincipalUsuario extends JFrame{
 	protected JButton btnFavoritos;
 	protected JPanel pnlBotones;
 	protected JPanel pnlFiltro;
-	protected JComboBox<String> filtroTipos;
+	/*protected JComboBox<String> filtroTipos;*/
 	protected JTextField buscador;
 	protected List<Producto> productos;
 	protected static VentanaCestaUsuario vcu;
@@ -132,12 +132,13 @@ public class VentanaPrincipalUsuario extends JFrame{
 		actualizarPanel(productos);
 		
 		
-		filtroTipos = new JComboBox<>();
-		filtroTipos.addItem("Todos"); //de inicio no habra filtro
+		//filtroTipos = new JComboBox<>();
+		//filtroTipos.addItem("Todos"); //de inicio no habra filtro
 		buscador = new JTextField();
 		buscador.setPreferredSize(new Dimension(300,30));
 		JButton btnBuscar = new JButton("Buscar");
 		
+		/*
 		 for(Producto.tipo tipo : Producto.tipo.values()){
 		  	filtroTipos.addItem(tipo.name());
 		 }
@@ -167,18 +168,18 @@ public class VentanaPrincipalUsuario extends JFrame{
 				pnlProductos.revalidate();
 			}
 		});
+		*/
 		 
 		 btnBuscar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String nombre = buscador.getText().trim();
-				String tipo = (String) filtroTipos.getSelectedItem();
 				List<Producto> pf = new ArrayList<Producto>();
 				 for (Producto p : productos) {
-					 boolean coincideTipo = tipo.equals("Todos") || p.getTipo().name().equals(tipo);
+					 //boolean coincideTipo = tipo.equals("Todos") || p.getTipo().name().equals(tipo);
 			         boolean coincideNombre = nombre.isBlank() || p.getNombre().toLowerCase().contains(nombre.toLowerCase());
 			            
-			         if (coincideTipo && coincideNombre) {
+			         if (coincideNombre) {
 			              pf.add(p);
 			            }
 			        }
@@ -197,7 +198,6 @@ public class VentanaPrincipalUsuario extends JFrame{
 		});
 		  
 		pnlFiltro = new JPanel();
-		pnlFiltro.add(filtroTipos);
 		pnlFiltro.add(buscador);
 		pnlFiltro.add(btnBuscar);
 		
