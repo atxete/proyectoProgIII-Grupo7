@@ -96,7 +96,6 @@ public class VentanaInicial extends JFrame {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
 				BaseDatos1.cerrarConexion();
 			}
 			

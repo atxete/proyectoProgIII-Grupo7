@@ -91,7 +91,7 @@ public class VentanaCestaUsuario extends JFrame{
 				/**TOTALPRECIO.SETTEXT(PRECIO TOTAL: 0.00 €");**/
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
 				c1.getCesta().removeAll(c1.getCesta());
-				/**ACTUALIZAR LISTA**/
+				actualizarLista();
 			}else {
 				JOptionPane.showMessageDialog(null, "ERROR: Cesta vacia");
 			}
@@ -167,7 +167,7 @@ public class VentanaCestaUsuario extends JFrame{
 					}
 					c1.getCesta().remove(pos);
 					actualizarLista();
-					precioTotal.setText(String.format("%.2f", actualizarPrecio(c1.getCesta()))+"€");
+					precioTotal.setText(String.format("%.2f", actualizarPrecio(productos/*c1.getCesta()*/))+"€");
 				}
 			}
 			
