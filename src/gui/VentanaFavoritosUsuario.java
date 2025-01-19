@@ -40,7 +40,7 @@ public class VentanaFavoritosUsuario extends JFrame{
 		super();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
-		List<Producto> productos = new ArrayList<>(); 
+		List<Producto> productos = c1.getListaFavoritos(); 
 		modeloFavoritosUsuarios = new ModeloFavoritosUsuario(productos);
 		tablaFavoritos = new JTable(modeloFavoritosUsuarios);
 		scrollFavoritos = new JScrollPane(tablaFavoritos);
@@ -83,7 +83,7 @@ public class VentanaFavoritosUsuario extends JFrame{
         tablaFavoritos.setDefaultRenderer(Object.class, (table, value, isSelected, hasFocus, row, column) -> {
             JLabel labelCestaUsuario = new JLabel(value.toString());
          	if(column==2) {
-         	   int precio = (int) value;
+         	   float precio = (float) value;
          	   if(precio <10) {
          		   labelCestaUsuario.setBackground(Color.GREEN);
          	   }
@@ -95,6 +95,7 @@ public class VentanaFavoritosUsuario extends JFrame{
          		   labelCestaUsuario.setBackground(Color.red);
          	   }
          	}
+         	/*
          	if(column ==3) {
          		TipoIva tipoIva = (TipoIva) value;
          		if(tipoIva == tipoIva.General) {
@@ -107,6 +108,7 @@ public class VentanaFavoritosUsuario extends JFrame{
          			labelCestaUsuario.setForeground(Color.green);
          		}
          	}
+         	*/
          	
          	else {
          		labelCestaUsuario.setBackground(Color.white);

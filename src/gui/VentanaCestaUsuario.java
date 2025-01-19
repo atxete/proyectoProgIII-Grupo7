@@ -31,26 +31,27 @@ public class VentanaCestaUsuario extends JFrame{
 	private ModeloCestaUsuario modeloCestaUsuario;
 	private JTable tabla;
 	private JScrollPane scrolltabla;
-	private JPanel panelBotones, panelTotal;
+	private JPanel panelBotones;
 	private JButton botonAniadirFavoritos, botonPagar, botonSeguirComprando;
-	private JLabel pieDePagina, textoTotal, valorTotal;
+	private JLabel pieDePagina, precioTotal;
 	private List<Producto> productos;
 	
 	
 	//Generar un comprador
 	Comprador c1 = (Comprador) Logica.getUsuario();
-	//prueba
+	
 	
 	
 	public VentanaCestaUsuario() {
 		super();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		productos = new ArrayList<>();
+		productos = c1.getCesta();
 		modeloCestaUsuario = new ModeloCestaUsuario(productos);
 		tabla = new JTable(modeloCestaUsuario);
 		scrolltabla = new JScrollPane(tabla);
 		getContentPane().add(scrolltabla, BorderLayout.CENTER);
 		
+		/*
 		panelTotal = new JPanel();
 		textoTotal = new JLabel("Total a pagar: ");
 		valorTotal = new JLabel("0.00€");
@@ -60,15 +61,21 @@ public class VentanaCestaUsuario extends JFrame{
 		
 		
 		getContentPane().add(panelTotal, BorderLayout.SOUTH);
+		*/
 		
 		panelBotones = new JPanel();
 		
-		//Creamos los 3 botones
+		//Creamos los 2 botones y el label para que se vea el precio total
 		botonPagar = new JButton("Pagar");
 		botonSeguirComprando = new JButton("Seguir comprando");
+		precioTotal = new JLabel("Precio total: " + actualizarPrecio(productos));
+		precioTotal.setAlignmentX(RIGHT_ALIGNMENT);
+		precioTotal.setBackground(Color.white);
 		//Los añadimos al panel
 		panelBotones.add(botonPagar);
 		panelBotones.add(botonSeguirComprando);
+		panelBotones.add(precioTotal);
+		
 		//Añadimos el panel a la ventana
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
 		 
@@ -108,7 +115,7 @@ public class VentanaCestaUsuario extends JFrame{
         tabla.setDefaultRenderer(Object.class, (table, value, isSelected, hasFocus, row, column) -> {
            JLabel labelCestaUsuario = new JLabel(value.toString());
         	if(column==2) {
-        	   int precio = (int) value;
+        	   float precio = (float) value;
         	   if(precio <10) {
         		   labelCestaUsuario.setBackground(Color.GREEN);
         	   }
@@ -120,6 +127,7 @@ public class VentanaCestaUsuario extends JFrame{
         		   labelCestaUsuario.setBackground(Color.red);
         	   }
         	}
+        	/*
         	if(column ==3) {
         		TipoIva tipoIva = (TipoIva) value;
         		if(tipoIva == tipoIva.General) {
@@ -132,6 +140,7 @@ public class VentanaCestaUsuario extends JFrame{
         			labelCestaUsuario.setForeground(Color.green);
         		}
         	}
+        	*/
         	
         	else {
         		labelCestaUsuario.setBackground(Color.white);
@@ -158,7 +167,7 @@ public class VentanaCestaUsuario extends JFrame{
 					}
 					c1.getCesta().remove(pos);
 					actualizarLista();
-					valorTotal.setText(String.format("%.2f", actualizarPrecio(c1.getCesta()))+"€");
+					precioTotal.setText(String.format("%.2f", actualizarPrecio(c1.getCesta()))+"€");
 				}
 			}
 			
