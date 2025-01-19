@@ -507,4 +507,25 @@ public class BaseDatos1 {
 		
 	}
 	
+	
+	public static boolean esFavorito(Producto p, int idUsuario) {
+		boolean esFavorito=false;
+		String sql = "SELECT * FROM wishlist WHERE idUsuario = ? AND idProducto = ?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setInt(1, idUsuario);
+			ps.setInt(2, p.getCodigo());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				esFavorito =true;
+			}else {
+				esFavorito =false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return esFavorito;
+		
+	}
+	
 }

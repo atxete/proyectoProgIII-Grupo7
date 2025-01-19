@@ -39,12 +39,14 @@ public class VentanaProductoUsuario extends JFrame{
 	
 	protected int cantidadEnCesta;
 	
-	private boolean esFavorito = false;
+	private boolean esFavorito;
 	private ImageIcon iconoBlancoRedimensionado;
 	private ImageIcon iconoNegroRedimensionado;
 	
 	public VentanaProductoUsuario(Producto p, VentanaPrincipalUsuario ventAnt) {
 		 
+		
+		
 		JFrame ventanaAnterior = ventAnt;
 		
 		setBounds(300, 100, 700, 500);
@@ -67,11 +69,16 @@ public class VentanaProductoUsuario extends JFrame{
 		
 		Comprador c1 = (Comprador) Logica.getUsuario();
 		
+		
+		
+		
 		for(Producto pr:c1.listaFavoritos) {
 			if (pr.getCodigo() == p.getCodigo()) {
 				esFavorito=true;
 			}
 		}
+		
+		esFavorito = BaseDatos1.esFavorito(p, c1.getCodigoUsuario());
 		
 		nombreProducto = new JLabel("Nombre: " + p.getNombre());
 		precioProducto = new JLabel("Precio: "+p.getPrecio());
