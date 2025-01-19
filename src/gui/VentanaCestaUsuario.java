@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class VentanaCestaUsuario extends JFrame{
 	private JButton botonAniadirFavoritos, botonPagar, botonSeguirComprando;
 	private JLabel pieDePagina, precioTotal;
 	private List<Producto> productos;
+	private List<Producto> prods;
 	
 	
 	//Generar un comprador
@@ -73,7 +76,7 @@ public class VentanaCestaUsuario extends JFrame{
 		//Creamos los 2 botones y el label para que se vea el precio total
 		botonPagar = new JButton("Pagar");
 		botonSeguirComprando = new JButton("Seguir comprando");
-		precioTotal = new JLabel("Precio total: " + actualizarPrecio(productos));
+		precioTotal = new JLabel("Precio total: " + actualizarPrecio(c1.getCodigoUsuario()/*productos*/));
 		precioTotal.setAlignmentX(RIGHT_ALIGNMENT);
 		precioTotal.setBackground(Color.white);
 		//Los añadimos al panel
@@ -87,22 +90,19 @@ public class VentanaCestaUsuario extends JFrame{
 		botonPagar.addActionListener((e)->{
 			JOptionPane.showMessageDialog(VentanaCestaUsuario.this, "Compra pagada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 			
-			List<Producto> productosEnCesta = BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1);
-
-			
-			if(!productosEnCesta.isEmpty() /*!c1.getCesta().isEmpty()*/) {
+			if(!BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1).isEmpty() /*!c1.getCesta().isEmpty()*/) {
 				long fecha = System.currentTimeMillis();
-				int id = BaseDatos1.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(productosEnCesta/*c1.getCesta()*/));
-				for(Producto p : productosEnCesta/*c1.getCesta()*/) {
+				int id = BaseDatos1.anyadirCompra(c1.getCodigoUsuario(), fecha, actualizarPrecio(c1.getCodigoUsuario()/*BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1)/*c1.getCesta()*/));
+				for(Producto p : BaseDatos1.getWishListOCesta(c1.getCodigoUsuario(), 1)/*c1.getCesta()*/) {
 					BaseDatos1.anyadirCompraP(id, p.getCodigo());
 				}
 				
 				/**TOTALPRECIO.SETTEXT(PRECIO TOTAL: 0.00 €");**/
-				precioTotal.setText("Precio total: 0.00" );
+				precioTotal.setText("Precio total: " + actualizarPrecio(c1.getCodigoUsuario()/*productos*/));
 				
 				
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
-				//c1.getCesta().removeAll(c1.getCesta());
+				c1.getCesta().removeAll(c1.getCesta());
 				BaseDatos1.eliminarCestaUsuario(c1.getCodigoUsuario());
 				actualizarLista();
 			}else {
@@ -193,7 +193,7 @@ public class VentanaCestaUsuario extends JFrame{
 					actualizarLista();
 					
 					cargarTablaCesta(c1.getCodigoUsuario());
-					precioTotal.setText(String.format("%.2f", actualizarPrecio(productos/*c1.getCesta()*/))+"€");
+					precioTotal.setText(String.format("%.2f", actualizarPrecio(c1.getCodigoUsuario()))+"€");
 				}
 			}
 			
@@ -235,15 +235,22 @@ public class VentanaCestaUsuario extends JFrame{
 		tabla.setModel(modeloCestaUsuario);
 	}
 	
-	public double actualizarPrecio(List<Producto> lista) { //lista es la lista de los productos del que queremos obtener el precio total --> se calcula el precio total de los productos en esa lista
+	public double actualizarPrecio(int idUsuario) { //lista es la lista de los productos del que queremos obtener el precio total --> se calcula el precio total de los productos en esa lista
 		double precioT =0.0;
 		
-		DecimalFormat df = new DecimalFormat("#,00"); //el formato del decimal es el siguiente: cualquier digito antes del punto decimal + punto decimal se indicará mediante un punto '.' + debe tener exactamente dos digitos después del punto decimal
-		for(Producto p : productos) {
-			precioT += p.getPrecio();
+//		DecimalFormat df = new DecimalFormat("#,00"); //el formato del decimal es el siguiente: cualquier digito antes del punto decimal + punto decimal se indicará mediante un punto '.' + debe tener exactamente dos digitos después del punto decimal
+		
+		prods = BaseDatos1.obtenerProductosCesta(idUsuario);
+		
+		for(Producto p : prods) {
+			precioT += p.getPrecio()*p.getCantidad();
 		}
 		
-		return Double.parseDouble(df.format(precioT));
+		
+		//IAG (herramienta: ChatGPT)
+		 //para que un double tenga solamente dos decimales, no sabiamos cómo hacerlo
+		BigDecimal bd = new BigDecimal(precioT).setScale(2, RoundingMode.DOWN);
+		return bd.doubleValue();
 	}
 	
 	
